@@ -182,11 +182,35 @@
             font-size: clamp(15px, 1.8vw, 22px);
             font-family: var(--font-body);
             transition: border-color 0.2s, background 0.2s;
-            cursor: default;
+            color: var(--text-primary);
+            cursor: pointer;
+            text-align: center;
         }
         .poll-option:hover {
             border-color: var(--accent-cool);
             background: oklch(0.19 0.03 260);
+        }
+        .poll-option.revealed.correct {
+            border-color: var(--accent-mint);
+            background: oklch(0.24 0.05 165);
+        }
+        .poll-option.revealed.incorrect {
+            border-color: var(--accent-coral);
+            background: oklch(0.22 0.05 25);
+        }
+        .reveal-feedback,
+        [data-reveal] {
+            display: none;
+        }
+        .reveal-feedback.revealed,
+        [data-reveal].revealed {
+            display: block;
+            animation: slideUp 0.35s var(--ease-out-expo) forwards;
+        }
+        .reveal-hint {
+            font-family: var(--font-mono);
+            font-size: clamp(11px, 1.1vw, 13px);
+            color: var(--text-muted);
         }
 
         /* ═══ Autocomplete Demo ═══ */
@@ -592,6 +616,21 @@
             color: var(--text-secondary);
             line-height: 1.4;
         }
+        .slide [data-reveal]:not(.revealed),
+        .slide .reveal-feedback:not(.revealed) {
+            display: none !important;
+        }
+        .slide .step[data-reveal].revealed {
+            display: flex;
+        }
+        .slide .suggestion-chip[data-reveal].revealed {
+            display: inline-flex;
+        }
+        .slide .card[data-reveal].revealed,
+        .slide .card-elevated[data-reveal].revealed,
+        .slide .reveal-feedback.revealed {
+            display: block;
+        }
 
         /* ═══ Swipe Support ═══ */
         .slide-deck { touch-action: pan-y; }
@@ -652,11 +691,12 @@
         <p class="slide-label accent-cool">let's start with a question</p>
         <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 56px);">When you type a message<br>to ChatGPT and hit send…<br><span class="accent-warm">what actually happens?</span></h2>
     </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 560px;">
-        <div class="poll-option">A) It searches the internet for the answer</div>
-        <div class="poll-option">B) A person types back really fast</div>
-        <div class="poll-option">C) It "thinks" about it like a human brain</div>
-        <div class="poll-option">D) Something else entirely… 👀</div>
+    <div class="stagger flex-col gap-sm" style="max-width: 650px;">
+        <button class="poll-option" data-poll="incorrect" data-feedback="Not quite — ChatGPT usually is not searching live web unless a search/tool is specifically enabled.">A) It searches the internet for the answer</button>
+        <button class="poll-option" data-poll="incorrect" data-feedback="Nope — no tiny person is typing back. It is software generating text.">B) A person types back really fast</button>
+        <button class="poll-option" data-poll="incorrect" data-feedback="Close, but not exactly — it is not thinking like a human with feelings or lived experience.">C) It "thinks" about it like a human brain</button>
+        <button class="poll-option" data-poll="correct" data-feedback="Closest — it reads your prompt, then generates an answer one piece at a time from learned patterns.">D) Something else entirely… 👀</button>
+        <div class="card-elevated reveal-feedback" id="pollFeedback" aria-live="polite"></div>
     </div>
 </div>
 
@@ -683,7 +723,7 @@
         </div>
         <div class="card flex-col gap-sm">
             <p style="font-size: clamp(16px, 1.8vw, 22px); font-weight: 600;">ChatGPT answers by doing this <span class="accent-mint">after</span> reading your question.</p>
-            <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-secondary);"><strong class="accent-cool">It reads your whole question first</strong>, then predicts the answer one piece at a time.</p>
+            <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-secondary);"><strong class="accent-cool">It reads your whole question first</strong>, then chooses the first word from answer patterns. A question that asks “what is…” often starts with “The…” because that pattern appeared millions of times in training text.</p>
             <div class="token-chain" style="margin-top: 4px; justify-content: center;">
                 <span class="token">Question: “What is the capital of France?”</span>
             </div>
@@ -712,15 +752,16 @@
         <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">🎮 Let's Play:<br><span class="accent-coral">Be the AI!</span></h2>
         <p class="slide-subtitle">I'll start a phrase. Shout out the word most people would probably say next.</p>
     </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 600px;">
-        <div class="game-prompt">🍕 "The most popular pizza topping is…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint">pepperoni?</span></div>
-        <div class="game-prompt">⭐ "May the Force be…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint">with you?</span></div>
-        <div class="game-prompt">👟 "Just do…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint">it?</span></div>
-        <div class="game-prompt">🎵 "Baby shark…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint">doo doo?</span></div>
+    <div class="stagger flex-col gap-sm" style="max-width: 650px;">
+        <div class="game-prompt">🍕 "The most popular pizza topping is…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: pepperoni</span></div>
+        <div class="game-prompt">⭐ "May the Force be…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: with you</span></div>
+        <div class="game-prompt">👟 "Just do…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: it</span></div>
+        <div class="game-prompt">🎵 "Baby shark…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: doo doo</span></div>
     </div>
-    <div class="animate-in card-elevated" style="max-width: 700px; animation-delay: 0.6s; opacity: 0;">
+    <div class="animate-in card-elevated" data-reveal style="max-width: 700px;">
         <p style="font-size: clamp(15px, 1.7vw, 19px); color: var(--text-secondary); line-height: 1.45;"><strong class="accent-gold">Class pattern:</strong> if most of you say <strong>pepperoni</strong>, we just discovered a pattern. AI does that at massive scale — except it studied billions of examples instead of one classroom.</p>
     </div>
+    <p class="reveal-hint">Click anywhere to reveal each likely completion.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -766,15 +807,16 @@
         <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">How Was It Trained?</h2>
         <p class="slide-subtitle">By doing prediction practice billions of times.</p>
     </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 760px;">
-        <div class="step"><span class="step-num">1</span><p class="step-text"><strong class="accent-cool">Feed it text</strong><br>Billions of sentences from books, websites, and code.</p></div>
-        <div class="step"><span class="step-num">2</span><p class="step-text"><strong class="accent-violet">Hide a word</strong><br>Take a sentence, cover one word, and ask: “Guess what goes here.”</p></div>
-        <div class="step"><span class="step-num">3</span><p class="step-text"><strong class="accent-coral">Check the answer</strong><br>If it guessed wrong, adjust the model. If it guessed right, reinforce that pattern.</p></div>
-        <div class="step"><span class="step-num">4</span><p class="step-text"><strong class="accent-gold">Repeat billions of times</strong><br>After enough examples, it gets really good at guessing what usually comes next.</p></div>
+    <div class="flex-col gap-sm" style="max-width: 760px;">
+        <div class="step" data-reveal><span class="step-num">1</span><p class="step-text"><strong class="accent-cool">Feed it text</strong><br>Billions of sentences from books, websites, and code.</p></div>
+        <div class="step" data-reveal><span class="step-num">2</span><p class="step-text"><strong class="accent-violet">Hide a word</strong><br>Take a sentence, cover one word, and ask: “Guess what goes here.”</p></div>
+        <div class="step" data-reveal><span class="step-num">3</span><p class="step-text"><strong class="accent-coral">Check the answer</strong><br>If it guessed wrong, adjust the model. If it guessed right, reinforce that pattern.</p></div>
+        <div class="step" data-reveal><span class="step-num">4</span><p class="step-text"><strong class="accent-gold">Repeat billions of times</strong><br>After enough examples, it gets really good at guessing what usually comes next.</p></div>
     </div>
-    <div class="animate-in card" style="max-width: 760px; animation-delay: 0.6s; opacity: 0;">
+    <div class="animate-in card" data-reveal style="max-width: 760px;">
         <p style="font-size: clamp(15px, 1.7vw, 20px); line-height: 1.5; color: var(--text-secondary);">📚 It's like studying for a test by doing practice problems over and over — except it did <strong class="accent-gold">BILLIONS</strong> of practice problems.</p>
     </div>
+    <p class="reveal-hint">Click anywhere to reveal each training step.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -789,7 +831,7 @@
     <div class="stagger flex-col gap-sm" style="max-width: 760px;">
         <div class="card flex-col gap-xs">
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-coral">🚫 Not a database lookup</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">ChatGPT does <strong>not</strong> keep a secret database of facts like Google or a search engine.</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">The base model is not a searchable fact database like Google. It generates from learned weights. However, apps can connect to search, tools, or databases when those features are enabled.</p>
         </div>
         <div class="card flex-col gap-sm">
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-mint">🔢 It lives in “weights”</p>
@@ -917,22 +959,22 @@
     <div class="animate-in flex-col gap-sm">
         <p class="slide-label accent-mint">prompt rewrites</p>
         <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">Same prompts, rewritten better</h2>
-        <p class="slide-subtitle">Each one uses Role + Context + Task + Format + Check.</p>
+        <p class="slide-subtitle">Same recipe, but written like a normal message. You do not need labels every time.</p>
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 820px;">
         <div class="myth-card fact flex-col gap-xs">
             <p class="myth-verdict accent-mint">rewrite #1</p>
-            <p class="myth-statement"><strong>Role: fact-checker.</strong> <strong>Context: official Marvel canon.</strong> Check whether Spider-Man has a lightsaber. Answer in 2 bullets. If you cannot verify it, say so.</p>
+            <p class="myth-statement">Can you fact-check this using official Marvel canon: does Spider-Man have a lightsaber? Answer in 2 bullets, and if you cannot verify it, say so.</p>
             <p class="myth-explain">Correct answer: Spider-Man does not have a lightsaber; lightsabers are from Star Wars. Spider-Man does not use a lightsaber in official Marvel canon. ✅</p>
         </div>
         <div class="myth-card fact flex-col gap-xs">
             <p class="myth-verdict accent-mint">rewrite #2</p>
-            <p class="myth-statement"><strong>Role: tutor.</strong> <strong>Context: no book title was provided.</strong> Before answering “What happened in Chapter 12?”, ask one clarifying question. Do not invent plot details.</p>
+            <p class="myth-statement">I need help with Chapter 12 for school, but I have not told you the book yet. Ask me which book first, and do not invent plot details.</p>
             <p class="myth-explain">Correct answer: Ask me which book first, or ask me to paste the chapter/summary. ✅</p>
         </div>
         <div class="myth-card fact flex-col gap-xs">
             <p class="myth-verdict accent-mint">rewrite #3</p>
-            <p class="myth-statement"><strong>Role: internet safety coach.</strong> <strong>Context: suspicious prize text.</strong> Explain what I should do in 3 do/don’t bullets. If you cannot verify the prize, say so.</p>
+            <p class="myth-statement">Act like an internet safety coach. My phone says I won a free iPhone. Give me 3 do/don’t bullets, and if you cannot verify the prize, say so.</p>
             <p class="myth-explain">Correct answer: Do not click the link; verify through Apple’s official website or an adult you trust. ✅</p>
         </div>
     </div>
@@ -1284,6 +1326,8 @@
         current = n;
         slides.forEach((s, i) => {
             s.classList.toggle('active', i === n - 1);
+            s.querySelectorAll('[data-reveal], .reveal-feedback').forEach((item) => item.classList.remove('revealed'));
+            s.querySelectorAll('.poll-option').forEach((item) => item.classList.remove('revealed', 'correct', 'incorrect'));
         });
         document.getElementById('current').textContent = n;
         document.getElementById('progressBar').style.width = (n / total * 100) + '%';
@@ -1291,6 +1335,33 @@
 
     function nextSlide() { showSlide(current + 1); }
     function prevSlide() { showSlide(current - 1); }
+
+    function revealNextInSlide(slide) {
+        const next = slide.querySelector('[data-reveal]:not(.revealed)');
+        if (!next) return false;
+        next.classList.add('revealed');
+        return true;
+    }
+
+    slides.forEach((slide) => {
+        slide.addEventListener('click', (event) => {
+            if (!slide.classList.contains('active')) return;
+            if (event.target.closest('a, button, .nav-controls, .site-header')) return;
+            revealNextInSlide(slide);
+        });
+    });
+
+    document.querySelectorAll('.poll-option').forEach((button) => {
+        button.addEventListener('click', () => {
+            const slide = button.closest('.slide');
+            const feedback = slide?.querySelector('#pollFeedback');
+            if (!slide || !feedback) return;
+            slide.querySelectorAll('.poll-option').forEach((option) => option.classList.remove('revealed', 'correct', 'incorrect'));
+            button.classList.add('revealed', button.dataset.poll === 'correct' ? 'correct' : 'incorrect');
+            feedback.textContent = button.dataset.feedback || '';
+            feedback.classList.add('revealed');
+        });
+    });
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {

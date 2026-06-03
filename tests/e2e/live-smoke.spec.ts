@@ -140,4 +140,38 @@ test.describe('AI talk learning hub', () => {
       expect(result.offenders, `slide ${slideNumber}: visible content overlaps nav`).toEqual([]);
     }
   });
+
+  test('interactive teaching slides reveal feedback step by step', async ({ page }) => {
+    await page.goto('/presentation.html');
+
+    await page.evaluate(() => window.showSlide(3));
+    await expect(page.locator('.slide.active')).toContainText('what actually happens');
+    await expect(page.getByText(/Not quite — ChatGPT usually is not searching live web/i)).toBeHidden();
+    await page.getByRole('button', { name: /It searches the internet/i }).click();
+    await expect(page.getByText(/Not quite — ChatGPT usually is not searching live web/i)).toBeVisible();
+    await page.getByRole('button', { name: /Something else entirely/i }).click();
+    await expect(page.getByText(/Closest — it reads your prompt, then generates an answer/i)).toBeVisible();
+
+    await page.evaluate(() => window.showSlide(5));
+    await expect(page.getByText(/Most likely: pepperoni/i)).toBeHidden();
+    await page.locator('.slide.active').click();
+    await expect(page.getByText(/Most likely: pepperoni/i)).toBeVisible();
+    await page.locator('.slide.active').click();
+    await expect(page.getByText(/Most likely: with you/i)).toBeVisible();
+    await page.locator('.slide.active').click();
+    await expect(page.getByText(/Most likely: it/i)).toBeVisible();
+    await page.locator('.slide.active').click();
+    await expect(page.getByText(/Most likely: doo doo/i)).toBeVisible();
+
+    await page.evaluate(() => window.showSlide(7));
+    await expect(page.getByText(/Feed it text/i)).toBeHidden();
+    await page.locator('.slide.active').click();
+    await expect(page.getByText(/Feed it text/i)).toBeVisible();
+    await page.locator('.slide.active').click();
+    await expect(page.getByText(/Hide a word/i)).toBeVisible();
+    await page.locator('.slide.active').click();
+    await expect(page.getByText(/Check the answer/i)).toBeVisible();
+    await page.locator('.slide.active').click();
+    await expect(page.getByText(/Repeat billions of times/i)).toBeVisible();
+  });
 });
