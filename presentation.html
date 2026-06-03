@@ -869,22 +869,27 @@
 <div class="slide flex-col gap-lg">
     <div class="animate-in flex-col gap-sm">
         <p class="slide-label accent-gold">prompting</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 54px);">Prompting matters because<br><span class="accent-gold">AI is not a mind reader.</span></h2>
-        <p class="slide-subtitle">A vague prompt makes AI guess. A careful prompt tells it when not to make things up.</p>
+        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 54px);">Bad prompts can cause hallucinations</h2>
+        <p class="slide-subtitle">AI is not a mind reader. When the prompt assumes something fake is true, AI may confidently fill in fake details.</p>
     </div>
-    <div class="animate-in split" style="animation-delay: 0.2s; opacity: 0;">
+    <div class="stagger flex-col gap-sm" style="max-width: 760px;">
         <div class="myth-card myth flex-col gap-xs">
-            <p class="myth-verdict accent-coral">weak prompt</p>
+            <p class="myth-verdict accent-coral">bad prompt #1 — pop culture</p>
             <p class="myth-statement">"Tell me about Spider-Man’s lightsaber."</p>
-            <p class="myth-explain"><strong>Bad prompt can cause hallucination:</strong> it may assume the fake item is real and invent a comic issue, movie scene, or backstory.</p>
+            <p class="myth-explain"><strong>Bad prompt can cause hallucination:</strong> “Spider-Man first used his lightsaber in Amazing Spider-Man #801 during a multiverse battle.” 🚫</p>
         </div>
-        <div class="myth-card fact flex-col gap-xs">
-            <p class="myth-verdict accent-mint">better prompt</p>
-            <p class="myth-statement">"Check whether Spider-Man has a lightsaber. If you cannot verify it, say so. Do not invent details."</p>
-            <p class="myth-explain">Now the AI has a job: verify first, answer second, and admit uncertainty instead of guessing.</p>
+        <div class="myth-card myth flex-col gap-xs">
+            <p class="myth-verdict accent-coral">bad prompt #2 — school</p>
+            <p class="myth-statement">"What happened in Chapter 12?"</p>
+            <p class="myth-explain">Hallucinated answer: “In Chapter 12, the hero discovers the hidden letter.” 🚫 Which book? The AI guessed.</p>
+        </div>
+        <div class="myth-card myth flex-col gap-xs">
+            <p class="myth-verdict accent-coral">bad prompt #3 — everyday</p>
+            <p class="myth-statement">"My phone says I won a free iPhone. What do I do?"</p>
+            <p class="myth-explain">Hallucinated answer: “Congrats — click the link to claim it before it expires!” 🚫 Unsafe guess.</p>
         </div>
     </div>
-    <p class="animate-in" style="font-size: clamp(14px, 1.6vw, 18px); color: var(--text-secondary); animation-delay: 0.5s; opacity: 0; max-width: 760px;">Spider-Man does not have a lightsaber. Your prompt becomes the context, so better context tells AI to verify instead of confidently filling in a fake pattern.</p>
+    <p class="animate-in" style="font-size: clamp(14px, 1.6vw, 18px); color: var(--text-secondary); animation-delay: 0.5s; opacity: 0; max-width: 760px;">Your prompt becomes the context. Bad context points the model toward bad patterns.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -902,6 +907,34 @@
         <div class="tool-row"><span class="tool-emoji">🎯</span><div><span class="tool-name">Task</span><br><span class="tool-desc">"Explain why 3/4 + 1/2 = 1 1/4..."</span></div><span class="tool-badge">what should it do?</span></div>
         <div class="tool-row"><span class="tool-emoji">📦</span><div><span class="tool-name">Format</span><br><span class="tool-desc">"Use 3 steps and one pizza analogy."</span></div><span class="tool-badge">how should it answer?</span></div>
         <div class="tool-row"><span class="tool-emoji">🔍</span><div><span class="tool-name">Check</span><br><span class="tool-desc">"If you're unsure, say so. Ask me one question to see if I understood."</span></div><span class="tool-badge">reduce mistakes</span></div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 11 — Prompt Rewrites -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide flex-col gap-lg">
+    <div class="animate-in flex-col gap-sm">
+        <p class="slide-label accent-mint">prompt rewrites</p>
+        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">Same prompts, rewritten better</h2>
+        <p class="slide-subtitle">Each one uses Role + Context + Task + Format + Check.</p>
+    </div>
+    <div class="stagger flex-col gap-sm" style="max-width: 820px;">
+        <div class="myth-card fact flex-col gap-xs">
+            <p class="myth-verdict accent-mint">rewrite #1</p>
+            <p class="myth-statement"><strong>Role: fact-checker.</strong> <strong>Context: official Marvel canon.</strong> Check whether Spider-Man has a lightsaber. Answer in 2 bullets. If you cannot verify it, say so.</p>
+            <p class="myth-explain">Correct answer: Spider-Man does not have a lightsaber; lightsabers are from Star Wars. Spider-Man does not use a lightsaber in official Marvel canon. ✅</p>
+        </div>
+        <div class="myth-card fact flex-col gap-xs">
+            <p class="myth-verdict accent-mint">rewrite #2</p>
+            <p class="myth-statement"><strong>Role: tutor.</strong> <strong>Context: no book title was provided.</strong> Before answering “What happened in Chapter 12?”, ask one clarifying question. Do not invent plot details.</p>
+            <p class="myth-explain">Correct answer: Ask me which book first, or ask me to paste the chapter/summary. ✅</p>
+        </div>
+        <div class="myth-card fact flex-col gap-xs">
+            <p class="myth-verdict accent-mint">rewrite #3</p>
+            <p class="myth-statement"><strong>Role: internet safety coach.</strong> <strong>Context: suspicious prize text.</strong> Explain what I should do in 3 do/don’t bullets. If you cannot verify the prize, say so.</p>
+            <p class="myth-explain">Correct answer: Do not click the link; verify through Apple’s official website or an adult you trust. ✅</p>
+        </div>
     </div>
 </div>
 
@@ -1235,7 +1268,7 @@
 <!-- ═══ Navigation ═══ -->
 <div class="nav-controls">
     <button class="nav-btn" onclick="prevSlide()" aria-label="Previous slide">←</button>
-    <span class="slide-counter"><span id="current">1</span> / <span id="total">28</span></span>
+    <span class="slide-counter"><span id="current">1</span> / <span id="total">29</span></span>
     <button class="nav-btn" onclick="nextSlide()" aria-label="Next slide">→</button>
 </div>
 
