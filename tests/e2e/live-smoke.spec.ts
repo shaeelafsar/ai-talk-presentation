@@ -74,6 +74,7 @@ test.describe('AI talk learning hub', () => {
 
         const slideStyle = getComputedStyle(slide);
         const slideRect = slide.getBoundingClientRect();
+        const heading = slide.querySelector('h1,h2');
         const navTop = nav.getBoundingClientRect().top;
         const canScrollIfNeeded =
           slide.scrollHeight <= slide.clientHeight + 1 ||
@@ -118,10 +119,13 @@ test.describe('AI talk learning hub', () => {
 
         return {
           missing: false,
+          title: heading?.textContent?.trim().replace(/\s+/g, ' '),
           canScrollIfNeeded,
           overflowY: slideStyle.overflowY,
           scrollHeight: slide.scrollHeight,
           clientHeight: slide.clientHeight,
+          headingClippedTop: heading ? heading.getBoundingClientRect().top < Math.max(slideRect.top, 0) - 1 : false,
+          headingClippedBottom: heading ? heading.getBoundingClientRect().bottom > Math.min(slideRect.bottom, navTop) + 1 : false,
           offenders,
         };
       });
@@ -131,6 +135,8 @@ test.describe('AI talk learning hub', () => {
         result.canScrollIfNeeded,
         `slide ${slideNumber}: content taller than viewport but slide overflowY=${result.overflowY}; scrollHeight=${result.scrollHeight}, clientHeight=${result.clientHeight}`
       ).toBeTruthy();
+      expect(result.headingClippedTop, `slide ${slideNumber} heading clipped at top: ${result.title}`).toBeFalsy();
+      expect(result.headingClippedBottom, `slide ${slideNumber} heading clipped at bottom: ${result.title}`).toBeFalsy();
       expect(result.offenders, `slide ${slideNumber}: visible content overlaps nav`).toEqual([]);
     }
   });
