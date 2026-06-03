@@ -1,0 +1,26 @@
+{
+  "name": "first-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaeelafsar/ai-talk-presentation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/shaeelafsar/ai-talk-presentation/issues"
+  },
+  "homepage": "https://github.com/shaeelafsar/ai-talk-presentation#readme",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
+    "@playwright/test": "^1.60.0",
+    "axe-core": "^4.12.0"
+  }
+}

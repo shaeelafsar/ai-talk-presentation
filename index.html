@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI: The Magic Trick Explained</title>
+    <title>AI Talk Learning Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* ═══ Design Tokens ═══ */
         :root {
             --bg-deep: oklch(0.13 0.02 260);
             --bg-surface: oklch(0.17 0.02 260);
             --bg-elevated: oklch(0.21 0.025 260);
             --text-primary: oklch(0.95 0.01 260);
             --text-secondary: oklch(0.72 0.02 260);
-            --text-muted: oklch(0.55 0.02 260);
-            --accent-warm: oklch(0.72 0.18 45);
+            --text-muted: oklch(0.74 0.02 260);
             --accent-cool: oklch(0.68 0.15 250);
+            --button-blue: oklch(0.44 0.16 250);
             --accent-mint: oklch(0.75 0.14 165);
             --accent-coral: oklch(0.70 0.17 25);
             --accent-violet: oklch(0.65 0.18 300);
@@ -25,1113 +24,368 @@
             --font-display: 'Cabinet Grotesk', 'Space Grotesk', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* ═══ Reset & Base ═══ */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
         body {
-            background: var(--bg-deep);
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 8%, oklch(0.25 0.10 250 / 0.45), transparent 34%),
+                radial-gradient(circle at 85% 0%, oklch(0.26 0.10 165 / 0.35), transparent 32%),
+                var(--bg-deep);
             color: var(--text-primary);
             font-family: var(--font-body);
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
+            line-height: 1.6;
         }
 
-        /* ═══ Slide Deck ═══ */
-        .slide-deck {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        @media (min-width: 769px) {
-            .slide-deck {
-                max-width: calc(100vh * 16 / 9);
-                max-height: calc(100vw * 9 / 16);
-                margin: auto;
-                position: absolute;
-                inset: 0;
-            }
-        }
-
-        .slide {
-            position: absolute;
-            width: 100%; height: 100%;
+        a { color: inherit; }
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: clamp(32px, 5vw, 80px);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s var(--ease-out-expo);
-            background: var(--bg-deep);
-            overflow: hidden;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px clamp(18px, 4vw, 56px);
+            background: oklch(0.13 0.02 260 / 0.9);
+            border-bottom: 1px solid oklch(0.22 0.02 260);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .slide.active .animate-in {
-            animation: slideUp 0.6s var(--ease-out-expo) forwards;
-        }
-        .slide.active .stagger > * {
-            opacity: 0;
-            animation: slideUp 0.5s var(--ease-out-expo) forwards;
-        }
-        .slide.active .stagger > *:nth-child(1) { animation-delay: 0.1s; }
-        .slide.active .stagger > *:nth-child(2) { animation-delay: 0.18s; }
-        .slide.active .stagger > *:nth-child(3) { animation-delay: 0.26s; }
-        .slide.active .stagger > *:nth-child(4) { animation-delay: 0.34s; }
-        .slide.active .stagger > *:nth-child(5) { animation-delay: 0.42s; }
-        .slide.active .stagger > *:nth-child(6) { animation-delay: 0.5s; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* ═══ Typography ═══ */
-        .slide-title {
+        .brand {
             font-family: var(--font-display);
-            font-size: clamp(36px, 5.5vw, 72px);
+            font-size: clamp(18px, 2vw, 24px);
             font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
+            text-decoration: none;
         }
-        .slide-subtitle {
-            font-size: clamp(18px, 2.2vw, 28px);
-            font-weight: 400;
+        .top-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .top-nav::-webkit-scrollbar { display: none; }
+        .top-nav a {
             color: var(--text-secondary);
-            line-height: 1.4;
-            max-width: 700px;
-        }
-        .slide-label {
+            text-decoration: none;
             font-family: var(--font-mono);
-            font-size: clamp(11px, 1.2vw, 14px);
-            font-weight: 500;
+            font-size: 12px;
+            padding: 8px 12px;
+            border: 1px solid oklch(0.25 0.02 260);
+            border-radius: 999px;
+            background: var(--bg-surface);
+            white-space: nowrap;
+        }
+        .top-nav a:hover {
+            color: var(--text-primary);
+            border-color: var(--accent-cool);
+        }
+
+        main { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+        section { padding: clamp(48px, 8vw, 88px) 0; border-bottom: 1px solid oklch(0.19 0.02 260); }
+        section:last-child { border-bottom: 0; }
+
+        .hero {
+            padding-top: clamp(64px, 10vw, 120px);
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: clamp(32px, 5vw, 72px);
+            align-items: center;
+        }
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--accent-mint);
+            margin-bottom: 14px;
         }
-        .emoji-big {
-            font-size: clamp(40px, 6vw, 80px);
-            line-height: 1;
+        h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; letter-spacing: -0.025em; }
+        h1 {
+            font-size: clamp(42px, 8vw, 92px);
+            font-weight: 900;
         }
-        .accent-warm { color: var(--accent-warm); }
-        .accent-cool { color: var(--accent-cool); }
-        .accent-mint { color: var(--accent-mint); }
-        .accent-coral { color: var(--accent-coral); }
-        .accent-violet { color: var(--accent-violet); }
-        .accent-gold { color: var(--accent-gold); }
+        h2 {
+            font-size: clamp(30px, 5vw, 54px);
+            font-weight: 850;
+            margin-bottom: 12px;
+        }
+        h3 {
+            font-size: clamp(20px, 2.4vw, 28px);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .lead {
+            color: var(--text-secondary);
+            font-size: clamp(17px, 2vw, 24px);
+            max-width: 720px;
+            margin-top: 18px;
+        }
+        .hero-card {
+            background: linear-gradient(145deg, oklch(0.22 0.05 250), oklch(0.18 0.04 165));
+            border: 1px solid oklch(0.34 0.07 230);
+            border-radius: 24px;
+            padding: clamp(24px, 4vw, 40px);
+            box-shadow: 0 28px 80px oklch(0.05 0.02 260 / 0.45);
+        }
+        .hero-card p { color: var(--text-secondary); margin-top: 10px; }
 
-        /* ═══ Layout Helpers ═══ */
-        .flex-col { display: flex; flex-direction: column; }
-        .flex-row { display: flex; flex-direction: row; }
-        .gap-xs { gap: 8px; }
-        .gap-sm { gap: 16px; }
-        .gap-md { gap: 24px; }
-        .gap-lg { gap: 40px; }
-        .gap-xl { gap: 56px; }
-        .items-center { align-items: center; }
-        .justify-center { justify-content: center; }
-        .text-center { text-align: center; }
-
-        .split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(24px, 4vw, 64px);
+        .button-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+        .btn {
+            display: inline-flex;
             align-items: center;
-            width: 100%;
+            justify-content: center;
+            gap: 8px;
+            min-height: 46px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 750;
+            border: 1px solid oklch(0.3 0.02 260);
+            background: var(--bg-elevated);
+            color: var(--text-primary);
         }
+        .btn-primary { background: var(--button-blue); border-color: var(--button-blue); color: oklch(0.98 0 0); }
+        .btn-mint { background: var(--accent-mint); border-color: var(--accent-mint); color: oklch(0.14 0.02 165); }
 
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 28px;
+        }
         .card {
             background: var(--bg-surface);
             border: 1px solid oklch(0.25 0.02 260);
-            border-radius: 12px;
-            padding: clamp(16px, 2vw, 28px);
-        }
-        .card-elevated {
-            background: var(--bg-elevated);
-            border: 1px solid oklch(0.3 0.02 260);
-            border-radius: 12px;
-            padding: clamp(16px, 2vw, 28px);
-        }
-
-        /* ═══ Poll Options ═══ */
-        .poll-option {
-            background: var(--bg-surface);
-            border: 1px solid oklch(0.25 0.02 260);
-            border-radius: 10px;
-            padding: clamp(12px, 1.5vw, 20px) clamp(16px, 2vw, 28px);
-            font-size: clamp(15px, 1.8vw, 22px);
-            font-family: var(--font-body);
-            transition: border-color 0.2s, background 0.2s;
-            cursor: default;
-        }
-        .poll-option:hover {
-            border-color: var(--accent-cool);
-            background: oklch(0.19 0.03 260);
-        }
-
-        /* ═══ Autocomplete Demo ═══ */
-        .token-chain {
+            border-radius: 18px;
+            padding: 22px;
+            min-height: 190px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            align-items: center;
+            flex-direction: column;
+            gap: 10px;
         }
-        .token {
-            font-family: var(--font-mono);
-            font-size: clamp(16px, 2vw, 24px);
-            padding: 6px 14px;
-            border-radius: 8px;
-            background: var(--bg-elevated);
-            border: 1px solid oklch(0.3 0.03 260);
-        }
-        .token-arrow {
-            color: var(--text-muted);
-            font-size: clamp(14px, 1.6vw, 20px);
-        }
-
-        /* ═══ Comparison Columns ═══ */
-        .compare-col {
-            background: var(--bg-surface);
-            border: 1px solid oklch(0.25 0.02 260);
-            border-radius: 14px;
-            padding: clamp(20px, 3vw, 40px);
-            flex: 1;
-        }
-        .compare-col h3 {
-            font-family: var(--font-display);
-            font-size: clamp(18px, 2.2vw, 26px);
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid oklch(0.25 0.02 260);
-        }
-        .compare-col li {
-            list-style: none;
-            padding: 8px 0;
-            font-size: clamp(14px, 1.5vw, 18px);
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* ═══ Tool Cards ═══ */
-        .tool-row {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: clamp(12px, 2vw, 24px);
-            align-items: center;
-            background: var(--bg-surface);
-            border: 1px solid oklch(0.25 0.02 260);
-            border-radius: 10px;
-            padding: clamp(10px, 1.5vw, 18px) clamp(14px, 2vw, 24px);
-        }
-        .tool-emoji { font-size: clamp(24px, 3vw, 36px); }
-        .tool-name {
-            font-weight: 600;
-            font-size: clamp(15px, 1.7vw, 20px);
-        }
-        .tool-desc {
-            font-size: clamp(12px, 1.3vw, 15px);
-            color: var(--text-secondary);
-        }
-        .tool-badge {
-            font-family: var(--font-mono);
-            font-size: clamp(10px, 1vw, 12px);
-            padding: 4px 10px;
-            border-radius: 6px;
-            background: oklch(0.25 0.03 260);
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-
-        /* ═══ Myth/Fact Cards ═══ */
-        .myth-card {
-            background: var(--bg-surface);
-            border-left: 4px solid;
-            border-radius: 0 10px 10px 0;
-            padding: clamp(14px, 2vw, 24px);
-        }
-        .myth-card.myth { border-color: var(--accent-coral); }
-        .myth-card.fact { border-color: var(--accent-mint); }
-        .myth-card.complicated { border-color: var(--accent-gold); }
-        .myth-verdict {
-            font-family: var(--font-mono);
-            font-size: clamp(11px, 1.2vw, 13px);
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-        .myth-statement {
-            font-size: clamp(15px, 1.7vw, 20px);
-            font-weight: 600;
-        }
-        .myth-explain {
-            font-size: clamp(12px, 1.3vw, 15px);
-            color: var(--text-secondary);
-        }
-
-        /* ═══ Game Prompts ═══ */
-        .game-prompt {
-            background: var(--bg-surface);
-            border-radius: 10px;
-            padding: clamp(12px, 1.5vw, 20px) clamp(16px, 2vw, 28px);
-            font-size: clamp(16px, 2vw, 24px);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .cursor-blink {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            background: var(--accent-cool);
-            animation: pulse 1s infinite;
-            margin-left: 4px;
-        }
-
-        /* ═══ Convo Bubbles ═══ */
-        .convo { width: 100%; max-width: 600px; }
-        .bubble {
-            border-radius: 14px;
-            padding: clamp(10px, 1.5vw, 16px) clamp(14px, 2vw, 20px);
-            margin-bottom: 10px;
-            max-width: 85%;
-            font-size: clamp(14px, 1.5vw, 18px);
-            line-height: 1.5;
-        }
-        .bubble-user {
-            background: var(--accent-cool);
-            color: oklch(0.98 0 0);
-            margin-left: auto;
-            border-bottom-right-radius: 4px;
-        }
-        .bubble-ai {
-            background: var(--bg-elevated);
-            border: 1px solid oklch(0.3 0.02 260);
-            border-bottom-left-radius: 4px;
-        }
-        .bubble-label {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            letter-spacing: 0.08em;
-        }
-
-        /* ═══ Steps ═══ */
-        .step {
-            display: flex;
-            gap: clamp(12px, 2vw, 20px);
-            align-items: flex-start;
-        }
-        .step-num {
-            font-family: var(--font-display);
-            font-size: clamp(28px, 3.5vw, 44px);
-            font-weight: 800;
-            color: var(--accent-cool);
-            line-height: 1;
-            min-width: 44px;
-        }
-        .step-text {
-            font-size: clamp(15px, 1.7vw, 20px);
-            color: var(--text-secondary);
-            line-height: 1.5;
-            padding-top: 4px;
-        }
-
-        /* ═══ Do/Don't Rows ═══ */
-        .advice-row {
-            display: flex;
-            align-items: center;
-            gap: clamp(10px, 1.5vw, 16px);
-            padding: clamp(8px, 1vw, 12px) 0;
-            font-size: clamp(14px, 1.5vw, 18px);
-            color: var(--text-secondary);
-            border-bottom: 1px solid oklch(0.2 0.01 260);
-        }
-        .advice-row:last-child { border-bottom: none; }
-        .advice-icon {
-            font-size: clamp(18px, 2vw, 24px);
-            flex-shrink: 0;
-        }
-        .advice-do .advice-icon { color: var(--accent-mint); }
-        .advice-dont .advice-icon { color: var(--accent-coral); }
-
-        /* ═══ Navigation ═══ */
-        .progress-bar {
-            position: fixed;
-            top: 0; left: 0;
-            height: 3px;
-            background: var(--accent-cool);
-            transition: width 0.4s var(--ease-out-expo);
-            z-index: 1000;
-        }
-        .nav-controls {
-            position: fixed;
-            bottom: clamp(16px, 3vh, 32px);
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            z-index: 1000;
-            background: oklch(0.15 0.02 260 / 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 8px 16px;
-            border-radius: 100px;
-            border: 1px solid oklch(0.25 0.02 260);
-        }
-        .nav-btn {
-            background: none;
-            border: 1px solid oklch(0.3 0.02 260);
-            color: var(--text-primary);
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .nav-btn:hover {
-            background: oklch(0.25 0.03 260);
-            border-color: var(--accent-cool);
-        }
-        .slide-counter {
-            color: var(--text-muted);
+        .card .icon { font-size: 34px; }
+        .card p { color: var(--text-secondary); font-size: 15px; }
+        .card a {
+            margin-top: auto;
+            color: var(--accent-mint);
             font-family: var(--font-mono);
             font-size: 13px;
-            min-width: 50px;
-            text-align: center;
+            text-decoration: none;
         }
 
-        /* ═══ Section Divider Slides ═══ */
-        .slide-section {
-            background: oklch(0.10 0.025 260);
-        }
-        .section-number {
-            font-family: var(--font-display);
-            font-size: clamp(60px, 10vw, 140px);
-            font-weight: 900;
-            color: oklch(0.2 0.03 260);
-            line-height: 1;
-            position: absolute;
-            top: clamp(20px, 4vh, 60px);
-            right: clamp(20px, 5vw, 80px);
-        }
-
-        /* ═══ Token Examples ═══ */
-        .token-example {
-            display: flex;
-            align-items: center;
+        .topic-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            flex-wrap: wrap;
+            margin-top: 24px;
         }
-        .token-word {
-            font-family: var(--font-mono);
-            font-size: clamp(16px, 2vw, 22px);
-            font-weight: 600;
-            min-width: 120px;
-        }
-        .token-pieces {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .token-piece {
-            font-family: var(--font-mono);
-            font-size: clamp(14px, 1.6vw, 18px);
-            padding: 4px 12px;
-            border-radius: 6px;
-            border: 1px solid;
-        }
-
-        /* ═══ Responsive ═══ */
-        @media (max-width: 768px) {
-            .split { grid-template-columns: 1fr; }
-            .tool-row { grid-template-columns: auto 1fr; }
-            .tool-badge { display: none; }
-            .section-number { font-size: 60px; }
-        }
-        @media (max-width: 480px) {
-            .slide { padding: 24px 20px; }
-            .nav-controls { bottom: 12px; padding: 6px 12px; gap: 10px; }
-            .nav-btn { width: 32px; height: 32px; font-size: 14px; }
-            .compare-col { padding: 16px; }
-        }
-
-        /* ═══ Demo Card ═══ */
-        .demo-card {
-            background: linear-gradient(135deg, oklch(0.22 0.04 165), oklch(0.18 0.03 200));
-            border: 1px solid oklch(0.35 0.08 165);
-            border-radius: 10px;
-            padding: clamp(10px, 1.5vw, 16px) clamp(14px, 2vw, 22px);
-            display: flex;
-            align-items: center;
-            gap: clamp(10px, 1.5vw, 16px);
-            max-width: 620px;
-            width: 100%;
-        }
-        .demo-card-icon {
-            font-size: clamp(20px, 2.5vw, 30px);
-            flex-shrink: 0;
-        }
-        .demo-card-content {
-            flex: 1;
-        }
-        .demo-card-label {
-            font-family: var(--font-mono);
-            font-size: clamp(10px, 1vw, 12px);
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--accent-mint);
-            margin-bottom: 2px;
-        }
-        .demo-card-text {
-            font-size: clamp(13px, 1.4vw, 16px);
+        .topic {
+            background: var(--bg-surface);
+            border: 1px solid oklch(0.25 0.02 260);
+            border-radius: 14px;
+            padding: 16px 18px;
             color: var(--text-secondary);
-            line-height: 1.4;
+        }
+        .topic strong { color: var(--text-primary); display: block; margin-bottom: 4px; }
+
+        .recipe {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 28px;
+        }
+        .recipe-step {
+            background: var(--bg-surface);
+            border-top: 4px solid var(--accent-gold);
+            border-radius: 0 0 14px 14px;
+            padding: 18px;
+        }
+        .recipe-step span {
+            font-family: var(--font-mono);
+            color: var(--accent-gold);
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .recipe-step p { color: var(--text-secondary); margin-top: 8px; font-size: 14px; }
+
+        .about {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+        .about-box {
+            background: var(--bg-surface);
+            border: 1px solid oklch(0.25 0.02 260);
+            border-radius: 18px;
+            padding: 24px;
+        }
+        .about-box p { color: var(--text-secondary); margin-top: 10px; }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--bg-elevated);
+            border: 1px solid oklch(0.28 0.02 260);
+            border-radius: 999px;
+            padding: 6px 10px;
         }
 
-        /* ═══ Swipe Support ═══ */
-        .slide-deck { touch-action: pan-y; }
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 44px 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .hero, .about { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .recipe { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 560px) {
+            .site-header { align-items: flex-start; flex-direction: column; }
+            .grid, .topic-list, .recipe { grid-template-columns: 1fr; }
+            .card { min-height: auto; }
+        }
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <a class="brand" href="./">AI Talk Learning Hub</a>
+        <nav class="top-nav" aria-label="Main navigation">
+            <a href="presentation.html">Slides</a>
+            <a href="labs.html">Labs</a>
+            <a href="#prompting">Prompting Guide</a>
+            <a href="#about">About Shaeel</a>
+        </nav>
+    </header>
 
-<div class="progress-bar" id="progressBar"></div>
-
-<div class="slide-deck" id="deck">
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 1 — Title -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide active flex-col items-center justify-center text-center gap-lg">
-    <div class="animate-in flex-col items-center gap-md">
-        <span class="emoji-big">🤖</span>
-        <h1 class="slide-title">AI: The Magic<br>Trick Explained</h1>
-        <p class="slide-subtitle">What's really happening when you talk to ChatGPT</p>
-        <p class="slide-label" style="margin-top: 16px;">no coding experience needed · just curiosity</p>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 2 — The Hook -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-md">
-        <p class="slide-label accent-cool">let's start with a question</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 56px);">When you type a message<br>to ChatGPT and hit send…<br><span class="accent-warm">what actually happens?</span></h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 560px;">
-        <div class="poll-option">A) It searches the internet for the answer</div>
-        <div class="poll-option">B) A person types back really fast</div>
-        <div class="poll-option">C) It "thinks" about it like a human brain</div>
-        <div class="poll-option">D) Something else entirely… 👀</div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 3 — The Reveal -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col items-center justify-center text-center gap-lg">
-    <div class="animate-in flex-col items-center gap-md">
-        <p class="slide-label accent-mint">the answer</p>
-        <h2 class="slide-title accent-mint" style="font-size: clamp(30px, 5vw, 64px);">It's the world's best<br>autocomplete.</h2>
-        <p class="slide-subtitle">Seriously. It predicts the next word, over and over and over.</p>
-    </div>
-    <div class="animate-in flex-col items-center gap-md" style="animation-delay: 0.3s; opacity: 0;">
-        <div class="card" style="max-width: 600px;">
-            <p class="slide-label" style="margin-bottom: 12px;">you type</p>
-            <p style="font-size: clamp(16px, 1.8vw, 22px);">"What is the capital of France?"</p>
-        </div>
-        <div class="token-chain" style="margin-top: 8px;">
-            <span class="token accent-cool">"The"</span>
-            <span class="token-arrow">→</span>
-            <span class="token accent-cool">"capital"</span>
-            <span class="token-arrow">→</span>
-            <span class="token accent-cool">"of"</span>
-            <span class="token-arrow">→</span>
-            <span class="token accent-cool">"France"</span>
-            <span class="token-arrow">→</span>
-            <span class="token accent-cool">"is"</span>
-            <span class="token-arrow">→</span>
-            <span class="token accent-mint" style="font-weight: 600;">"Paris"</span>
-        </div>
-        <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-muted); margin-top: 8px;">📱 You know when your phone suggests the next word? Same idea — just way more powerful.</p>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 4 — Be the AI Game -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-coral">interactive game</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">🎮 Let's Play:<br><span class="accent-coral">Be the AI!</span></h2>
-        <p class="slide-subtitle">I'll start a sentence. You predict the next word!</p>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 600px;">
-        <div class="game-prompt">🍕 "The best pizza topping is…"<span class="cursor-blink"></span></div>
-        <div class="game-prompt">😎 "On weekends I like to…"<span class="cursor-blink"></span></div>
-        <div class="game-prompt">📚 "My favorite subject in school is…"<span class="cursor-blink"></span></div>
-        <div class="game-prompt">🏀 "LeBron James is the greatest…"<span class="cursor-blink"></span></div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 5 — How It Learned -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-cool">training</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">But how does it know<br>what word comes next?</h2>
-        <p class="slide-subtitle">It studied. A lot.</p>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 620px;">
-        <div class="tool-row">
-            <span class="tool-emoji">📖</span>
-            <div><span class="tool-name">Books & Articles</span><br><span class="tool-desc">Millions of books, news articles, essays</span></div>
-            <span class="tool-badge">text</span>
-        </div>
-        <div class="tool-row">
-            <span class="tool-emoji">🌐</span>
-            <div><span class="tool-name">The Internet</span><br><span class="tool-desc">Wikipedia, forums, websites, blogs</span></div>
-            <span class="tool-badge">web</span>
-        </div>
-        <div class="tool-row">
-            <span class="tool-emoji">💻</span>
-            <div><span class="tool-name">Code</span><br><span class="tool-desc">Billions of lines of programming code</span></div>
-            <span class="tool-badge">code</span>
-        </div>
-        <div class="tool-row">
-            <span class="tool-emoji">💬</span>
-            <div><span class="tool-name">Conversations</span><br><span class="tool-desc">Dialogues, Q&As, discussions</span></div>
-            <span class="tool-badge">chat</span>
-        </div>
-    </div>
-    <p class="animate-in" style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">Think of it like Netflix learning your taste — but with words instead of movies.</p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 6 — Tokens -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-violet">fun fact</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🧩 AI doesn't read<br>words like you do</h2>
-        <p class="slide-subtitle">It breaks everything into pieces called <strong style="color: var(--accent-violet);">"tokens"</strong></p>
-    </div>
-    <div class="stagger flex-col gap-md" style="max-width: 600px;">
-        <div class="token-example">
-            <span class="token-word">"basketball"</span>
-            <span class="token-arrow">→</span>
-            <div class="token-pieces">
-                <span class="token-piece" style="border-color: var(--accent-cool);">basket</span>
-                <span class="token-piece" style="border-color: var(--accent-cool);">ball</span>
+    <main>
+        <section class="hero" id="top">
+            <div>
+                <p class="eyebrow">AI for middle schoolers + high schoolers</p>
+                <h1>AI is not magic. But it is powerful.</h1>
+                <p class="lead">Use this hub to review the talk, jump into hands-on labs, practice better prompting, and explore tools beyond ChatGPT.</p>
+                <div class="button-row">
+                    <a class="btn btn-primary" href="presentation.html">▶ Start Presentation</a>
+                    <a class="btn btn-mint" href="labs.html">🧪 Try the Labs</a>
+                </div>
             </div>
-        </div>
-        <div class="token-example">
-            <span class="token-word">"homework"</span>
-            <span class="token-arrow">→</span>
-            <div class="token-pieces">
-                <span class="token-piece" style="border-color: var(--accent-mint);">home</span>
-                <span class="token-piece" style="border-color: var(--accent-mint);">work</span>
+            <aside class="hero-card">
+                <h3>What you will learn</h3>
+                <p>How ChatGPT works behind the scenes, what models are, how AI tools are trained, why prompting matters, and how to build with AI safely.</p>
+                <div class="tags">
+                    <span class="tag">ChatGPT</span>
+                    <span class="tag">Models</span>
+                    <span class="tag">Prompting</span>
+                    <span class="tag">GitHub Copilot</span>
+                    <span class="tag">AI Labs</span>
+                </div>
+            </aside>
+        </section>
+
+        <section id="start">
+            <p class="eyebrow">choose your path</p>
+            <h2>Where do you want to go?</h2>
+            <div class="grid">
+                <article class="card">
+                    <span class="icon">🎤</span>
+                    <h3>Slides</h3>
+                    <p>Presenter-mode slides from the talk with keyboard, swipe, and arrow navigation.</p>
+                    <a href="presentation.html">Open slides →</a>
+                </article>
+                <article class="card">
+                    <span class="icon">🧪</span>
+                    <h3>Labs</h3>
+                    <p>Try AI vision, image generation, audio, OCR, music, and GitHub Copilot activities.</p>
+                    <a href="labs.html">Try labs →</a>
+                </article>
+                <article class="card">
+                    <span class="icon">🧭</span>
+                    <h3>Prompting Guide</h3>
+                    <p>Learn the simple recipe for better prompts: role, context, task, format, and checks.</p>
+                    <a href="#prompting">Practice prompting →</a>
+                </article>
+                <article class="card">
+                    <span class="icon">👋</span>
+                    <h3>About Me</h3>
+                    <p>Learn why Shaeel cares about AI and what he builds as a software engineer.</p>
+                    <a href="#about">Meet Shaeel →</a>
+                </article>
             </div>
-        </div>
-        <div class="token-example">
-            <span class="token-word">"unbelievable"</span>
-            <span class="token-arrow">→</span>
-            <div class="token-pieces">
-                <span class="token-piece" style="border-color: var(--accent-coral);">un</span>
-                <span class="token-piece" style="border-color: var(--accent-coral);">believ</span>
-                <span class="token-piece" style="border-color: var(--accent-coral);">able</span>
+        </section>
+
+        <section id="concepts">
+            <p class="eyebrow">review the main ideas</p>
+            <h2>Key AI concepts from the talk</h2>
+            <div class="topic-list">
+                <div class="topic"><strong>How ChatGPT works</strong>It predicts the next word, using patterns learned from huge amounts of text.</div>
+                <div class="topic"><strong>What a model is</strong>A trained AI system — like a brain shaped by examples for a specific job.</div>
+                <div class="topic"><strong>How models are trained</strong>They practice billions of pattern problems, adjust when wrong, and improve over time.</div>
+                <div class="topic"><strong>Where knowledge lives</strong>Not in a filing cabinet — in billions of numbers called weights.</div>
+                <div class="topic"><strong>Different GenAI models</strong>Text, image, vision, audio, music, and code models each learn different patterns.</div>
+                <div class="topic"><strong>Why AI can hallucinate</strong>It knows what sounds likely, not always what is true.</div>
             </div>
-        </div>
-        <div class="token-example">
-            <span class="token-word">"ChatGPT"</span>
-            <span class="token-arrow">→</span>
-            <div class="token-pieces">
-                <span class="token-piece" style="border-color: var(--accent-violet);">Chat</span>
-                <span class="token-piece" style="border-color: var(--accent-violet);">G</span>
-                <span class="token-piece" style="border-color: var(--accent-violet);">PT</span>
+            <div class="button-row">
+                <a class="btn" href="presentation.html">Review in slides →</a>
             </div>
-        </div>
-    </div>
-    <p class="animate-in" style="font-size: clamp(13px, 1.4vw, 16px); color: var(--accent-gold); animation-delay: 0.6s; opacity: 0;">💡 This is why AI sometimes misspells things — it sees pieces, not whole words!</p>
-</div>
+        </section>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 7 — Myth or Fact #1 -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-gold">round 1</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">⚡ AI: Myth or Fact?</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="myth-card myth flex-col gap-xs">
-            <p class="myth-statement">"ChatGPT searches Google for answers"</p>
-            <p class="myth-verdict accent-coral">❌ MYTH</p>
-            <p class="myth-explain">It generates text from patterns it learned — no internet search</p>
-        </div>
-        <div class="myth-card fact flex-col gap-xs">
-            <p class="myth-statement">"AI can be confidently wrong"</p>
-            <p class="myth-verdict accent-mint">✅ FACT</p>
-            <p class="myth-explain">It can sound 100% sure and still be totally made up</p>
-        </div>
-        <div class="myth-card complicated flex-col gap-xs">
-            <p class="myth-statement">"ChatGPT understands what you're saying"</p>
-            <p class="myth-verdict accent-gold">🤔 IT'S COMPLICATED</p>
-            <p class="myth-explain">It recognizes patterns incredibly well, but doesn't "understand" like a human</p>
-        </div>
-    </div>
-</div>
+        <section id="prompting">
+            <p class="eyebrow">prompting guide</p>
+            <h2>Better prompts = better answers</h2>
+            <p class="lead">AI is not a mind reader. Your prompt becomes the context the model uses to choose patterns. Specific context narrows the guessing zone and helps reduce hallucinations.</p>
+            <div class="recipe">
+                <div class="recipe-step"><span>Role</span><p>“Act like a patient tutor...”</p></div>
+                <div class="recipe-step"><span>Context</span><p>“I’m in 8th grade learning photosynthesis...”</p></div>
+                <div class="recipe-step"><span>Task</span><p>“Quiz me with 5 questions...”</p></div>
+                <div class="recipe-step"><span>Format</span><p>“Use bullets and simple examples...”</p></div>
+                <div class="recipe-step"><span>Check</span><p>“If unsure, say so. Ask me one follow-up question.”</p></div>
+            </div>
+            <div class="button-row">
+                <a class="btn btn-mint" href="presentation.html">See prompting slides →</a>
+            </div>
+        </section>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 8 — Hallucinations -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col items-center gap-lg">
-    <div class="animate-in flex-col items-center gap-sm text-center">
-        <p class="slide-label accent-coral">hallucinations</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🫠 When AI Makes<br>Stuff Up</h2>
-        <p class="slide-subtitle">It's called a "hallucination" — and it happens more than you'd think</p>
-    </div>
-    <div class="animate-in convo stagger" style="animation-delay: 0.2s; opacity: 0;">
-        <div class="bubble-label" style="text-align: right;">YOU</div>
-        <div class="bubble bubble-user">Who won the 2019 Super Bowl MVP?</div>
-        <div class="bubble-label">CHATGPT</div>
-        <div class="bubble bubble-ai">Patrick Mahomes won the 2019 Super Bowl MVP ✅</div>
-        <div style="height: 12px;"></div>
-        <div class="bubble-label" style="text-align: right;">YOU</div>
-        <div class="bubble bubble-user">Who won the 2023 Nobel Prize in Memeology?</div>
-        <div class="bubble-label">CHATGPT</div>
-        <div class="bubble bubble-ai">Dr. James Richardson won the 2023 Nobel Prize in Memeology for his groundbreaking work on internet humor. 🚫</div>
-    </div>
-    <p class="animate-in" style="font-size: clamp(13px, 1.4vw, 16px); color: var(--accent-gold); animation-delay: 0.7s; opacity: 0; text-align: center;">⚠️ There's no Nobel Prize in Memeology. ChatGPT just made up a confident-sounding answer!</p>
-</div>
+        <section id="about">
+            <p class="eyebrow">about Shaeel</p>
+            <h2>Why I’m giving this talk</h2>
+            <div class="about">
+                <div class="about-box">
+                    <h3>Shaeel Afsar</h3>
+                    <p>Lead Software Engineer in Chicago focused on backend systems, cloud architecture, microservices, and APIs.</p>
+                    <div class="tags">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">Microservices</span>
+                        <span class="tag">APIs</span>
+                    </div>
+                </div>
+                <div class="about-box">
+                    <h3>AI is a creative multiplier</h3>
+                    <p>I’ve worked on enterprise systems at Fortune 500 companies including Amazon, United Airlines, and UnitedHealth Group. I want students to understand AI early because it can help them learn, create, build, and think critically about the future.</p>
+                    <div class="button-row">
+                        <a class="btn" href="https://shaeelafsar.github.io" target="_blank" rel="noreferrer">Personal website →</a>
+                        <a class="btn" href="https://linkedin.com/in/shaeel-afsar" target="_blank" rel="noreferrer">LinkedIn →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 9 — Human vs AI Brain -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm text-center items-center">
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🧠 So is AI actually "thinking"?</h2>
-    </div>
-    <div class="animate-in split" style="max-width: 800px; margin: 0 auto; animation-delay: 0.2s; opacity: 0;">
-        <div class="compare-col">
-            <h3 class="accent-cool">🧑 Human Brain</h3>
-            <ul>
-                <li>✦ Understands meaning & context</li>
-                <li>✦ Has feelings & experiences</li>
-                <li>✦ Can say "I don't know"</li>
-                <li>✦ Learns from a few examples</li>
-                <li>✦ Has common sense</li>
-            </ul>
-        </div>
-        <div class="compare-col">
-            <h3 class="accent-mint">🤖 AI "Brain"</h3>
-            <ul>
-                <li>✦ Recognizes powerful patterns</li>
-                <li>✦ No feelings, no experiences</li>
-                <li>✦ Guesses even when unsure</li>
-                <li>✦ Needs BILLIONS of examples</li>
-                <li>✦ No actual common sense</li>
-            </ul>
-        </div>
-    </div>
-    <p class="animate-in text-center" style="font-size: clamp(14px, 1.6vw, 18px); color: var(--accent-violet); font-weight: 600; animation-delay: 0.5s; opacity: 0;">Not thinking like us — but incredibly powerful pattern matching at massive scale.</p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 10 — Section Divider: Zoom Out -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide slide-section flex-col items-center justify-center text-center gap-md">
-    <span class="section-number">02</span>
-    <div class="animate-in flex-col items-center gap-md">
-        <span class="emoji-big">🔭</span>
-        <h2 class="slide-title accent-cool">Zoom Out</h2>
-        <p class="slide-subtitle">ChatGPT is just one type of AI.<br>Let's look at the bigger picture.</p>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 11 — What is AI? -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-mint">the big idea</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">What is AI, really?</h2>
-        <p class="slide-subtitle"><strong class="accent-mint">AI = Software that learns from examples</strong> instead of being told exactly what to do</p>
-    </div>
-    <div class="animate-in split" style="max-width: 780px; animation-delay: 0.3s; opacity: 0;">
-        <div class="card flex-col gap-sm">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-coral">Traditional Software</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Human writes rules:<br><span style="font-family: var(--font-mono); font-size: 0.9em;">"IF email has 'free money' → spam"</span></p>
-        </div>
-        <div class="card flex-col gap-sm">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-mint">AI Software</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Learns from 10,000 spam emails:<br><span style="font-family: var(--font-mono); font-size: 0.9em;">"I figured out the pattern myself!"</span></p>
-        </div>
-    </div>
-    <div class="animate-in text-center" style="animation-delay: 0.5s; opacity: 0;">
-        <p style="font-size: clamp(16px, 2vw, 22px); font-weight: 600;" class="accent-cool">A "model" = an AI brain trained for a specific job</p>
-        <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary); margin-top: 8px;">ChatGPT's model does text. Other models see, listen, draw, and more!</p>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 12 — Types of AI Models -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-cool">model types</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🎯 Different AI Brains,<br>Different Jobs</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="tool-row"><span class="tool-emoji">✍️</span><div><span class="tool-name accent-cool">Text AI</span><br><span class="tool-desc">Writes, translates, summarizes</span></div><span class="tool-badge">ChatGPT · Claude · Gemini</span></div>
-        <div class="tool-row"><span class="tool-emoji">👁️</span><div><span class="tool-name accent-mint">Vision AI</span><br><span class="tool-desc">Sees & understands images</span></div><span class="tool-badge">Google Lens · GPT-4V</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name accent-violet">Image AI</span><br><span class="tool-desc">Creates images from descriptions</span></div><span class="tool-badge">DALL·E · Midjourney</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name accent-coral">Audio AI</span><br><span class="tool-desc">Understands & creates sound</span></div><span class="tool-badge">Whisper · Suno</span></div>
-        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name accent-gold">Code AI</span><br><span class="tool-desc">Writes & understands code</span></div><span class="tool-badge">GitHub Copilot · Cursor</span></div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 13 — Myth or Fact #2 -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-gold">round 2</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">⚡ AI: Myth or Fact?</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="myth-card myth flex-col gap-xs">
-            <p class="myth-statement">"AI is going to take over the world"</p>
-            <p class="myth-verdict accent-coral">❌ MYTH (for now)</p>
-            <p class="myth-explain">AI can't set its own goals — it only does what it's trained to do</p>
-        </div>
-        <div class="myth-card fact flex-col gap-xs">
-            <p class="myth-statement">"AI can create fake photos of real people"</p>
-            <p class="myth-verdict accent-mint">✅ FACT</p>
-            <p class="myth-explain">Deepfakes are real and getting better — always question what you see</p>
-        </div>
-        <div class="myth-card complicated flex-col gap-xs">
-            <p class="myth-statement">"AI learns and gets smarter on its own"</p>
-            <p class="myth-verdict accent-gold">🤔 MOSTLY MYTH</p>
-            <p class="myth-explain">It needs humans to retrain it — it can't study on its own</p>
-        </div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 14 — Section Divider: AI Tools -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide slide-section flex-col items-center justify-center text-center gap-md">
-    <span class="section-number">03</span>
-    <div class="animate-in flex-col items-center gap-md">
-        <span class="emoji-big">🧰</span>
-        <h2 class="slide-title accent-warm">AI Can See. Hear.<br>Draw. Read. Code.</h2>
-        <p class="slide-subtitle">Let's look at what's out there.</p>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 15 — Vision AI -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-mint">ai that can see</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">👁️ AI Vision</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 620px;">
-        <div class="tool-row"><span class="tool-emoji">📸</span><div><span class="tool-name">Photo a math problem</span><br><span class="tool-desc">AI solves it step by step</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🌿</span><div><span class="tool-name">Point at a plant</span><br><span class="tool-desc">AI identifies the species</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🌍</span><div><span class="tool-name">Snap a foreign sign</span><br><span class="tool-desc">Instant translation</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🔍</span><div><span class="tool-name">Screenshot an error</span><br><span class="tool-desc">AI explains what went wrong</span></div></div>
-    </div>
-    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
-        <span class="demo-card-icon">📲</span>
-        <div class="demo-card-content">
-            <p class="demo-card-label">⚡ Quick Demo</p>
-            <p class="demo-card-text">Open ChatGPT on phone → snap a photo of something in the room → watch AI describe it</p>
-        </div>
-    </div>
-    <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">tools: Google Lens · ChatGPT Vision · Apple Visual Look Up · <a href="labs.html#vision" style="color: var(--accent-mint);">🧪 Try the Lab</a></p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 16 — Image Generation -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-violet">ai that can create</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">🎨 AI Image Generation</h2>
-        <p class="slide-subtitle">Describe what you want → AI draws it</p>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 600px;">
-        <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">🐱🚀🍕 "A cat astronaut floating in space eating pizza"</div>
-        <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">🌆✨ "A cyberpunk city at sunset, neon lights"</div>
-        <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">📝😂 "My homework but it's actually done"</div>
-        <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">🐉🏀 "A dragon playing basketball"</div>
-    </div>
-    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
-        <span class="demo-card-icon">🖌️</span>
-        <div class="demo-card-content">
-            <p class="demo-card-label">⚡ Quick Demo</p>
-            <p class="demo-card-text">Open DALL·E in ChatGPT → let a student suggest a wild prompt → generate the image live</p>
-        </div>
-    </div>
-    <p class="animate-in" style="font-size: clamp(13px, 1.4vw, 16px); color: var(--accent-gold); animation-delay: 0.6s; opacity: 0;">🤯 These images don't exist anywhere — AI creates them from scratch! · <a href="labs.html#image-gen" style="color: var(--accent-mint);">🧪 Try the Lab</a></p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 17 — Speech, OCR, Music -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-coral">ai that can hear & read</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🎧 AI Audio & Documents</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="tool-row"><span class="tool-emoji">🗣️</span><div><span class="tool-name">Speech → Text</span><br><span class="tool-desc">Voice to written text instantly</span></div><span class="tool-badge">Whisper · Otter.ai</span></div>
-        <div class="tool-row"><span class="tool-emoji">🌐</span><div><span class="tool-name">Real-time Translation</span><br><span class="tool-desc">Speak English → hear it in Spanish, Japanese</span></div><span class="tool-badge">Google Translate</span></div>
-        <div class="tool-row"><span class="tool-emoji">📄</span><div><span class="tool-name">OCR — Read Anything</span><br><span class="tool-desc">Scan handwritten notes, receipts, signs</span></div><span class="tool-badge">Google Lens</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name">Music & Voice</span><br><span class="tool-desc">Create music from text, clone voices</span></div><span class="tool-badge">Suno · ElevenLabs</span></div>
-    </div>
-    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
-        <span class="demo-card-icon">🎤</span>
-        <div class="demo-card-content">
-            <p class="demo-card-label">⚡ Quick Demo</p>
-            <p class="demo-card-text">Play a pre-made Suno song or do live voice-to-text → have a student write something by hand → scan it with Google Lens</p>
-        </div>
-    </div>
-    <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;"><a href="labs.html#audio" style="color: var(--accent-mint);">🧪 Try the Audio Lab</a> · <a href="labs.html#ocr" style="color: var(--accent-mint);">🧪 Try the OCR Lab</a> · <a href="labs.html#music" style="color: var(--accent-mint);">🧪 Try the Music Lab</a></p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 18 — Code AI (Bridge Slide) -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col items-center justify-center gap-xl">
-    <div class="animate-in flex-col items-center gap-md text-center">
-        <p class="slide-label accent-cool">and finally…</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 56px);">💻 AI That Can <span class="accent-cool">Code</span></h2>
-        <p class="slide-subtitle">Describe what you want in plain English → AI writes the code.</p>
-    </div>
-    <div class="stagger flex-col gap-md" style="max-width: 520px;">
-        <div class="step"><span class="step-num">1</span><p class="step-text">You describe what you want in plain English</p></div>
-        <div class="step"><span class="step-num">2</span><p class="step-text">AI writes the code for you</p></div>
-        <div class="step"><span class="step-num">3</span><p class="step-text">You review it, tweak it, ship it</p></div>
-        <div class="step"><span class="step-num">4</span><p class="step-text">A working app — without memorizing a programming language</p></div>
-    </div>
-    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
-        <span class="demo-card-icon">🎮</span>
-        <div class="demo-card-content">
-            <p class="demo-card-label">⚡ Full Demo Coming Up</p>
-            <p class="demo-card-text">We'll use GitHub Copilot to build a quiz game live — the audience picks the topic!</p>
-        </div>
-    </div>
-    <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">tools: GitHub Copilot · Cursor · Replit AI · <a href="labs.html#code" style="color: var(--accent-mint);">🧪 Try the Code Lab</a></p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 19 — Section Divider: Demo -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide slide-section flex-col items-center justify-center text-center gap-md">
-    <span class="section-number">04</span>
-    <div class="animate-in flex-col items-center gap-md">
-        <span class="emoji-big">🎮</span>
-        <h2 class="slide-title accent-mint">Live Demo Time!</h2>
-        <p class="slide-subtitle">Let's build a quiz game together — using AI.<br><strong class="accent-gold">But first… YOU get to decide what we build! 🫵</strong></p>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 20 — Audience Choices -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-cool">you choose</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🗳️ Help Me Design<br>the Game</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 600px;">
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">🎯 Quiz Topic?</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Sports? Anime? Music? Movies? Science? Random?</p>
-        </div>
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">⏱️ Timer?</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Should there be a countdown timer for each question?</p>
-        </div>
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">💯 Scoring?</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Points for correct answers? Lose points for wrong ones?</p>
-        </div>
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">🏆 End Screen?</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">What happens when you win? Confetti? Meme? Dance?</p>
-        </div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 21 — LIVE DEMO -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col items-center justify-center text-center gap-lg" style="background: oklch(0.08 0.02 260);">
-    <div class="animate-in flex-col items-center gap-md">
-        <p style="font-family: var(--font-mono); font-size: clamp(14px, 1.5vw, 18px); color: var(--accent-mint); letter-spacing: 0.1em;">⌨️ LIVE DEMO</p>
-        <h2 class="slide-title" style="font-size: clamp(32px, 5vw, 64px);">Building your<br>quiz game with<br><span class="accent-mint">GitHub Copilot</span></h2>
-        <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-muted); margin-top: 16px;">[ switch to code editor ]</p>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 22 — What Just Happened -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col items-center justify-center gap-lg">
-    <div class="animate-in flex-col items-center gap-md text-center">
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">🤯 What just happened?</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 520px;">
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>We described a game in plain English</div>
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>AI wrote all the code</div>
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>We had a working game in minutes</div>
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>No programming experience needed</div>
-    </div>
-    <p class="animate-in text-center" style="font-size: clamp(16px, 2vw, 22px); font-weight: 600; color: var(--accent-mint); animation-delay: 0.6s; opacity: 0;">That's the power of AI + human creativity 🤝</p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 23 — What AI is Bad At -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-coral">the fine print</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">⚠️ What AI is NOT<br>Good At (Yet)</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 620px;">
-        <div class="tool-row"><span class="tool-emoji">🚫</span><div><span class="tool-name">Being 100% accurate</span><br><span class="tool-desc">It makes stuff up confidently — always double-check</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🤷</span><div><span class="tool-name">Knowing what's true</span><br><span class="tool-desc">It knows what sounds right, not what IS right</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🔒</span><div><span class="tool-name">Keeping secrets</span><br><span class="tool-desc">Don't share personal info — it might end up in training data</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🧠</span><div><span class="tool-name">Replacing your brain</span><br><span class="tool-desc">It's a tool, not a substitute for learning and thinking</span></div></div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 24 — Smart AI Use -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-mint">the smart way</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🧭 Using AI the<br>Smart Way</h2>
-    </div>
-    <div class="stagger flex-col gap-xs" style="max-width: 600px;">
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>Use AI to help you learn, explore, and create</div>
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>Always verify facts AI tells you</div>
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>Think of AI as a super-powered assistant</div>
-        <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Copy-paste answers without understanding them</div>
-        <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Share personal info (addresses, passwords)</div>
-        <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Trust AI blindly — it's confident, not always correct</div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 25 — Try These Today -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-cool">take action</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🚀 Try These TODAY<br><span style="font-size: 0.6em; color: var(--text-secondary);">(Most are free!)</span></h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="tool-row"><span class="tool-emoji">💬</span><div><span class="tool-name">ChatGPT</span><br><span class="tool-desc">Ask anything, brainstorm, get homework help</span></div><span class="tool-badge">chat.openai.com</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name">DALL·E</span><br><span class="tool-desc">Generate images from text (built into ChatGPT)</span></div><span class="tool-badge">free tier</span></div>
-        <div class="tool-row"><span class="tool-emoji">📸</span><div><span class="tool-name">Google Lens</span><br><span class="tool-desc">Identify objects, solve math, translate signs</span></div><span class="tool-badge">your phone</span></div>
-        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name">GitHub Copilot</span><br><span class="tool-desc">Free for students! Write code with AI</span></div><span class="tool-badge">github.com/copilot</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name">Suno</span><br><span class="tool-desc">Create music by describing it in words</span></div><span class="tool-badge">suno.com</span></div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 26 — Q&A -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col items-center justify-center text-center gap-lg" style="background: oklch(0.10 0.025 260);">
-    <div class="animate-in flex-col items-center gap-md">
-        <span class="emoji-big">❓</span>
-        <h2 class="slide-title">Questions?</h2>
-        <p class="slide-subtitle">Ask me anything about AI — no question is too basic!</p>
-        <p style="font-size: clamp(20px, 3vw, 36px); margin-top: 24px;">Thank you! 🙏</p>
-    </div>
-</div>
-
-</div><!-- /.slide-deck -->
-
-<!-- ═══ Navigation ═══ -->
-<div class="nav-controls">
-    <button class="nav-btn" onclick="prevSlide()" aria-label="Previous slide">←</button>
-    <span class="slide-counter"><span id="current">1</span> / <span id="total">26</span></span>
-    <button class="nav-btn" onclick="nextSlide()" aria-label="Next slide">→</button>
-</div>
-
-<script>
-    let current = 1;
-    const slides = document.querySelectorAll('.slide');
-    const total = slides.length;
-    document.getElementById('total').textContent = total;
-
-    function showSlide(n) {
-        if (n < 1) n = 1;
-        if (n > total) n = total;
-        current = n;
-        slides.forEach((s, i) => {
-            s.classList.toggle('active', i === n - 1);
-        });
-        document.getElementById('current').textContent = n;
-        document.getElementById('progressBar').style.width = (n / total * 100) + '%';
-    }
-
-    function nextSlide() { showSlide(current + 1); }
-    function prevSlide() { showSlide(current - 1); }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
-        if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prevSlide(); }
-        if (e.key === 'Home') { e.preventDefault(); showSlide(1); }
-        if (e.key === 'End') { e.preventDefault(); showSlide(total); }
-    });
-
-    // Touch swipe
-    let touchStartX = 0;
-    let touchEndX = 0;
-    document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-    document.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) nextSlide();
-            else prevSlide();
-        }
-    });
-
-    showSlide(1);
-</script>
-
+    <footer>
+        Built as a take-home learning hub for the AI talk.
+    </footer>
 </body>
 </html>
