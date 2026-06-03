@@ -793,15 +793,13 @@
         </div>
         <div class="card flex-col gap-sm">
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-mint">🔢 It lives in “weights”</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">The knowledge is stored as <strong>billions of numbers</strong> called weights. Those numbers represent patterns it learned from training.</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">A weight is a <strong>connection strength</strong> between patterns. If “capital of France” keeps leading to “Paris,” that connection gets stronger.</p>
             <div class="weight-cloud">
-                <span class="weight-chip">0.82</span>
-                <span class="weight-chip">-1.14</span>
-                <span class="weight-chip">2.31</span>
-                <span class="weight-chip">0.07</span>
-                <span class="weight-chip">-0.56</span>
-                <span class="weight-chip">1.92</span>
+                <span class="weight-chip">France → Paris: +2.31</span>
+                <span class="weight-chip">France → pizza: -1.14</span>
+                <span class="weight-chip">dog → bark: +1.92</span>
             </div>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">During training, a <strong>wrong guess nudges weights</strong> away from that answer. A <strong>right guess strengthens weights</strong> toward it.</p>
         </div>
         <div class="card flex-col gap-xs">
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-cool">🏀 Think muscle memory</p>
