@@ -682,17 +682,23 @@
             </div>
         </div>
         <div class="card flex-col gap-sm">
-            <p style="font-size: clamp(16px, 1.8vw, 22px); font-weight: 600;">ChatGPT does the <span class="accent-mint">exact same thing</span>.</p>
-            <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-secondary);">It looks at what came before, predicts what probably comes next, adds that word, then repeats the process again and again.</p>
-            <div class="token-chain" style="margin-top: 4px;">
-                <span class="token">The capital</span>
+            <p style="font-size: clamp(16px, 1.8vw, 22px); font-weight: 600;">ChatGPT answers by doing this <span class="accent-mint">after</span> reading your question.</p>
+            <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-secondary);"><strong class="accent-cool">It reads your whole question first</strong>, then predicts the answer one piece at a time.</p>
+            <div class="token-chain" style="margin-top: 4px; justify-content: center;">
+                <span class="token">Question: “What is the capital of France?”</span>
+            </div>
+            <div class="token-chain" style="margin-top: 8px; justify-content: center;">
+                <span class="token">The</span>
+                <span class="token-arrow">→</span>
+                <span class="token">capital</span>
                 <span class="token-arrow">→</span>
                 <span class="token">of France</span>
                 <span class="token-arrow">→</span>
                 <span class="token">is</span>
                 <span class="token-arrow">→</span>
-                <span class="token accent-mint" style="font-weight: 600;">Paris</span>
+                <span class="token accent-mint" style="font-weight: 600;">Paris.</span>
             </div>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Then it builds the answer one piece at a time: <strong>Answer: “The capital of France is Paris.”</strong></p>
         </div>
     </div>
 </div>
