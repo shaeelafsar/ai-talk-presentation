@@ -704,13 +704,16 @@
     <div class="animate-in flex-col gap-sm">
         <p class="slide-label accent-coral">interactive game</p>
         <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">🎮 Let's Play:<br><span class="accent-coral">Be the AI!</span></h2>
-        <p class="slide-subtitle">I'll start a sentence. You predict the next word!</p>
+        <p class="slide-subtitle">I'll start a phrase. Shout out the word most people would probably say next.</p>
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 600px;">
-        <div class="game-prompt">🍕 "The best pizza topping is…"<span class="cursor-blink"></span></div>
-        <div class="game-prompt">😎 "On weekends I like to…"<span class="cursor-blink"></span></div>
-        <div class="game-prompt">📚 "My favorite subject in school is…"<span class="cursor-blink"></span></div>
-        <div class="game-prompt">🏀 "LeBron James is the greatest…"<span class="cursor-blink"></span></div>
+        <div class="game-prompt">🍕 "The most popular pizza topping is…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint">pepperoni?</span></div>
+        <div class="game-prompt">⭐ "May the Force be…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint">with you?</span></div>
+        <div class="game-prompt">👟 "Just do…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint">it?</span></div>
+        <div class="game-prompt">🎵 "Baby shark…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint">doo doo?</span></div>
+    </div>
+    <div class="animate-in card-elevated" style="max-width: 700px; animation-delay: 0.6s; opacity: 0;">
+        <p style="font-size: clamp(15px, 1.7vw, 19px); color: var(--text-secondary); line-height: 1.45;"><strong class="accent-gold">Class pattern:</strong> if most of you say <strong>pepperoni</strong>, we just discovered a pattern. AI does that at massive scale — except it studied billions of examples instead of one classroom.</p>
     </div>
 </div>
 
@@ -834,81 +837,6 @@
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 9 — Tokens -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-violet">fun fact</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🧩 AI doesn't read<br>words like you do</h2>
-        <p class="slide-subtitle">It breaks everything into pieces called <strong style="color: var(--accent-violet);">"tokens"</strong></p>
-    </div>
-    <div class="stagger flex-col gap-md" style="max-width: 600px;">
-        <div class="token-example">
-            <span class="token-word">"basketball"</span>
-            <span class="token-arrow">→</span>
-            <div class="token-pieces">
-                <span class="token-piece" style="border-color: var(--accent-cool);">basket</span>
-                <span class="token-piece" style="border-color: var(--accent-cool);">ball</span>
-            </div>
-        </div>
-        <div class="token-example">
-            <span class="token-word">"homework"</span>
-            <span class="token-arrow">→</span>
-            <div class="token-pieces">
-                <span class="token-piece" style="border-color: var(--accent-mint);">home</span>
-                <span class="token-piece" style="border-color: var(--accent-mint);">work</span>
-            </div>
-        </div>
-        <div class="token-example">
-            <span class="token-word">"unbelievable"</span>
-            <span class="token-arrow">→</span>
-            <div class="token-pieces">
-                <span class="token-piece" style="border-color: var(--accent-coral);">un</span>
-                <span class="token-piece" style="border-color: var(--accent-coral);">believ</span>
-                <span class="token-piece" style="border-color: var(--accent-coral);">able</span>
-            </div>
-        </div>
-        <div class="token-example">
-            <span class="token-word">"ChatGPT"</span>
-            <span class="token-arrow">→</span>
-            <div class="token-pieces">
-                <span class="token-piece" style="border-color: var(--accent-violet);">Chat</span>
-                <span class="token-piece" style="border-color: var(--accent-violet);">G</span>
-                <span class="token-piece" style="border-color: var(--accent-violet);">PT</span>
-            </div>
-        </div>
-    </div>
-    <p class="animate-in" style="font-size: clamp(13px, 1.4vw, 16px); color: var(--accent-gold); animation-delay: 0.6s; opacity: 0;">💡 This is why AI sometimes misspells things — it sees pieces, not whole words!</p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 7 — Myth or Fact #1 -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-gold">round 1</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">⚡ AI: Myth or Fact?</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="myth-card myth flex-col gap-xs">
-            <p class="myth-statement">"ChatGPT searches Google for answers"</p>
-            <p class="myth-verdict accent-coral">❌ MYTH</p>
-            <p class="myth-explain">It generates text from patterns it learned — no internet search</p>
-        </div>
-        <div class="myth-card fact flex-col gap-xs">
-            <p class="myth-statement">"AI can be confidently wrong"</p>
-            <p class="myth-verdict accent-mint">✅ FACT</p>
-            <p class="myth-explain">It can sound 100% sure and still be totally made up</p>
-        </div>
-        <div class="myth-card complicated flex-col gap-xs">
-            <p class="myth-statement">"ChatGPT understands what you're saying"</p>
-            <p class="myth-verdict accent-gold">🤔 IT'S COMPLICATED</p>
-            <p class="myth-explain">It recognizes patterns incredibly well, but doesn't "understand" like a human</p>
-        </div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
 <!-- SLIDE 8 — Hallucinations -->
 <!-- ═══════════════════════════════════════════ -->
 <div class="slide flex-col gap-lg">
@@ -919,9 +847,9 @@
     </div>
     <div class="animate-in convo stagger" style="animation-delay: 0.2s; opacity: 0;">
         <div class="bubble-label" style="text-align: right;">YOU</div>
-        <div class="bubble bubble-user">Who won the 2019 Super Bowl MVP?</div>
+        <div class="bubble bubble-user">Who is Mario's brother?</div>
         <div class="bubble-label">CHATGPT</div>
-        <div class="bubble bubble-ai">Patrick Mahomes won the 2019 Super Bowl MVP ✅</div>
+        <div class="bubble bubble-ai">Mario's brother is Luigi. ✅</div>
         <div style="height: 12px;"></div>
         <div class="bubble-label" style="text-align: right;">YOU</div>
         <div class="bubble bubble-user">Who won the 2023 Nobel Prize in Memeology?</div>
@@ -1003,18 +931,6 @@
         </div>
     </div>
     <p class="animate-in text-center" style="font-size: clamp(14px, 1.6vw, 18px); color: var(--accent-violet); font-weight: 600; animation-delay: 0.5s; opacity: 0;">Not thinking like us — but incredibly powerful pattern matching at massive scale.</p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 10 — Section Divider: Zoom Out -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide slide-section flex-col items-center justify-center text-center gap-md">
-    <span class="section-number">02</span>
-    <div class="animate-in flex-col items-center gap-md">
-        <span class="emoji-big">🔭</span>
-        <h2 class="slide-title accent-cool">Zoom Out</h2>
-        <p class="slide-subtitle">ChatGPT is just one type of AI.<br>Let's look at the bigger picture.</p>
-    </div>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -1315,7 +1231,7 @@
 <!-- ═══ Navigation ═══ -->
 <div class="nav-controls">
     <button class="nav-btn" onclick="prevSlide()" aria-label="Previous slide">←</button>
-    <span class="slide-counter"><span id="current">1</span> / <span id="total">31</span></span>
+    <span class="slide-counter"><span id="current">1</span> / <span id="total">28</span></span>
     <button class="nav-btn" onclick="nextSlide()" aria-label="Next slide">→</button>
 </div>
 
