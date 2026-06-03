@@ -475,6 +475,40 @@
             .compare-col { padding: 16px; }
         }
 
+        /* ═══ Demo Card ═══ */
+        .demo-card {
+            background: linear-gradient(135deg, oklch(0.22 0.04 165), oklch(0.18 0.03 200));
+            border: 1px solid oklch(0.35 0.08 165);
+            border-radius: 10px;
+            padding: clamp(10px, 1.5vw, 16px) clamp(14px, 2vw, 22px);
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 1.5vw, 16px);
+            max-width: 620px;
+            width: 100%;
+        }
+        .demo-card-icon {
+            font-size: clamp(20px, 2.5vw, 30px);
+            flex-shrink: 0;
+        }
+        .demo-card-content {
+            flex: 1;
+        }
+        .demo-card-label {
+            font-family: var(--font-mono);
+            font-size: clamp(10px, 1vw, 12px);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-mint);
+            margin-bottom: 2px;
+        }
+        .demo-card-text {
+            font-size: clamp(13px, 1.4vw, 16px);
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
         /* ═══ Swipe Support ═══ */
         .slide-deck { touch-action: pan-y; }
     </style>
@@ -832,6 +866,13 @@
         <div class="tool-row"><span class="tool-emoji">🌍</span><div><span class="tool-name">Snap a foreign sign</span><br><span class="tool-desc">Instant translation</span></div></div>
         <div class="tool-row"><span class="tool-emoji">🔍</span><div><span class="tool-name">Screenshot an error</span><br><span class="tool-desc">AI explains what went wrong</span></div></div>
     </div>
+    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
+        <span class="demo-card-icon">📲</span>
+        <div class="demo-card-content">
+            <p class="demo-card-label">⚡ Quick Demo</p>
+            <p class="demo-card-text">Open ChatGPT on phone → snap a photo of something in the room → watch AI describe it</p>
+        </div>
+    </div>
     <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">tools: Google Lens · ChatGPT Vision · Apple Visual Look Up</p>
 </div>
 
@@ -850,6 +891,13 @@
         <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">📝😂 "My homework but it's actually done"</div>
         <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">🐉🏀 "A dragon playing basketball"</div>
     </div>
+    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
+        <span class="demo-card-icon">🖌️</span>
+        <div class="demo-card-content">
+            <p class="demo-card-label">⚡ Quick Demo</p>
+            <p class="demo-card-text">Open DALL·E in ChatGPT → let a student suggest a wild prompt → generate the image live</p>
+        </div>
+    </div>
     <p class="animate-in" style="font-size: clamp(13px, 1.4vw, 16px); color: var(--accent-gold); animation-delay: 0.6s; opacity: 0;">🤯 These images don't exist anywhere — AI creates them from scratch!</p>
 </div>
 
@@ -867,6 +915,13 @@
         <div class="tool-row"><span class="tool-emoji">📄</span><div><span class="tool-name">OCR — Read Anything</span><br><span class="tool-desc">Scan handwritten notes, receipts, signs</span></div><span class="tool-badge">Google Lens</span></div>
         <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name">Music & Voice</span><br><span class="tool-desc">Create music from text, clone voices</span></div><span class="tool-badge">Suno · ElevenLabs</span></div>
     </div>
+    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
+        <span class="demo-card-icon">🎤</span>
+        <div class="demo-card-content">
+            <p class="demo-card-label">⚡ Quick Demo</p>
+            <p class="demo-card-text">Play a pre-made Suno song or do live voice-to-text → have a student write something by hand → scan it with Google Lens</p>
+        </div>
+    </div>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -883,6 +938,13 @@
         <div class="step"><span class="step-num">2</span><p class="step-text">AI writes the code for you</p></div>
         <div class="step"><span class="step-num">3</span><p class="step-text">You review it, tweak it, ship it</p></div>
         <div class="step"><span class="step-num">4</span><p class="step-text">A working app — without memorizing a programming language</p></div>
+    </div>
+    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
+        <span class="demo-card-icon">🎮</span>
+        <div class="demo-card-content">
+            <p class="demo-card-label">⚡ Full Demo Coming Up</p>
+            <p class="demo-card-text">We'll use GitHub Copilot to build a quiz game live — the audience picks the topic!</p>
+        </div>
     </div>
     <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">tools: GitHub Copilot · Cursor · Replit AI · ChatGPT Code Interpreter</p>
 </div>
