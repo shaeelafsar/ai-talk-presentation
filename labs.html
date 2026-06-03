@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Labs — Try It Yourself!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: oklch(0.13 0.02 260);
+            --bg-surface: oklch(0.17 0.02 260);
+            --bg-elevated: oklch(0.21 0.025 260);
+            --text-primary: oklch(0.95 0.01 260);
+            --text-secondary: oklch(0.72 0.02 260);
+            --text-muted: oklch(0.55 0.02 260);
+            --accent-warm: oklch(0.72 0.18 45);
+            --accent-cool: oklch(0.68 0.15 250);
+            --accent-mint: oklch(0.75 0.14 165);
+            --accent-coral: oklch(0.70 0.17 25);
+            --accent-violet: oklch(0.65 0.18 300);
+            --accent-gold: oklch(0.78 0.14 80);
+            --font-display: 'Cabinet Grotesk', 'Space Grotesk', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            padding: 0;
+        }
+
+        /* ═══ Header ═══ */
+        .hero {
+            padding: clamp(60px, 12vh, 120px) clamp(20px, 5vw, 60px);
+            text-align: center;
+            border-bottom: 1px solid oklch(0.2 0.02 260);
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--accent-cool);
+        }
+        .hero p {
+            font-size: clamp(16px, 2vw, 22px);
+            color: var(--text-secondary);
+            margin-top: 16px;
+            max-width: 550px;
+            margin-inline: auto;
+        }
+
+        /* ═══ Nav ═══ */
+        .lab-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: oklch(0.13 0.02 260 / 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid oklch(0.2 0.02 260);
+            padding: 12px clamp(16px, 4vw, 40px);
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .lab-nav::-webkit-scrollbar { display: none; }
+        .lab-nav a {
+            font-family: var(--font-mono);
+            font-size: clamp(11px, 1.2vw, 13px);
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            background: var(--bg-surface);
+            border: 1px solid oklch(0.25 0.02 260);
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .lab-nav a:hover {
+            color: var(--text-primary);
+            border-color: var(--accent-cool);
+            background: var(--bg-elevated);
+        }
+
+        /* ═══ Content ═══ */
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 clamp(20px, 5vw, 40px);
+        }
+
+        /* ═══ Lab Sections ═══ */
+        .lab-section {
+            padding: clamp(48px, 8vh, 80px) 0;
+            border-bottom: 1px solid oklch(0.18 0.02 260);
+        }
+        .lab-section:last-child { border-bottom: none; }
+
+        .lab-header {
+            margin-bottom: 32px;
+        }
+        .lab-emoji {
+            font-size: clamp(36px, 5vw, 56px);
+            display: block;
+            margin-bottom: 12px;
+        }
+        .lab-title {
+            font-family: var(--font-display);
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        .lab-desc {
+            font-size: clamp(15px, 1.7vw, 18px);
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* ═══ Activity Cards ═══ */
+        .activity {
+            background: var(--bg-surface);
+            border: 1px solid oklch(0.25 0.02 260);
+            border-radius: 14px;
+            padding: clamp(20px, 3vw, 32px);
+            margin-bottom: 16px;
+        }
+        .activity-num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .activity h3 {
+            font-family: var(--font-display);
+            font-size: clamp(18px, 2.2vw, 24px);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .activity p {
+            font-size: clamp(14px, 1.5vw, 16px);
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* ═══ Steps ═══ */
+        .steps {
+            list-style: none;
+            margin: 16px 0;
+        }
+        .steps li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid oklch(0.2 0.01 260);
+            font-size: clamp(14px, 1.5vw, 16px);
+            color: var(--text-secondary);
+        }
+        .steps li:last-child { border-bottom: none; }
+        .steps li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--accent-cool);
+            min-width: 28px;
+        }
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        /* ═══ Try It Button ═══ */
+        .try-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            font-family: var(--font-body);
+            font-size: clamp(14px, 1.5vw, 16px);
+            font-weight: 600;
+            color: oklch(0.98 0 0);
+            background: var(--accent-cool);
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 12px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .try-btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
+        }
+        .try-btn-mint { background: var(--accent-mint); color: oklch(0.15 0.02 165); }
+        .try-btn-violet { background: var(--accent-violet); }
+        .try-btn-coral { background: var(--accent-coral); }
+        .try-btn-gold { background: var(--accent-gold); color: oklch(0.15 0.02 80); }
+
+        /* ═══ Tips ═══ */
+        .tip {
+            background: oklch(0.19 0.03 200 / 0.5);
+            border-left: 3px solid var(--accent-cool);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            font-size: clamp(13px, 1.4vw, 15px);
+            color: var(--text-secondary);
+            margin-top: 16px;
+        }
+        .tip strong { color: var(--accent-cool); }
+
+        /* ═══ Example Prompts ═══ */
+        .prompt-list {
+            list-style: none;
+            margin: 12px 0;
+        }
+        .prompt-list li {
+            font-family: var(--font-mono);
+            font-size: clamp(13px, 1.4vw, 15px);
+            color: var(--text-primary);
+            background: var(--bg-elevated);
+            border: 1px solid oklch(0.28 0.02 260);
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin-bottom: 8px;
+        }
+
+        /* ═══ Back Link ═══ */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 24px 0;
+        }
+        .back-link:hover { color: var(--accent-cool); }
+
+        /* ═══ Footer ═══ */
+        .footer {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid oklch(0.18 0.02 260);
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <a href="index.html" class="back-link">← Back to presentation</a>
+    <h1>🧪 AI Labs</h1>
+    <p>Try these yourself! Each lab takes 5–10 minutes. All tools are free to use.</p>
+</div>
+
+<nav class="lab-nav">
+    <a href="#vision">👁️ Vision</a>
+    <a href="#image-gen">🎨 Image Gen</a>
+    <a href="#audio">🎧 Audio</a>
+    <a href="#ocr">📄 OCR</a>
+    <a href="#music">🎵 Music</a>
+    <a href="#code">💻 Code</a>
+</nav>
+
+<div class="container">
+
+<!-- ═══════════════════════ VISION LAB ═══════════════════════ -->
+<section class="lab-section" id="vision">
+    <div class="lab-header">
+        <span class="lab-emoji">👁️</span>
+        <h2 class="lab-title" style="color: var(--accent-mint);">Lab 1: AI Vision</h2>
+        <p class="lab-desc">Make AI see and understand the world around you.</p>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 1</p>
+        <h3>📸 Photo Detective</h3>
+        <p>Take a photo of anything — your desk, a page in a book, food — and ask AI what it sees.</p>
+        <ol class="steps">
+            <li>Open ChatGPT on your phone (or <a href="https://chat.openai.com" target="_blank" style="color: var(--accent-cool);">chat.openai.com</a>)</li>
+            <li>Tap the camera/photo icon in the message bar</li>
+            <li>Take a photo of something interesting around you</li>
+            <li>Ask: "What do you see in this image? Describe it in detail."</li>
+            <li>Try follow-up questions like "What brand is this?" or "How much does this cost?"</li>
+        </ol>
+        <a href="https://chat.openai.com" target="_blank" class="try-btn try-btn-mint">→ Open ChatGPT</a>
+        <div class="tip">
+            <strong>💡 Try this:</strong> Take a photo of a math problem from your homework. Ask ChatGPT to solve it and explain each step!
+        </div>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 2</p>
+        <h3>🌿 Nature Identifier</h3>
+        <p>Use Google Lens to identify plants, animals, landmarks, or objects around you.</p>
+        <ol class="steps">
+            <li>Open Google Lens (in Google app, or search bar on Android)</li>
+            <li>Point your camera at a plant, insect, building, or anything interesting</li>
+            <li>See the AI-generated results — species, history, reviews</li>
+            <li>Try it on food packaging to get nutritional info</li>
+        </ol>
+        <a href="https://lens.google.com" target="_blank" class="try-btn try-btn-mint">→ Open Google Lens</a>
+    </div>
+</section>
+
+<!-- ═══════════════════════ IMAGE GEN LAB ═══════════════════════ -->
+<section class="lab-section" id="image-gen">
+    <div class="lab-header">
+        <span class="lab-emoji">🎨</span>
+        <h2 class="lab-title" style="color: var(--accent-violet);">Lab 2: AI Image Generation</h2>
+        <p class="lab-desc">Create images that have never existed before — from just words.</p>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 1</p>
+        <h3>🖌️ Prompt Artist</h3>
+        <p>Describe an image you want to create. The more specific, the better the result!</p>
+        <ol class="steps">
+            <li>Open ChatGPT (<a href="https://chat.openai.com" target="_blank" style="color: var(--accent-cool);">chat.openai.com</a>)</li>
+            <li>Type: "Generate an image of..." followed by your description</li>
+            <li>Be specific! Include style, colors, mood, setting</li>
+            <li>If you don't like the result, ask it to change specific things</li>
+        </ol>
+
+        <p style="margin-top: 16px; font-weight: 600; color: var(--text-primary);">Example prompts to try:</p>
+        <ul class="prompt-list">
+            <li>"A golden retriever astronaut on the moon, photorealistic"</li>
+            <li>"A cozy coffee shop in Tokyo during rain, anime style"</li>
+            <li>"My school but it's set in a fantasy world with dragons"</li>
+            <li>"A sneaker designed by nature — made of moss, flowers, and vines"</li>
+            <li>"A basketball court floating in the clouds at sunset"</li>
+        </ul>
+
+        <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--accent-violet);">→ Open ChatGPT + DALL·E</a>
+
+        <div class="tip">
+            <strong>💡 Pro tip:</strong> Add a style at the end of your prompt like "in the style of Studio Ghibli" or "as a 90s cartoon" or "photorealistic 4K" to change the look!
+        </div>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 2</p>
+        <h3>🎭 AI Profile Pic</h3>
+        <p>Create a unique profile picture or avatar for yourself using AI.</p>
+        <ol class="steps">
+            <li>Think about how you want to be represented (animal, superhero, anime character?)</li>
+            <li>Describe it: "A [animal/character] wearing [outfit] in [setting], [art style]"</li>
+            <li>Example: "A wolf wearing a hoodie and headphones, cyberpunk neon city, digital art"</li>
+            <li>Iterate! Ask AI to change colors, style, or pose until it's perfect</li>
+        </ol>
+        <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--accent-violet);">→ Create Your Avatar</a>
+    </div>
+</section>
+
+<!-- ═══════════════════════ AUDIO LAB ═══════════════════════ -->
+<section class="lab-section" id="audio">
+    <div class="lab-header">
+        <span class="lab-emoji">🎧</span>
+        <h2 class="lab-title" style="color: var(--accent-coral);">Lab 3: AI Audio & Voice</h2>
+        <p class="lab-desc">Talk to AI, translate in real-time, and create with your voice.</p>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 1</p>
+        <h3>🗣️ Voice Conversation</h3>
+        <p>Have a full voice conversation with AI — like talking to a really smart friend.</p>
+        <ol class="steps">
+            <li>Open ChatGPT on your phone</li>
+            <li>Tap the headphone icon (Voice mode)</li>
+            <li>Ask it anything! Try: "Explain black holes like I'm 10" or "Quiz me on history"</li>
+            <li>Interrupt it anytime — it'll adjust</li>
+            <li>Try different topics: jokes, study help, debate practice</li>
+        </ol>
+        <a href="https://chat.openai.com" target="_blank" class="try-btn try-btn-coral">→ Try Voice Mode</a>
+        <div class="tip">
+            <strong>💡 Cool idea:</strong> Use voice mode to practice a presentation or rehearse for a debate. AI will give you feedback!
+        </div>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 2</p>
+        <h3>🌍 Real-Time Translation</h3>
+        <p>Speak in one language and hear/read it back in another.</p>
+        <ol class="steps">
+            <li>Open Google Translate (<a href="https://translate.google.com" target="_blank" style="color: var(--accent-cool);">translate.google.com</a>)</li>
+            <li>Tap the microphone icon</li>
+            <li>Speak a sentence in English</li>
+            <li>Watch it translate to Spanish, French, Japanese — anything!</li>
+            <li>Tap the speaker icon to hear the translation spoken aloud</li>
+        </ol>
+        <a href="https://translate.google.com" target="_blank" class="try-btn try-btn-coral">→ Open Google Translate</a>
+    </div>
+</section>
+
+<!-- ═══════════════════════ OCR LAB ═══════════════════════ -->
+<section class="lab-section" id="ocr">
+    <div class="lab-header">
+        <span class="lab-emoji">📄</span>
+        <h2 class="lab-title" style="color: var(--accent-warm);">Lab 4: AI Document Reading (OCR)</h2>
+        <p class="lab-desc">AI can read handwriting, scan documents, and extract text from images.</p>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 1</p>
+        <h3>✍️ Handwriting Scanner</h3>
+        <p>Write something by hand and see if AI can read it — even messy handwriting!</p>
+        <ol class="steps">
+            <li>Write a sentence on paper (try your normal handwriting)</li>
+            <li>Open Google Lens or ChatGPT</li>
+            <li>Take a photo of your handwriting</li>
+            <li>Ask: "What does this say?" or just let it auto-detect the text</li>
+            <li>Challenge: write something really messy and see if it still works!</li>
+        </ol>
+        <a href="https://lens.google.com" target="_blank" class="try-btn" style="background: var(--accent-warm); color: oklch(0.15 0.02 45);">→ Open Google Lens</a>
+        <div class="tip">
+            <strong>💡 School hack:</strong> Take a photo of a whiteboard after class — AI will convert it to clean typed text you can save in your notes!
+        </div>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 2</p>
+        <h3>📋 Instant Digitizer</h3>
+        <p>Turn any printed page, receipt, or poster into editable text.</p>
+        <ol class="steps">
+            <li>Find a printed page — textbook, menu, poster, receipt</li>
+            <li>Take a photo with ChatGPT or Google Lens</li>
+            <li>Ask ChatGPT: "Type out all the text in this image"</li>
+            <li>Bonus: Ask it to summarize or translate what it found</li>
+        </ol>
+        <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--accent-warm); color: oklch(0.15 0.02 45);">→ Open ChatGPT</a>
+    </div>
+</section>
+
+<!-- ═══════════════════════ MUSIC LAB ═══════════════════════ -->
+<section class="lab-section" id="music">
+    <div class="lab-header">
+        <span class="lab-emoji">🎵</span>
+        <h2 class="lab-title" style="color: var(--accent-gold);">Lab 5: AI Music Creation</h2>
+        <p class="lab-desc">Create original songs with AI — just describe the vibe.</p>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 1</p>
+        <h3>🎤 Your First AI Song</h3>
+        <p>Describe a song and AI will compose it — lyrics, melody, instruments, everything.</p>
+        <ol class="steps">
+            <li>Go to <a href="https://suno.com" target="_blank" style="color: var(--accent-cool);">suno.com</a> and create a free account</li>
+            <li>Click "Create" and describe your song</li>
+            <li>Example: "An upbeat pop song about being done with homework on a Friday"</li>
+            <li>Wait 30 seconds — AI generates a full song with vocals!</li>
+            <li>Try different genres: lo-fi, rap, country, jazz, rock</li>
+        </ol>
+
+        <p style="margin-top: 16px; font-weight: 600; color: var(--text-primary);">Prompt ideas:</p>
+        <ul class="prompt-list">
+            <li>"A chill lo-fi beat for studying late at night"</li>
+            <li>"An epic rap battle between a cat and a dog"</li>
+            <li>"A country song about losing your WiFi connection"</li>
+            <li>"A motivational anthem for waking up early"</li>
+        </ul>
+
+        <a href="https://suno.com" target="_blank" class="try-btn try-btn-gold">→ Open Suno</a>
+
+        <div class="tip">
+            <strong>💡 Challenge:</strong> Create a theme song for yourself or your friend group. Share it and see who makes the best one!
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════ CODE LAB ═══════════════════════ -->
+<section class="lab-section" id="code">
+    <div class="lab-header">
+        <span class="lab-emoji">💻</span>
+        <h2 class="lab-title" style="color: var(--accent-cool);">Lab 6: AI Code Writing</h2>
+        <p class="lab-desc">Build websites and games by telling AI what you want — no coding experience needed.</p>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 1</p>
+        <h3>🎮 Build a Mini Game</h3>
+        <p>Tell AI to build you a simple game — and it'll write all the code!</p>
+        <ol class="steps">
+            <li>Go to <a href="https://chat.openai.com" target="_blank" style="color: var(--accent-cool);">ChatGPT</a></li>
+            <li>Type: "Build me a simple [game type] game in HTML that I can play in my browser"</li>
+            <li>Copy the code it gives you</li>
+            <li>Paste it into a new file called <code style="background: var(--bg-elevated); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono);">game.html</code></li>
+            <li>Open that file in your browser — your game works!</li>
+            <li>Ask ChatGPT to modify it: "Add a score counter" or "Make it harder"</li>
+        </ol>
+
+        <p style="margin-top: 16px; font-weight: 600; color: var(--text-primary);">Game ideas to try:</p>
+        <ul class="prompt-list">
+            <li>"Build me a whack-a-mole game with emojis"</li>
+            <li>"Create a typing speed test game"</li>
+            <li>"Make a simple trivia quiz about anime"</li>
+            <li>"Build a reaction time tester"</li>
+            <li>"Create a color-matching memory game"</li>
+        </ul>
+
+        <a href="https://chat.openai.com" target="_blank" class="try-btn">→ Open ChatGPT</a>
+
+        <div class="tip">
+            <strong>💡 Level up:</strong> Once your game works, ask ChatGPT: "Add animations and make it look cool with CSS." Watch it transform!
+        </div>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 2</p>
+        <h3>🌐 Build Your Own Website</h3>
+        <p>Create a personal website about yourself, your hobby, or anything you're into.</p>
+        <ol class="steps">
+            <li>Open ChatGPT</li>
+            <li>Type: "Build me a personal website about [your interest]. Include a hero section, about me, and a gallery. Make it look modern and cool."</li>
+            <li>Copy the HTML code into a file called <code style="background: var(--bg-elevated); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono);">index.html</code></li>
+            <li>Open it in your browser — that's YOUR website!</li>
+            <li>Keep asking ChatGPT to add features: "Add a dark mode toggle" or "Add a contact form"</li>
+        </ol>
+        <a href="https://chat.openai.com" target="_blank" class="try-btn">→ Start Building</a>
+    </div>
+
+    <div class="activity">
+        <p class="activity-num">Activity 3</p>
+        <h3>🤖 GitHub Copilot (Free for Students!)</h3>
+        <p>If you want to go further, GitHub Copilot gives you an AI coding assistant right inside your editor.</p>
+        <ol class="steps">
+            <li>Sign up at <a href="https://github.com" target="_blank" style="color: var(--accent-cool);">github.com</a> (free)</li>
+            <li>Apply for the <a href="https://education.github.com/pack" target="_blank" style="color: var(--accent-cool);">GitHub Student Developer Pack</a> (free for students!)</li>
+            <li>You'll get GitHub Copilot for free</li>
+            <li>Install VS Code and the Copilot extension</li>
+            <li>Start typing code — Copilot suggests completions in real-time!</li>
+        </ol>
+        <a href="https://education.github.com/pack" target="_blank" class="try-btn">→ Get Student Pack (Free)</a>
+    </div>
+</section>
+
+</div><!-- /.container -->
+
+<footer class="footer">
+    <p>Made with AI 🤖 · <a href="index.html" style="color: var(--accent-cool); text-decoration: none;">← Back to presentation</a></p>
+</footer>
+
+</body>
+</html>
