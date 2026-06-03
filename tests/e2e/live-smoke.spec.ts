@@ -42,4 +42,96 @@ test.describe('AI talk learning hub', () => {
     await page.screenshot({ path: `tests/e2e/screenshots/${viewport}/labs-${timestamp}.png`, fullPage: true });
     await expectNoSevereA11yViolations(page);
   });
+
+  test('all presentation slides are scroll-safe and do not sit behind navigation', async ({ page }) => {
+    await page.goto('/presentation.html');
+    await page.addStyleTag({
+      content: `
+        *, *::before, *::after {
+          animation-duration: 1ms !important;
+          transition-duration: 1ms !important;
+          animation-delay: 0ms !important;
+        }
+      `,
+    });
+
+    const total = Number(await page.locator('#total').innerText());
+
+    for (let slideNumber = 1; slideNumber <= total; slideNumber += 1) {
+      await page.evaluate((n) => {
+        window.showSlide(n);
+        document.querySelector('.slide.active')?.scrollTo(0, 0);
+      }, slideNumber);
+
+      await page.waitForTimeout(30);
+
+      const result = await page.evaluate(() => {
+        const slide = document.querySelector('.slide.active');
+        const nav = document.querySelector('.nav-controls');
+        if (!slide || !nav) {
+          return { missing: true };
+        }
+
+        const slideStyle = getComputedStyle(slide);
+        const slideRect = slide.getBoundingClientRect();
+        const navTop = nav.getBoundingClientRect().top;
+        const canScrollIfNeeded =
+          slide.scrollHeight <= slide.clientHeight + 1 ||
+          ['auto', 'scroll'].includes(slideStyle.overflowY);
+
+        const selectors = [
+          'h1',
+          'h2',
+          'h3',
+          'p',
+          'li',
+          '.card',
+          '.card-elevated',
+          '.tool-row',
+          '.game-prompt',
+          '.myth-card',
+          '.advice-row',
+          '.token-example',
+          '.demo-card',
+          '.bubble',
+        ].join(',');
+
+        const offenders = Array.from(slide.querySelectorAll(selectors))
+          .filter((element) => {
+            const style = getComputedStyle(element);
+            if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) {
+              return false;
+            }
+
+            const rect = element.getBoundingClientRect();
+            const visibleTop = Math.max(rect.top, slideRect.top, 0);
+            const visibleBottom = Math.min(rect.bottom, slideRect.bottom, window.innerHeight);
+            const visibleInViewport = rect.width > 0 && visibleBottom > visibleTop;
+
+            return visibleInViewport && visibleBottom > navTop - 8;
+          })
+          .map((element) => ({
+            text: (element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 90),
+            bottom: Math.round(Math.min(element.getBoundingClientRect().bottom, slideRect.bottom, window.innerHeight)),
+            navTop: Math.round(navTop),
+          }));
+
+        return {
+          missing: false,
+          canScrollIfNeeded,
+          overflowY: slideStyle.overflowY,
+          scrollHeight: slide.scrollHeight,
+          clientHeight: slide.clientHeight,
+          offenders,
+        };
+      });
+
+      expect(result.missing, `slide ${slideNumber}: active slide or nav missing`).toBeFalsy();
+      expect(
+        result.canScrollIfNeeded,
+        `slide ${slideNumber}: content taller than viewport but slide overflowY=${result.overflowY}; scrollHeight=${result.scrollHeight}, clientHeight=${result.clientHeight}`
+      ).toBeTruthy();
+      expect(result.offenders, `slide ${slideNumber}: visible content overlaps nav`).toEqual([]);
+    }
+  });
 });

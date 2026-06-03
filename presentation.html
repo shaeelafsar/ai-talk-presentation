@@ -61,17 +61,23 @@
 
         .slide {
             position: absolute;
-            width: 100%; height: 100%;
+            width: 100%;
+            height: calc(100% - 96px);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: clamp(64px, 6vw, 88px) clamp(32px, 5vw, 80px) 90px;
-            padding-bottom: 90px;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            padding: clamp(64px, 6vw, 88px) clamp(32px, 5vw, 80px) clamp(128px, 18vh, 160px);
+            padding-bottom: clamp(128px, 18vh, 160px);
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.5s var(--ease-out-expo);
             background: var(--bg-deep);
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            scrollbar-gutter: stable;
         }
         .slide.active {
             opacity: 1;
@@ -546,7 +552,7 @@
             .section-number { font-size: 60px; }
         }
         @media (max-width: 480px) {
-            .slide { padding: 64px 20px 90px; }
+            .slide { padding: 64px 20px 124px; }
             .site-header { left: 12px; right: 12px; justify-content: center; }
             .nav-controls { bottom: 12px; padding: 6px 12px; gap: 10px; }
             .nav-btn { width: 32px; height: 32px; font-size: 14px; }
@@ -666,7 +672,7 @@
     <div class="animate-in phone-demo" style="animation-delay: 0.3s; opacity: 0;">
         <div class="phone-screen">
             <p class="slide-label" style="margin-bottom: 12px; color: var(--accent-cool);">your phone does this</p>
-            <div class="card-elevated flex-col gap-sm" style="padding: 14px; text-align: left;">
+            <div class="card-elevated flex-col gap-sm" style="padding: 14px;">
                 <p class="phone-draft">I'm on my <span class="cursor-blink"></span></p>
                 <div class="suggestion-row">
                     <span class="suggestion-chip accent-mint">way</span>
@@ -675,7 +681,7 @@
                 </div>
             </div>
         </div>
-        <div class="card flex-col gap-sm" style="text-align: left;">
+        <div class="card flex-col gap-sm">
             <p style="font-size: clamp(16px, 1.8vw, 22px); font-weight: 600;">ChatGPT does the <span class="accent-mint">exact same thing</span>.</p>
             <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-secondary);">It looks at what came before, predicts what probably comes next, adds that word, then repeats the process again and again.</p>
             <div class="token-chain" style="margin-top: 4px;">
@@ -1275,22 +1281,6 @@
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 23 — What AI is Bad At -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-coral">the fine print</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">⚠️ What AI is NOT<br>Good At (Yet)</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 620px;">
-        <div class="tool-row"><span class="tool-emoji">🚫</span><div><span class="tool-name">Being 100% accurate</span><br><span class="tool-desc">It makes stuff up confidently — always double-check</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🤷</span><div><span class="tool-name">Knowing what's true</span><br><span class="tool-desc">It knows what sounds right, not what IS right</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🔒</span><div><span class="tool-name">Keeping secrets</span><br><span class="tool-desc">Don't share personal info — it might end up in training data</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🧠</span><div><span class="tool-name">Replacing your brain</span><br><span class="tool-desc">It's a tool, not a substitute for learning and thinking</span></div></div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
 <!-- SLIDE 24 — Smart AI Use -->
 <!-- ═══════════════════════════════════════════ -->
 <div class="slide flex-col gap-lg">
@@ -1305,23 +1295,6 @@
         <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Copy-paste answers without understanding them</div>
         <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Share personal info (addresses, passwords)</div>
         <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Trust AI blindly — it's confident, not always correct</div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 25 — Try These Today -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-cool">take action</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🚀 Try These TODAY<br><span style="font-size: 0.6em; color: var(--text-secondary);">(Most are free!)</span></h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="tool-row"><span class="tool-emoji">💬</span><div><span class="tool-name">ChatGPT</span><br><span class="tool-desc">Ask anything, brainstorm, get homework help</span></div><span class="tool-badge">chat.openai.com</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name">DALL·E</span><br><span class="tool-desc">Generate images from text (built into ChatGPT)</span></div><span class="tool-badge">free tier</span></div>
-        <div class="tool-row"><span class="tool-emoji">📸</span><div><span class="tool-name">Google Lens</span><br><span class="tool-desc">Identify objects, solve math, translate signs</span></div><span class="tool-badge">your phone</span></div>
-        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name">GitHub Copilot</span><br><span class="tool-desc">Free for students! Write code with AI</span></div><span class="tool-badge">github.com/copilot</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name">Suno</span><br><span class="tool-desc">Create music by describing it in words</span></div><span class="tool-badge">suno.com</span></div>
     </div>
 </div>
 
@@ -1342,7 +1315,7 @@
 <!-- ═══ Navigation ═══ -->
 <div class="nav-controls">
     <button class="nav-btn" onclick="prevSlide()" aria-label="Previous slide">←</button>
-    <span class="slide-counter"><span id="current">1</span> / <span id="total">33</span></span>
+    <span class="slide-counter"><span id="current">1</span> / <span id="total">31</span></span>
     <button class="nav-btn" onclick="nextSlide()" aria-label="Next slide">→</button>
 </div>
 
