@@ -10,18 +10,18 @@
     <style>
         /* ═══ Design Tokens ═══ */
         :root {
-            --bg-deep: oklch(0.13 0.02 260);
-            --bg-surface: oklch(0.17 0.02 260);
-            --bg-elevated: oklch(0.21 0.025 260);
-            --text-primary: oklch(0.95 0.01 260);
-            --text-secondary: oklch(0.72 0.02 260);
-            --text-muted: oklch(0.74 0.02 260);
-            --accent-warm: oklch(0.72 0.18 45);
-            --accent-cool: oklch(0.68 0.15 250);
-            --accent-mint: oklch(0.75 0.14 165);
-            --accent-coral: oklch(0.70 0.17 25);
-            --accent-violet: oklch(0.65 0.18 300);
-            --accent-gold: oklch(0.78 0.14 80);
+            --bg-deep: oklch(0.97 0.012 250);
+            --bg-surface: oklch(0.93 0.018 250);
+            --bg-elevated: oklch(0.89 0.024 250);
+            --text-primary: oklch(0.21 0.035 260);
+            --text-secondary: oklch(0.34 0.035 260);
+            --text-muted: oklch(0.44 0.03 260);
+            --accent-warm: oklch(0.48 0.17 45);
+            --accent-cool: oklch(0.42 0.15 250);
+            --accent-mint: oklch(0.42 0.13 165);
+            --accent-coral: oklch(0.48 0.17 25);
+            --accent-violet: oklch(0.43 0.17 300);
+            --accent-gold: oklch(0.46 0.13 80);
             --font-display: 'Cabinet Grotesk', 'Space Grotesk', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -268,15 +268,15 @@
         }
         .poll-option:hover {
             border-color: var(--accent-cool);
-            background: oklch(0.19 0.03 260);
+            background: oklch(0.87 0.035 250);
         }
         .poll-option.revealed.correct {
             border-color: var(--accent-mint);
-            background: oklch(0.24 0.05 165);
+            background: oklch(0.88 0.07 165);
         }
         .poll-option.revealed.incorrect {
             border-color: var(--accent-coral);
-            background: oklch(0.22 0.05 25);
+            background: oklch(0.90 0.06 25);
         }
         .reveal-feedback,
         [data-reveal] {
@@ -320,15 +320,15 @@
             gap: 14px;
         }
         .phone-screen {
-            background: linear-gradient(180deg, oklch(0.22 0.04 250), oklch(0.15 0.02 260));
-            border: 1px solid oklch(0.32 0.03 260);
+            background: linear-gradient(180deg, oklch(0.93 0.035 250), oklch(0.88 0.024 260));
+            border: 1px solid oklch(0.62 0.04 260);
             border-radius: 22px;
             padding: clamp(14px, 2vw, 22px);
-            box-shadow: 0 12px 40px oklch(0.05 0.02 260 / 0.35);
+            box-shadow: 0 12px 40px oklch(0.48 0.04 260 / 0.16);
         }
         .phone-draft {
-            background: oklch(0.24 0.02 260);
-            border: 1px solid oklch(0.32 0.03 260);
+            background: oklch(0.98 0.01 260);
+            border: 1px solid oklch(0.66 0.035 260);
             border-radius: 14px;
             padding: 12px 14px;
             font-size: clamp(16px, 1.9vw, 22px);
@@ -366,8 +366,8 @@
             font-size: clamp(11px, 1.2vw, 14px);
             padding: 6px 10px;
             border-radius: 999px;
-            background: oklch(0.24 0.03 260);
-            border: 1px solid oklch(0.32 0.03 260);
+            background: oklch(0.88 0.03 260);
+            border: 1px solid oklch(0.60 0.04 260);
             color: var(--text-secondary);
         }
         .meaning-map {
@@ -375,11 +375,11 @@
             width: min(100%, 880px);
             min-height: 300px;
             border-radius: 18px;
-            border: 1px solid oklch(0.3 0.03 260);
+            border: 1px solid oklch(0.60 0.04 260);
             background:
-                radial-gradient(circle at 21% 42%, oklch(0.32 0.08 80 / 0.45), transparent 22%),
-                radial-gradient(circle at 77% 28%, oklch(0.28 0.08 250 / 0.35), transparent 21%),
-                radial-gradient(circle at 70% 78%, oklch(0.25 0.07 300 / 0.35), transparent 22%),
+                radial-gradient(circle at 21% 42%, oklch(0.86 0.10 80 / 0.75), transparent 22%),
+                radial-gradient(circle at 77% 28%, oklch(0.88 0.08 250 / 0.7), transparent 21%),
+                radial-gradient(circle at 70% 78%, oklch(0.90 0.08 300 / 0.7), transparent 22%),
                 var(--bg-surface);
             margin: 0 auto;
         }
@@ -398,9 +398,9 @@
             font-family: var(--font-mono);
             font-size: 10px;
             line-height: 1;
-            color: var(--text-primary);
-            background: oklch(0.12 0.02 260 / 0.86);
-            border: 1px solid oklch(0.28 0.03 260);
+            color: oklch(0.98 0.01 260);
+            background: oklch(0.22 0.04 260 / 0.92);
+            border: 1px solid oklch(0.35 0.04 260);
             border-radius: 999px;
             padding: 3px 6px;
             transform: translate(-50%, -50%);
@@ -418,8 +418,9 @@
             color: var(--text-primary);
         }
         .map-dot.primary {
-            background: oklch(0.3 0.08 80);
+            background: oklch(0.86 0.12 80);
             border-color: var(--accent-gold);
+            color: var(--text-primary);
             font-weight: 700;
         }
 
@@ -472,7 +473,7 @@
             font-size: clamp(10px, 1vw, 12px);
             padding: 4px 10px;
             border-radius: 6px;
-            background: oklch(0.25 0.03 260);
+            background: oklch(0.86 0.035 260);
             color: var(--text-muted);
             white-space: nowrap;
         }
@@ -645,12 +646,12 @@
             align-items: center;
             gap: 16px;
             z-index: 1000;
-            background: oklch(0.15 0.02 260 / 0.9);
+            background: oklch(0.98 0.012 250 / 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 8px 16px;
             border-radius: 100px;
-            border: 1px solid oklch(0.25 0.02 260);
+            border: 1px solid oklch(0.70 0.035 260);
         }
         .nav-btn {
             background: none;
@@ -666,7 +667,7 @@
             transition: background 0.2s, border-color 0.2s;
         }
         .nav-btn:hover {
-            background: oklch(0.25 0.03 260);
+            background: oklch(0.88 0.035 250);
             border-color: var(--accent-cool);
         }
         .slide-counter {
@@ -685,8 +686,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: oklch(0.15 0.02 260 / 0.9);
-            border: 1px solid oklch(0.25 0.02 260);
+            background: oklch(0.98 0.012 250 / 0.92);
+            border: 1px solid oklch(0.70 0.035 260);
             border-radius: 999px;
             padding: 6px 10px;
             backdrop-filter: blur(12px);
@@ -702,18 +703,18 @@
         }
         .site-header a:hover {
             color: var(--text-primary);
-            background: oklch(0.24 0.03 260);
+            background: oklch(0.88 0.035 250);
         }
 
         /* ═══ Section Divider Slides ═══ */
         .slide-section {
-            background: oklch(0.10 0.025 260);
+            background: oklch(0.94 0.018 260);
         }
         .section-number {
             font-family: var(--font-display);
             font-size: clamp(60px, 10vw, 140px);
             font-weight: 900;
-            color: oklch(0.2 0.03 260);
+            color: oklch(0.82 0.035 260);
             line-height: 1;
             position: absolute;
             top: clamp(20px, 4vh, 60px);
@@ -1357,7 +1358,7 @@
 <!-- ═══════════════════════════════════════════ -->
 <!-- SLIDE 21 — LIVE DEMO -->
 <!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col items-center justify-center text-center gap-lg" style="background: oklch(0.08 0.02 260);">
+<div class="slide flex-col items-center justify-center text-center gap-lg" style="background: var(--bg-deep);">
     <div class="animate-in flex-col items-center gap-md">
         <p style="font-family: var(--font-mono); font-size: clamp(14px, 1.5vw, 18px); color: var(--accent-mint); letter-spacing: 0.1em;">⌨️ LIVE DEMO</p>
         <h2 class="slide-title" style="font-size: clamp(32px, 5vw, 64px);">Building your<br>website with<br><span class="accent-mint">GitHub Copilot</span></h2>
@@ -1401,7 +1402,7 @@
 <!-- ═══════════════════════════════════════════ -->
 <!-- SLIDE 26 — Q&A -->
 <!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col items-center justify-center text-center gap-lg" style="background: oklch(0.10 0.025 260);">
+<div class="slide flex-col items-center justify-center text-center gap-lg" style="background: var(--bg-deep);">
     <div class="animate-in flex-col items-center gap-md">
         <span class="emoji-big">❓</span>
         <h2 class="slide-title">Questions?</h2>
