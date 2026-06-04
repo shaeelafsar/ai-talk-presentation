@@ -176,7 +176,7 @@ test.describe('AI talk learning hub', () => {
     await page.locator('.slide.active').click();
     await expect(page.getByText(/Most likely: doo doo/i)).toBeVisible();
 
-    await page.evaluate(() => window.showSlide(7));
+    await page.evaluate(() => window.showSlide(8));
     await expect(page.getByText(/Feed it text/i)).toBeHidden();
     await page.locator('.slide.active').click();
     await expect(page.getByText(/Feed it text/i)).toBeVisible();

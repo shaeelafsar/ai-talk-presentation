@@ -802,6 +802,32 @@
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 6 — Pattern Matching -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide flex-col gap-lg">
+    <div class="animate-in flex-col gap-sm">
+        <p class="slide-label accent-gold">pattern matching</p>
+        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">How Does It Find<br>Patterns?</h2>
+        <p class="slide-subtitle">What the class just did is the core idea: use what usually comes next.</p>
+    </div>
+    <div class="stagger flex-col gap-sm" style="max-width: 760px;">
+        <div class="card flex-col gap-xs">
+            <p style="font-size: clamp(15px, 1.7vw, 18px); font-weight: 700;" class="accent-cool">Class pattern</p>
+            <p style="font-size: clamp(15px, 1.7vw, 19px);">“The most popular pizza topping is <span class="accent-gold">___</span>” → <strong>pepperoni</strong></p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">After enough people answer the same way, that answer becomes a strong pattern.</p>
+        </div>
+        <div class="card flex-col gap-xs">
+            <p style="font-size: clamp(15px, 1.7vw, 18px); font-weight: 700;" class="accent-mint">Language pattern</p>
+            <p style="font-size: clamp(15px, 1.7vw, 19px);">“dogs” often shows up near <strong>bark</strong>, <strong>fetch</strong>, <strong>walk</strong>, and <strong>tail</strong>.</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">AI learns which words and ideas tend to travel together.</p>
+        </div>
+    </div>
+    <div class="animate-in card-elevated" style="max-width: 760px; animation-delay: 0.6s; opacity: 0;">
+        <p style="font-size: clamp(15px, 1.7vw, 20px); line-height: 1.5; color: var(--text-secondary);">🏀 If you watched 1 million basketball games, you'd start predicting what a player will do next because you've seen the patterns so many times.</p>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
 <!-- SLIDE 5 — How It Learned -->
 <!-- ═══════════════════════════════════════════ -->
 <div class="slide flex-col gap-lg">
@@ -891,37 +917,6 @@
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-coral">🚫 Not a database lookup</p>
             <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">The base model is not a searchable fact database like Google. It generates from learned weights. However, apps can connect to search, tools, or databases when those features are enabled.</p>
         </div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 8 — How Does It Find Patterns? -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-gold">pattern matching</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">How Does It Find<br>Patterns?</h2>
-        <p class="slide-subtitle">After reading enough examples, some word combinations become really predictable.</p>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 760px;">
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(15px, 1.7vw, 18px); font-weight: 700;" class="accent-cool">Example 1</p>
-            <p style="font-size: clamp(15px, 1.7vw, 19px);">“The capital of France is <span class="accent-gold">___</span>” → <strong>Paris</strong></p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">After seeing this pattern again and again, “Paris” becomes a very strong guess.</p>
-        </div>
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(15px, 1.7vw, 18px); font-weight: 700;" class="accent-mint">Example 2</p>
-            <p style="font-size: clamp(15px, 1.7vw, 19px);">“dogs” often shows up near <strong>bark</strong>, <strong>fetch</strong>, <strong>walk</strong>, and <strong>tail</strong>.</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">It learns which words and ideas tend to travel together.</p>
-        </div>
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(15px, 1.7vw, 18px); font-weight: 700;" class="accent-coral">Example 3</p>
-            <p style="font-size: clamp(15px, 1.7vw, 19px);">After “Once upon a”, the next word is usually <strong>time</strong>.</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">It doesn't memorize every sentence. It learns which completions are common.</p>
-        </div>
-    </div>
-    <div class="animate-in card-elevated" style="max-width: 760px; animation-delay: 0.6s; opacity: 0;">
-        <p style="font-size: clamp(15px, 1.7vw, 20px); line-height: 1.5; color: var(--text-secondary);">🏀 If you watched 1 million basketball games, you'd start predicting what a player will do next — not because you fully “understand” basketball, but because you've seen the patterns so many times.</p>
     </div>
 </div>
 
@@ -1024,45 +1019,13 @@
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 9 — Human vs AI Brain -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm text-center items-center">
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🧠 So is AI actually "thinking"?</h2>
-    </div>
-    <div class="animate-in split" style="animation-delay: 0.2s; opacity: 0;">
-        <div class="compare-col">
-            <h3 class="accent-cool">🧑 Human Brain</h3>
-            <ul>
-                <li>✦ Understands meaning & context</li>
-                <li>✦ Has feelings & experiences</li>
-                <li>✦ Can say "I don't know"</li>
-                <li>✦ Learns from a few examples</li>
-                <li>✦ Has common sense</li>
-            </ul>
-        </div>
-        <div class="compare-col">
-            <h3 class="accent-mint">🤖 AI "Brain"</h3>
-            <ul>
-                <li>✦ Recognizes powerful patterns</li>
-                <li>✦ No feelings, no experiences</li>
-                <li>✦ Guesses even when unsure</li>
-                <li>✦ Needs BILLIONS of examples</li>
-                <li>✦ No actual common sense</li>
-            </ul>
-        </div>
-    </div>
-    <p class="animate-in text-center" style="font-size: clamp(14px, 1.6vw, 18px); color: var(--accent-violet); font-weight: 600; animation-delay: 0.5s; opacity: 0;">Not thinking like us — but incredibly powerful pattern matching at massive scale.</p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
 <!-- SLIDE 11 — What is AI? -->
 <!-- ═══════════════════════════════════════════ -->
 <div class="slide flex-col gap-lg">
     <div class="animate-in flex-col gap-sm">
         <p class="slide-label accent-mint">the big idea</p>
         <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">What is AI, really?</h2>
-        <p class="slide-subtitle"><strong class="accent-mint">AI = Software that learns from examples</strong> instead of being told exactly what to do</p>
+        <p class="slide-subtitle"><strong class="accent-mint">AI = software that learns from examples</strong> instead of being told every rule by hand.</p>
     </div>
     <div class="animate-in split" style="max-width: 780px; animation-delay: 0.3s; opacity: 0;">
         <div class="card flex-col gap-sm">
@@ -1076,7 +1039,7 @@
     </div>
     <div class="animate-in" style="animation-delay: 0.5s; opacity: 0; max-width: 780px;">
         <p style="font-size: clamp(16px, 2vw, 22px); font-weight: 600;" class="accent-cool">A "model" = an AI brain trained for a specific job</p>
-        <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary); margin-top: 8px;">ChatGPT's model does text. Other models see, listen, draw, and more!</p>
+        <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary); margin-top: 8px;"><strong>GenAI models</strong> create new things. ChatGPT is a GenAI text model: you give it words, and it generates words back.</p>
     </div>
 </div>
 
@@ -1086,127 +1049,16 @@
 <div class="slide flex-col gap-lg">
     <div class="animate-in flex-col gap-sm">
         <p class="slide-label accent-cool">model types</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🎯 Different AI Brains,<br>Different Jobs</h2>
+        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🎯 GenAI Models & Tools</h2>
+        <p class="slide-subtitle">Same big idea — learn patterns from examples — different kind of output.</p>
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="tool-row"><span class="tool-emoji">✍️</span><div><span class="tool-name accent-cool">Text AI</span><br><span class="tool-desc">Writes, translates, summarizes</span></div><span class="tool-badge">ChatGPT · Claude · Gemini</span></div>
-        <div class="tool-row"><span class="tool-emoji">👁️</span><div><span class="tool-name accent-mint">Vision AI</span><br><span class="tool-desc">Sees & understands images</span></div><span class="tool-badge">Google Lens · ChatGPT Vision</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name accent-violet">Image AI</span><br><span class="tool-desc">Creates images from descriptions</span></div><span class="tool-badge">Gemini · ChatGPT image generation</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name accent-coral">Audio AI</span><br><span class="tool-desc">Understands & creates sound</span></div><span class="tool-badge">Whisper · Suno</span></div>
-        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name accent-gold">Code AI</span><br><span class="tool-desc">Writes & understands code</span></div><span class="tool-badge">GitHub Copilot · Cursor</span></div>
+        <div class="tool-row"><span class="tool-emoji">✍️</span><div><span class="tool-name accent-cool">Text AI</span><br><span class="tool-desc">Writes, translates, summarizes</span></div><span class="tool-badge">ChatGPT · Claude · Google Gemini</span></div>
+        <div class="tool-row"><span class="tool-emoji">👁️</span><div><span class="tool-name accent-mint">Vision AI</span><br><span class="tool-desc">Understands pictures, screenshots, signs, and handwriting</span></div><span class="tool-badge">Google Lens · ChatGPT Vision</span></div>
+        <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name accent-violet">Image AI</span><br><span class="tool-desc">Creates images from text prompts</span></div><span class="tool-badge">Gemini · ChatGPT image generation</span></div>
+        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name accent-coral">Audio AI</span><br><span class="tool-desc">Transcribes speech, translates voice, and generates music</span></div><span class="tool-badge">Whisper · Suno · ElevenLabs</span></div>
+        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name accent-gold">Code AI</span><br><span class="tool-desc">Helps build websites, apps, and scripts</span></div><span class="tool-badge">GitHub Copilot · Cursor · Replit</span></div>
     </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 13 — Myth or Fact #2 -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-gold">safety check</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">🛡️ AI Safety Reality Check</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="myth-card myth flex-col gap-xs">
-            <p class="myth-statement">"AI is going to take over the world"</p>
-            <p class="myth-verdict accent-coral">❌ MYTH (for now)</p>
-            <p class="myth-explain">AI can't set its own goals — it only does what it's trained to do</p>
-        </div>
-        <div class="myth-card fact flex-col gap-xs">
-            <p class="myth-statement">"AI can create fake photos of real people"</p>
-            <p class="myth-verdict accent-mint">✅ FACT</p>
-            <p class="myth-explain">Deepfakes are real and getting better — always question what you see</p>
-        </div>
-        <div class="myth-card complicated flex-col gap-xs">
-            <p class="myth-statement">"AI learns and gets smarter on its own"</p>
-            <p class="myth-verdict accent-gold">🤔 MOSTLY MYTH</p>
-            <p class="myth-explain">It needs humans to retrain it — it can't study on its own</p>
-        </div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 14 — Section Divider: AI Tools -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide slide-section flex-col items-center justify-center text-center gap-md">
-    <span class="section-number">03</span>
-    <div class="animate-in flex-col items-center gap-md">
-        <span class="emoji-big">🧰</span>
-        <h2 class="slide-title accent-warm">AI Can See. Hear.<br>Draw. Read. Code.</h2>
-        <p class="slide-subtitle">Let's look at what's out there.</p>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 15 — Vision AI -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-mint">ai that can see</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">👁️ AI Vision</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 620px;">
-        <div class="tool-row"><span class="tool-emoji">📸</span><div><span class="tool-name">Photo a math problem</span><br><span class="tool-desc">AI solves it step by step</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🌿</span><div><span class="tool-name">Point at a plant</span><br><span class="tool-desc">AI identifies the species</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🌍</span><div><span class="tool-name">Snap a foreign sign</span><br><span class="tool-desc">Instant translation</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🔍</span><div><span class="tool-name">Screenshot an error</span><br><span class="tool-desc">AI explains what went wrong</span></div></div>
-    </div>
-    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
-        <span class="demo-card-icon">📲</span>
-        <div class="demo-card-content">
-            <p class="demo-card-label">⚡ Quick Demo</p>
-            <p class="demo-card-text">Open Google Lens → point at something in the room → watch AI identify it instantly</p>
-        </div>
-    </div>
-    <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">tools: Google Lens · ChatGPT Vision · Apple Visual Look Up · <a href="labs.html#vision" style="color: var(--accent-mint);">🧪 Try the Lab</a></p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 16 — Image Generation -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-violet">ai that can create</p>
-        <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">🎨 AI Image Generation</h2>
-        <p class="slide-subtitle">Describe what you want → AI draws it</p>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 600px;">
-        <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">🐱🚀🍕 "A cat astronaut floating in space eating pizza"</div>
-        <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">🌆✨ "A cyberpunk city at sunset, neon lights"</div>
-        <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">📝😂 "My homework but it's actually done"</div>
-        <div class="game-prompt" style="font-size: clamp(14px, 1.6vw, 18px);">🐉🏀 "A dragon playing basketball"</div>
-    </div>
-    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
-        <span class="demo-card-icon">🖌️</span>
-        <div class="demo-card-content">
-            <p class="demo-card-label">⚡ Quick Demo</p>
-            <p class="demo-card-text">Open Google Gemini → let a student suggest a wild prompt → generate an image live</p>
-        </div>
-    </div>
-    <p class="animate-in" style="font-size: clamp(13px, 1.4vw, 16px); color: var(--accent-gold); animation-delay: 0.6s; opacity: 0;">🤯 Gemini and ChatGPT image generation both turn text prompts into new images. Exact model names and limits change, but the prompting skill stays useful. · <a href="labs.html#image-gen" style="color: var(--accent-mint);">🧪 Try the Lab</a></p>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 17 — Speech, OCR, Music -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-coral">ai that can hear & read</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🎧 AI Audio & Documents</h2>
-    </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="tool-row"><span class="tool-emoji">🗣️</span><div><span class="tool-name">Speech → Text</span><br><span class="tool-desc">Voice to written text instantly</span></div><span class="tool-badge">Whisper · Otter.ai</span></div>
-        <div class="tool-row"><span class="tool-emoji">🌐</span><div><span class="tool-name">Real-time Translation</span><br><span class="tool-desc">Speak English → hear it in Spanish, Japanese</span></div><span class="tool-badge">Google Translate</span></div>
-        <div class="tool-row"><span class="tool-emoji">📄</span><div><span class="tool-name">OCR — Read Anything</span><br><span class="tool-desc">Scan handwritten notes, receipts, signs</span></div><span class="tool-badge">Google Lens</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name">Music & Voice</span><br><span class="tool-desc">Create music from text, clone voices</span></div><span class="tool-badge">Suno · ElevenLabs</span></div>
-    </div>
-    <div class="animate-in demo-card" style="animation-delay: 0.5s; opacity: 0;">
-        <span class="demo-card-icon">🎤</span>
-        <div class="demo-card-content">
-            <p class="demo-card-label">⚡ Quick Demo</p>
-            <p class="demo-card-text">Play a pre-made Suno song or do live voice-to-text → have a student write something by hand → scan it with Google Lens</p>
-        </div>
-    </div>
-    <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;"><a href="labs.html#audio" style="color: var(--accent-mint);">🧪 Try the Audio Lab</a> · <a href="labs.html#ocr" style="color: var(--accent-mint);">🧪 Try the OCR Lab</a> · <a href="labs.html#music" style="color: var(--accent-mint);">🧪 Try the Music Lab</a></p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -1228,7 +1080,7 @@
         <span class="demo-card-icon">🎮</span>
         <div class="demo-card-content">
             <p class="demo-card-label">⚡ Full Demo Coming Up</p>
-            <p class="demo-card-text">We'll use GitHub Copilot to build a quiz game live — the audience picks the topic!</p>
+            <p class="demo-card-text">We'll use GitHub Copilot to build a simple website live — the audience picks the details!</p>
         </div>
     </div>
     <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">tools: GitHub Copilot · Cursor · Replit AI · many tools have free tiers or student access; check current student access · <a href="labs.html#code" style="color: var(--accent-mint);">🧪 Try the Code Lab</a></p>
@@ -1240,9 +1092,9 @@
 <div class="slide slide-section flex-col items-center justify-center text-center gap-md">
     <span class="section-number">04</span>
     <div class="animate-in flex-col items-center gap-md">
-        <span class="emoji-big">🎮</span>
+        <span class="emoji-big">🌐</span>
         <h2 class="slide-title accent-mint">Live Demo Time!</h2>
-        <p class="slide-subtitle">Let's build a quiz game together — using AI.<br><strong class="accent-gold">But first… YOU get to decide what we build! 🫵</strong></p>
+        <p class="slide-subtitle">Let's build a website together — using AI.<br><strong class="accent-gold">But first… YOU get to decide what goes on it! 🫵</strong></p>
     </div>
 </div>
 
@@ -1252,24 +1104,24 @@
 <div class="slide flex-col gap-lg">
     <div class="animate-in flex-col gap-sm">
         <p class="slide-label accent-cool">you choose</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🗳️ Help Me Design<br>the Game</h2>
+        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🗳️ Help Me Design<br>the Website</h2>
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 600px;">
         <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">🎯 Quiz Topic?</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Sports? Anime? Music? Movies? Science? Random?</p>
+            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">🎯 Website Topic?</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Tutoring center? Sports team? Anime club? Music artist? Personal portfolio?</p>
         </div>
         <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">⏱️ Timer?</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Should there be a countdown timer for each question?</p>
+            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">🎨 Style?</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Dark mode? Bright colors? Minimal? Futuristic? Fun and playful?</p>
         </div>
         <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">💯 Scoring?</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Points for correct answers? Lose points for wrong ones?</p>
+            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">📦 Sections?</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Hero, about, services, gallery, tools to try, call-to-action?</p>
         </div>
         <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">🏆 End Screen?</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">What happens when you win? Confetti? Meme? Dance?</p>
+            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 600;">✨ Fun Feature?</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Animated cards? Buttons? A student challenge? A mini prompt guide?</p>
         </div>
     </div>
 </div>
@@ -1280,7 +1132,7 @@
 <div class="slide flex-col items-center justify-center text-center gap-lg" style="background: oklch(0.08 0.02 260);">
     <div class="animate-in flex-col items-center gap-md">
         <p style="font-family: var(--font-mono); font-size: clamp(14px, 1.5vw, 18px); color: var(--accent-mint); letter-spacing: 0.1em;">⌨️ LIVE DEMO</p>
-        <h2 class="slide-title" style="font-size: clamp(32px, 5vw, 64px);">Building your<br>quiz game with<br><span class="accent-mint">GitHub Copilot</span></h2>
+        <h2 class="slide-title" style="font-size: clamp(32px, 5vw, 64px);">Building your<br>website with<br><span class="accent-mint">GitHub Copilot</span></h2>
         <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-muted); margin-top: 16px;">[ switch to code editor ]</p>
     </div>
 </div>
@@ -1293,46 +1145,28 @@
         <h2 class="slide-title" style="font-size: clamp(28px, 4.5vw, 52px);">🤯 What just happened?</h2>
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 520px;">
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>We described a game in plain English</div>
+        <div class="advice-row advice-do"><span class="advice-icon">✅</span>We described a website in plain English</div>
         <div class="advice-row advice-do"><span class="advice-icon">✅</span>AI wrote all the code</div>
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>We had a working game in minutes</div>
+        <div class="advice-row advice-do"><span class="advice-icon">✅</span>We had a working website in minutes</div>
         <div class="advice-row advice-do"><span class="advice-icon">✅</span>No programming experience needed</div>
     </div>
     <p class="animate-in" style="font-size: clamp(16px, 2vw, 22px); font-weight: 600; color: var(--accent-mint); animation-delay: 0.6s; opacity: 0; max-width: 520px;">That's the power of AI + human creativity 🤝</p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 23 — Why Learning AI Matters -->
+<!-- SLIDE 21 — Smart AI User -->
 <!-- ═══════════════════════════════════════════ -->
 <div class="slide flex-col gap-lg">
     <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-gold">why it matters</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🚀 Why Learning AI Matters</h2>
-        <p class="slide-subtitle">AI probably will not replace every person. But people who know how to use AI will have a huge advantage.</p>
+        <p class="slide-label accent-gold">takeaway</p>
+        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🚀 Be a Smart AI User</h2>
+        <p class="slide-subtitle">People who know how to use AI well will have a huge advantage.</p>
     </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 720px;">
-        <div class="tool-row"><span class="tool-emoji">⚡</span><div><span class="tool-name">You can build faster</span><br><span class="tool-desc">Turn ideas into websites, games, images, songs, study plans, and prototypes.</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🧠</span><div><span class="tool-name">You can learn deeper</span><br><span class="tool-desc">Ask for examples, quizzes, explanations at your level, and feedback.</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name">You can create more</span><br><span class="tool-desc">AI removes blank-page fear, but your taste and ideas still drive the work.</span></div></div>
-        <div class="tool-row"><span class="tool-emoji">🕵️</span><div><span class="tool-name">You can spot fake stuff</span><br><span class="tool-desc">Understanding AI helps you question deepfakes, hallucinations, and viral misinformation.</span></div></div>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SLIDE 24 — Smart AI Use -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="slide flex-col gap-lg">
-    <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-mint">the smart way</p>
-        <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">🧭 Using AI the<br>Smart Way</h2>
-    </div>
-    <div class="stagger flex-col gap-xs" style="max-width: 600px;">
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>Use AI to help you learn, explore, and create</div>
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>Always verify facts AI tells you</div>
-        <div class="advice-row advice-do"><span class="advice-icon">✅</span>Think of AI as a super-powered assistant</div>
-        <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Copy-paste answers without understanding them</div>
-        <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Share personal info (addresses, passwords)</div>
-        <div class="advice-row advice-dont"><span class="advice-icon">❌</span>Trust AI blindly — it's confident, not always correct</div>
+    <div class="stagger flex-col gap-sm" style="max-width: 760px;">
+        <div class="tool-row"><span class="tool-emoji">⚡</span><div><span class="tool-name">Build and learn faster</span><br><span class="tool-desc">Use AI for ideas, prototypes, study help, quizzes, websites, and feedback.</span></div></div>
+        <div class="tool-row"><span class="tool-emoji">✅</span><div><span class="tool-name">Verify important facts</span><br><span class="tool-desc">AI can be confidently wrong. Check sources for school, health, money, and safety.</span></div></div>
+        <div class="tool-row"><span class="tool-emoji">🧠</span><div><span class="tool-name">Use it as a helper, not your brain</span><br><span class="tool-desc">Do not copy-paste answers you do not understand.</span></div></div>
+        <div class="tool-row"><span class="tool-emoji">🔒</span><div><span class="tool-name">Protect private info</span><br><span class="tool-desc">Do not share passwords, addresses, or sensitive personal details.</span></div></div>
     </div>
 </div>
 
@@ -1353,7 +1187,7 @@
 <!-- ═══ Navigation ═══ -->
 <div class="nav-controls">
     <button class="nav-btn" onclick="prevSlide()" aria-label="Previous slide">←</button>
-    <span class="slide-counter"><span id="current">1</span> / <span id="total">29</span></span>
+    <span class="slide-counter"><span id="current">1</span> / <span id="total">22</span></span>
     <button class="nav-btn" onclick="nextSlide()" aria-label="Next slide">→</button>
 </div>
 
