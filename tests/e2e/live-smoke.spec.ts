@@ -180,13 +180,13 @@ test.describe('AI talk learning hub', () => {
     await expect(page.getByText(/Most likely: jelly/i)).toBeVisible();
 
     await page.evaluate(() => window.showSlide(8));
-    await expect(page.getByText(/Feed it text/i)).toBeHidden();
+    await expect(page.getByText(/Feed it examples/i)).toBeHidden();
     await page.locator('.slide.active').click();
-    await expect(page.getByText(/Feed it text/i)).toBeVisible();
+    await expect(page.getByText(/Feed it examples/i)).toBeVisible();
     await page.locator('.slide.active').click();
     await expect(page.getByText(/Hide a word/i)).toBeVisible();
     await page.locator('.slide.active').click();
-    await expect(page.getByText(/Check the answer/i)).toBeVisible();
+    await expect(page.getByText(/Guess and check/i)).toBeVisible();
     await page.locator('.slide.active').click();
     await expect(page.getByText(/Repeat billions of times/i)).toBeVisible();
   });

@@ -872,10 +872,10 @@
         <p class="slide-subtitle">By doing prediction practice billions of times.</p>
     </div>
     <div class="flex-col gap-sm" style="max-width: 760px;">
-        <div class="step" data-reveal><span class="step-num">1</span><p class="step-text"><strong class="accent-cool">Feed it text</strong><br>Billions of sentences from books, websites, and code.</p></div>
-        <div class="step" data-reveal><span class="step-num">2</span><p class="step-text"><strong class="accent-violet">Hide a word</strong><br>Take a sentence, cover one word, and ask: “Guess what goes here.”</p></div>
-        <div class="step" data-reveal><span class="step-num">3</span><p class="step-text"><strong class="accent-coral">Check the answer</strong><br>If it guessed wrong, adjust the model. If it guessed right, reinforce that pattern.</p></div>
-        <div class="step" data-reveal><span class="step-num">4</span><p class="step-text"><strong class="accent-gold">Repeat billions of times</strong><br>After enough examples, it gets really good at guessing what usually comes next.</p></div>
+        <div class="step" data-reveal><span class="step-num">1</span><p class="step-text"><strong class="accent-cool">Feed it examples</strong><br>Dogs bark at strangers.<br>The dog barked at the mailman.<br>My neighbor’s dog likes to bark.</p></div>
+        <div class="step" data-reveal><span class="step-num">2</span><p class="step-text"><strong class="accent-violet">Hide a word</strong><br>Now try a similar sentence: “The puppy started to ___ at the door.”</p></div>
+        <div class="step" data-reveal><span class="step-num">3</span><p class="step-text"><strong class="accent-coral">Guess and check</strong><br>Guess: bark. Correct — strengthen that pattern.</p></div>
+        <div class="step" data-reveal><span class="step-num">4</span><p class="step-text"><strong class="accent-gold">Repeat billions of times</strong><br>Do this with tons of examples until the model gets good at predicting missing words.</p></div>
     </div>
     <div class="animate-in card" data-reveal style="max-width: 760px;">
         <p style="font-size: clamp(15px, 1.7vw, 20px); line-height: 1.5; color: var(--text-secondary);">📚 It's like studying for a test by doing practice problems over and over — except it did <strong class="accent-gold">BILLIONS</strong> of practice problems.</p>
@@ -888,9 +888,9 @@
 <!-- ═══════════════════════════════════════════ -->
 <div class="slide flex-col gap-lg">
     <div class="animate-in flex-col gap-sm">
-        <p class="slide-label accent-violet">common misconception</p>
+        <p class="slide-label accent-violet">meaning map</p>
         <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">Where Does the<br>Knowledge Live?</h2>
-        <p class="slide-subtitle">Not in a filing cabinet full of facts.</p>
+        <p class="slide-subtitle">In learned connections between ideas.</p>
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 780px;">
         <div class="meaning-map" aria-label="Meaning map showing related words clustered together">
@@ -898,12 +898,19 @@
             <span class="map-dot" style="left: 17%; top: 32%;">pepperoni</span>
             <span class="map-dot" style="left: 39%; top: 25%;">cheese</span>
             <span class="map-dot" style="left: 43%; top: 57%;">slice</span>
-            <span class="map-dot" style="left: 74%; top: 28%;">spaceship</span>
-            <span class="map-dot" style="left: 68%; top: 78%;">homework</span>
+            <span class="map-dot" style="left: 25%; top: 66%;">crust</span>
+            <span class="map-dot primary" style="left: 74%; top: 28%;">spaceship</span>
+            <span class="map-dot" style="left: 61%; top: 19%;">rocket</span>
+            <span class="map-dot" style="left: 86%; top: 22%;">planet</span>
+            <span class="map-dot" style="left: 78%; top: 45%;">astronaut</span>
+            <span class="map-dot primary" style="left: 67%; top: 78%;">homework</span>
+            <span class="map-dot" style="left: 54%; top: 69%;">assignment</span>
+            <span class="map-dot" style="left: 82%; top: 73%;">study</span>
+            <span class="map-dot" style="left: 67%; top: 91%;">teacher</span>
         </div>
         <div class="card flex-col gap-xs">
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-mint">🗺️ Meaning map</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Tokens become numbers that place ideas on a giant meaning map. Related ideas like <strong>pizza</strong>, <strong>pepperoni</strong>, <strong>cheese</strong>, and <strong>slice</strong> sit closer on the map. Unrelated ideas sit farther away.</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Tokens become numbers that place ideas on a giant meaning map. Food words cluster together, space words cluster together, and school words cluster together. Related ideas sit closer on the map. Unrelated ideas sit farther away.</p>
         </div>
         <div class="card flex-col gap-sm">
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-gold">🔢 Weights change the pull</p>
@@ -913,10 +920,6 @@
                 <span class="weight-chip">pizza → cheese: +1.92</span>
                 <span class="weight-chip">pizza → spaceship: -1.14</span>
             </div>
-        </div>
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-coral">🚫 Not a database lookup</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">The base model is not a searchable fact database like Google. It generates from learned weights. However, apps can connect to search, tools, or databases when those features are enabled.</p>
         </div>
     </div>
 </div>
