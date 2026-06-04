@@ -155,10 +155,13 @@ test.describe('AI talk learning hub', () => {
     await page.evaluate(() => window.showSlide(4));
     await expect(page.locator('.phone-typed')).toHaveText('');
     await expect(page.locator('.phone-suggestions')).toBeHidden();
+    const phoneHeightBeforeSuggestions = await page.locator('.phone-screen').evaluate((element) => element.getBoundingClientRect().height);
     await page.waitForTimeout(1800);
     await expect(page.locator('.phone-typed')).toHaveText("I'm on my");
     await expect(page.locator('.phone-suggestions')).toBeVisible();
     await expect(page.locator('.phone-suggestions')).toContainText('way');
+    const phoneHeightAfterSuggestions = await page.locator('.phone-screen').evaluate((element) => element.getBoundingClientRect().height);
+    expect(Math.abs(phoneHeightAfterSuggestions - phoneHeightBeforeSuggestions)).toBeLessThanOrEqual(1);
     await expect(page.locator('.phone-typed')).toHaveText('', { timeout: 5000 });
     await expect(page.locator('.phone-suggestions')).toBeHidden();
     await page.waitForTimeout(1800);
@@ -174,7 +177,7 @@ test.describe('AI talk learning hub', () => {
     await page.locator('.slide.active').click();
     await expect(page.getByText(/Most likely: it/i)).toBeVisible();
     await page.locator('.slide.active').click();
-    await expect(page.getByText(/Most likely: doo doo/i)).toBeVisible();
+    await expect(page.getByText(/Most likely: beyond/i)).toBeVisible();
 
     await page.evaluate(() => window.showSlide(8));
     await expect(page.getByText(/Feed it text/i)).toBeHidden();

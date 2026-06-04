@@ -253,19 +253,20 @@
             padding: 12px 14px;
             font-size: clamp(16px, 1.9vw, 22px);
         }
-        .phone-suggestions {
-            display: none;
-        }
-        .phone-suggestions.visible {
-            display: flex;
-        }
         .suggestion-row {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+            min-height: 42px;
+            align-items: center;
         }
         .suggestion-row.phone-suggestions:not(.visible) {
-            display: none;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .suggestion-row.phone-suggestions.visible {
+            visibility: visible;
+            opacity: 1;
         }
         .suggestion-chip {
             padding: 8px 14px;
@@ -759,8 +760,8 @@
             </div>
         </div>
         <div class="card flex-col gap-sm">
-            <p style="font-size: clamp(16px, 1.8vw, 22px); font-weight: 600;">ChatGPT answers by doing this <span class="accent-mint">after</span> reading your question.</p>
-            <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-secondary);"><strong class="accent-cool">It reads your whole question first</strong>, then chooses the first word from answer patterns. A question that asks “what is…” often starts with “The…” because that pattern appeared millions of times in training text.</p>
+            <p style="font-size: clamp(16px, 1.8vw, 22px); font-weight: 600;">ChatGPT reads your question first, then starts writing an answer.</p>
+            <p style="font-size: clamp(14px, 1.5vw, 18px); color: var(--text-secondary);"><strong class="accent-cool">It does not know the whole answer at once.</strong> It picks a likely first piece, then keeps choosing the next piece based on everything written so far.</p>
             <div class="token-chain" style="margin-top: 4px; justify-content: center;">
                 <span class="token">Question: “What is the capital of France?”</span>
             </div>
@@ -793,7 +794,7 @@
         <div class="game-prompt">🍕 "The most popular pizza topping is…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: pepperoni</span></div>
         <div class="game-prompt">⭐ "May the Force be…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: with you</span></div>
         <div class="game-prompt">👟 "Just do…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: it</span></div>
-        <div class="game-prompt">🎵 "Baby shark…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: doo doo</span></div>
+        <div class="game-prompt">🚀 "To infinity and…"<span class="cursor-blink"></span><span class="suggestion-chip accent-mint" data-reveal>Most likely: beyond</span></div>
     </div>
     <div class="animate-in card-elevated" data-reveal style="max-width: 700px;">
         <p style="font-size: clamp(15px, 1.7vw, 19px); color: var(--text-secondary); line-height: 1.45;"><strong class="accent-gold">Class pattern:</strong> if most of you say <strong>pepperoni</strong>, we just discovered a pattern. AI does that at massive scale — except it studied billions of examples instead of one classroom.</p>
