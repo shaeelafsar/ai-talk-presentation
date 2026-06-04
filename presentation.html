@@ -280,6 +280,34 @@
             border: 1px solid oklch(0.32 0.03 260);
             color: var(--text-secondary);
         }
+        .meaning-map {
+            position: relative;
+            width: min(100%, 680px);
+            min-height: 220px;
+            border-radius: 18px;
+            border: 1px solid oklch(0.3 0.03 260);
+            background:
+                radial-gradient(circle at 28% 42%, oklch(0.32 0.08 80 / 0.45), transparent 28%),
+                radial-gradient(circle at 76% 28%, oklch(0.28 0.08 250 / 0.35), transparent 24%),
+                radial-gradient(circle at 68% 78%, oklch(0.25 0.07 300 / 0.35), transparent 24%),
+                var(--bg-surface);
+            margin: 0 auto;
+        }
+        .map-dot {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: var(--bg-elevated);
+            border: 1px solid oklch(0.36 0.04 260);
+            font-size: clamp(12px, 1.3vw, 15px);
+            color: var(--text-primary);
+        }
+        .map-dot.primary {
+            background: oklch(0.3 0.08 80);
+            border-color: var(--accent-gold);
+            font-weight: 700;
+        }
 
         /* ═══ Comparison Columns ═══ */
         .compare-col {
@@ -828,27 +856,33 @@
         <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">Where Does the<br>Knowledge Live?</h2>
         <p class="slide-subtitle">Not in a filing cabinet full of facts.</p>
     </div>
-    <div class="stagger flex-col gap-sm" style="max-width: 760px;">
+    <div class="stagger flex-col gap-sm" style="max-width: 780px;">
+        <div class="meaning-map" aria-label="Meaning map showing related words clustered together">
+            <span class="map-dot primary" style="left: 30%; top: 42%;">pizza</span>
+            <span class="map-dot" style="left: 17%; top: 32%;">pepperoni</span>
+            <span class="map-dot" style="left: 39%; top: 25%;">cheese</span>
+            <span class="map-dot" style="left: 43%; top: 57%;">slice</span>
+            <span class="map-dot" style="left: 74%; top: 28%;">spaceship</span>
+            <span class="map-dot" style="left: 68%; top: 78%;">homework</span>
+        </div>
+        <div class="card flex-col gap-xs">
+            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-mint">🗺️ Meaning map</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">Tokens become numbers that place ideas on a giant meaning map. Related ideas like <strong>pizza</strong>, <strong>pepperoni</strong>, <strong>cheese</strong>, and <strong>slice</strong> sit closer on the map. Unrelated ideas sit farther away.</p>
+        </div>
+        <div class="card flex-col gap-sm">
+            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-gold">🔢 Weights change the pull</p>
+            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">A weight is a <strong>connection strength</strong>. During training, a <strong>right guess strengthens weights</strong>; a <strong>wrong guess nudges weights</strong> away.</p>
+            <div class="weight-cloud">
+                <span class="weight-chip">pizza → pepperoni: +2.31</span>
+                <span class="weight-chip">pizza → cheese: +1.92</span>
+                <span class="weight-chip">pizza → spaceship: -1.14</span>
+            </div>
+        </div>
         <div class="card flex-col gap-xs">
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-coral">🚫 Not a database lookup</p>
             <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">The base model is not a searchable fact database like Google. It generates from learned weights. However, apps can connect to search, tools, or databases when those features are enabled.</p>
         </div>
-        <div class="card flex-col gap-sm">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-mint">🔢 It lives in “weights”</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">A weight is a <strong>connection strength</strong> between patterns. If “capital of France” keeps leading to “Paris,” that connection gets stronger.</p>
-            <div class="weight-cloud">
-                <span class="weight-chip">France → Paris: +2.31</span>
-                <span class="weight-chip">France → pizza: -1.14</span>
-                <span class="weight-chip">dog → bark: +1.92</span>
-            </div>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">During training, a <strong>wrong guess nudges weights</strong> away from that answer. A <strong>right guess strengthens weights</strong> toward it.</p>
-        </div>
-        <div class="card flex-col gap-xs">
-            <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-cool">🏀 Think muscle memory</p>
-            <p style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-secondary);">A basketball player doesn't store free-throw instructions in a database. After thousands of reps, their body just learns the pattern.</p>
-        </div>
     </div>
-    <p class="animate-in" style="font-size: clamp(13px, 1.4vw, 16px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">When you ask a question, it's generating from those learned patterns — not opening a hidden folder and looking up the answer.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
