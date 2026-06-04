@@ -1364,6 +1364,18 @@
     document.getElementById('total').textContent = total;
 
     let phoneTypingTimer = null;
+    let phonePauseTimer = null;
+
+    function clearPhoneTimers() {
+        if (phoneTypingTimer) {
+            window.clearInterval(phoneTypingTimer);
+            phoneTypingTimer = null;
+        }
+        if (phonePauseTimer) {
+            window.clearTimeout(phonePauseTimer);
+            phonePauseTimer = null;
+        }
+    }
 
     function resetSlideInteractions(slide) {
         slide.querySelectorAll('[data-reveal], .reveal-feedback').forEach((item) => item.classList.remove('revealed'));
@@ -1379,6 +1391,7 @@
         const suggestions = slide.querySelector('.phone-suggestions');
         if (!typed || !suggestions) return;
 
+        clearPhoneTimers();
         const text = typed.dataset.text || '';
         typed.textContent = '';
         suggestions.classList.remove('visible');
@@ -1391,6 +1404,14 @@
                 window.clearInterval(phoneTypingTimer);
                 phoneTypingTimer = null;
                 window.setTimeout(() => suggestions.classList.add('visible'), 220);
+                phonePauseTimer = window.setTimeout(() => {
+                    if (!slide.classList.contains('active')) return;
+                    typed.textContent = '';
+                    suggestions.classList.remove('visible');
+                    phonePauseTimer = window.setTimeout(() => {
+                        if (slide.classList.contains('active')) startPhoneTyping(slide);
+                    }, 350);
+                }, 2400);
             }
         }, 120);
     }
@@ -1399,10 +1420,7 @@
         if (n < 1) n = 1;
         if (n > total) n = total;
         current = n;
-        if (phoneTypingTimer) {
-            window.clearInterval(phoneTypingTimer);
-            phoneTypingTimer = null;
-        }
+        clearPhoneTimers();
         slides.forEach((s, i) => {
             s.classList.toggle('active', i === n - 1);
             resetSlideInteractions(s);

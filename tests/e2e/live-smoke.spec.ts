@@ -159,6 +159,11 @@ test.describe('AI talk learning hub', () => {
     await expect(page.locator('.phone-typed')).toHaveText("I'm on my");
     await expect(page.locator('.phone-suggestions')).toBeVisible();
     await expect(page.locator('.phone-suggestions')).toContainText('way');
+    await expect(page.locator('.phone-typed')).toHaveText('', { timeout: 5000 });
+    await expect(page.locator('.phone-suggestions')).toBeHidden();
+    await page.waitForTimeout(1800);
+    await expect(page.locator('.phone-typed')).toHaveText("I'm on my");
+    await expect(page.locator('.phone-suggestions')).toBeVisible();
 
     await page.evaluate(() => window.showSlide(5));
     await expect(page.getByText(/Most likely: pepperoni/i)).toBeHidden();
