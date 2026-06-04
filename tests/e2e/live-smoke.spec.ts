@@ -23,6 +23,12 @@ test.describe('AI talk learning hub', () => {
     await page.screenshot({ path: `tests/e2e/screenshots/${viewport}/hub-${timestamp}.png`, fullPage: true });
     await expectNoSevereA11yViolations(page);
 
+    await page.getByRole('link', { name: /See prompting slides/i }).click();
+    await expect(page).toHaveURL(/presentation\.html#slide-11$/);
+    await expect(page.locator('#current')).toHaveText('11');
+    await expect(page.locator('.slide.active').getByRole('heading', { name: /Bad prompts can cause hallucinations/i })).toBeVisible();
+    await page.goto('/');
+
     await page.getByRole('link', { name: /Start Presentation/i }).click();
     await expect(page).toHaveURL(/presentation\.html$/);
     await expect(page.getByText(/AI: The Magic/i)).toBeVisible();

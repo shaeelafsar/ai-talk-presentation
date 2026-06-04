@@ -372,14 +372,14 @@
         }
         .meaning-map {
             position: relative;
-            width: min(100%, 680px);
-            min-height: 220px;
+            width: min(100%, 880px);
+            min-height: 300px;
             border-radius: 18px;
             border: 1px solid oklch(0.3 0.03 260);
             background:
-                radial-gradient(circle at 28% 42%, oklch(0.32 0.08 80 / 0.45), transparent 28%),
-                radial-gradient(circle at 76% 28%, oklch(0.28 0.08 250 / 0.35), transparent 24%),
-                radial-gradient(circle at 68% 78%, oklch(0.25 0.07 300 / 0.35), transparent 24%),
+                radial-gradient(circle at 21% 42%, oklch(0.32 0.08 80 / 0.45), transparent 22%),
+                radial-gradient(circle at 77% 28%, oklch(0.28 0.08 250 / 0.35), transparent 21%),
+                radial-gradient(circle at 70% 78%, oklch(0.25 0.07 300 / 0.35), transparent 22%),
                 var(--bg-surface);
             margin: 0 auto;
         }
@@ -795,6 +795,38 @@
             color: var(--text-secondary);
             line-height: 1.4;
         }
+        .qr-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(150px, 1fr));
+            gap: clamp(16px, 3vw, 28px);
+            width: min(100%, 520px);
+        }
+        .qr-card {
+            background: var(--bg-surface);
+            border: 1px solid oklch(0.28 0.02 260);
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .qr-card img {
+            width: min(100%, 150px);
+            aspect-ratio: 1;
+            border-radius: 12px;
+            background: white;
+            padding: 8px;
+        }
+        .qr-card strong {
+            color: var(--text-primary);
+            font-size: clamp(14px, 1.5vw, 18px);
+        }
+        .qr-card span {
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: clamp(10px, 1vw, 12px);
+        }
         .slide [data-reveal]:not(.revealed),
         .slide .reveal-feedback:not(.revealed) {
             display: none !important;
@@ -1069,30 +1101,30 @@
     <div class="stagger flex-col gap-sm" style="max-width: 780px;">
         <div class="meaning-map" aria-label="Meaning map showing related words clustered together">
             <svg class="meaning-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <line x1="30" y1="42" x2="17" y2="32" stroke="oklch(0.75 0.14 165)" stroke-width="1.8" />
-                <line x1="30" y1="42" x2="39" y2="25" stroke="oklch(0.75 0.14 165)" stroke-width="1.5" />
-                <line x1="74" y1="28" x2="61" y2="19" stroke="oklch(0.75 0.14 165)" stroke-width="1.6" />
-                <line x1="67" y1="78" x2="54" y2="69" stroke="oklch(0.75 0.14 165)" stroke-width="1.4" />
-                <line x1="30" y1="42" x2="74" y2="28" stroke="oklch(0.70 0.17 25)" stroke-width="0.6" stroke-dasharray="3 3" />
+                <line x1="22" y1="42" x2="9" y2="28" stroke="oklch(0.75 0.14 165)" stroke-width="1.8" />
+                <line x1="22" y1="42" x2="30" y2="17" stroke="oklch(0.75 0.14 165)" stroke-width="1.5" />
+                <line x1="78" y1="28" x2="64" y2="13" stroke="oklch(0.75 0.14 165)" stroke-width="1.6" />
+                <line x1="69" y1="76" x2="52" y2="70" stroke="oklch(0.75 0.14 165)" stroke-width="1.4" />
+                <line x1="22" y1="42" x2="78" y2="28" stroke="oklch(0.70 0.17 25)" stroke-width="0.55" stroke-dasharray="3 3" />
             </svg>
-            <span class="map-weight" style="left: 22%; top: 35%;">+2.31</span>
-            <span class="map-weight" style="left: 36%; top: 31%;">+1.92</span>
-            <span class="map-weight" style="left: 66%; top: 22%;">+2.18</span>
-            <span class="map-weight" style="left: 57%; top: 73%;">+2.05</span>
-            <span class="map-weight" style="left: 50%; top: 35%;">-1.14</span>
-            <span class="map-dot primary" style="left: 30%; top: 42%;">pizza</span>
-            <span class="map-dot" style="left: 17%; top: 32%;">pepperoni</span>
-            <span class="map-dot" style="left: 39%; top: 25%;">cheese</span>
-            <span class="map-dot" style="left: 43%; top: 57%;">slice</span>
-            <span class="map-dot" style="left: 25%; top: 66%;">crust</span>
-            <span class="map-dot primary" style="left: 74%; top: 28%;">spaceship</span>
-            <span class="map-dot" style="left: 61%; top: 19%;">rocket</span>
-            <span class="map-dot" style="left: 86%; top: 22%;">planet</span>
-            <span class="map-dot" style="left: 78%; top: 45%;">astronaut</span>
-            <span class="map-dot primary" style="left: 67%; top: 78%;">homework</span>
-            <span class="map-dot" style="left: 54%; top: 69%;">assignment</span>
-            <span class="map-dot" style="left: 82%; top: 73%;">study</span>
-            <span class="map-dot" style="left: 67%; top: 91%;">teacher</span>
+            <span class="map-weight" style="left: 6%; top: 41%;">+2.31</span>
+            <span class="map-weight" style="left: 34%; top: 12%;">+1.92</span>
+            <span class="map-weight" style="left: 61%; top: 7%;">+2.18</span>
+            <span class="map-weight" style="left: 48%; top: 83%;">+2.05</span>
+            <span class="map-weight" style="left: 50%; top: 48%;">-1.14</span>
+            <span class="map-dot primary" style="left: 22%; top: 42%;">pizza</span>
+            <span class="map-dot" style="left: 9%; top: 28%;">pepperoni</span>
+            <span class="map-dot" style="left: 30%; top: 17%;">cheese</span>
+            <span class="map-dot" style="left: 36%; top: 57%;">slice</span>
+            <span class="map-dot" style="left: 14%; top: 68%;">crust</span>
+            <span class="map-dot primary" style="left: 78%; top: 28%;">spaceship</span>
+            <span class="map-dot" style="left: 64%; top: 13%;">rocket</span>
+            <span class="map-dot" style="left: 93%; top: 19%;">planet</span>
+            <span class="map-dot" style="left: 84%; top: 48%;">astronaut</span>
+            <span class="map-dot primary" style="left: 69%; top: 76%;">homework</span>
+            <span class="map-dot" style="left: 52%; top: 70%;">assignment</span>
+            <span class="map-dot" style="left: 90%; top: 76%;">study</span>
+            <span class="map-dot" style="left: 69%; top: 93%;">teacher</span>
         </div>
         <div class="card flex-col gap-xs">
             <p style="font-size: clamp(16px, 1.8vw, 20px); font-weight: 700;" class="accent-mint">🗺️ Meaning map</p>
@@ -1197,8 +1229,8 @@
         </div>
         <div class="myth-card fact flex-col gap-xs">
             <p class="myth-verdict accent-mint">rewrite #2</p>
-            <p class="myth-statement">I need help understanding Chapter 12 for English class. Before you answer, ask me for the book title and either a photo, passage, or short summary. Do not guess plot details.</p>
-            <p class="myth-explain">Correct answer: “Which book is this for, and can you paste the chapter text or share a summary first?” ✅</p>
+            <p class="myth-statement">I’m reading <em>The Giver</em> for 8th grade English. For Chapter 12, explain what Jonas starts seeing and why it matters. Use 3 bullets. If you are not sure, say so instead of inventing details.</p>
+            <p class="myth-explain">Correct answer: Jonas begins seeing color, especially red; it shows he is different and that the community has removed color, memory, and choice. ✅</p>
         </div>
         <div class="myth-card fact flex-col gap-xs">
             <p class="myth-verdict accent-mint">rewrite #3</p>
@@ -1243,7 +1275,7 @@
         <p class="slide-subtitle">Same big idea — learn patterns from examples — different kind of output.</p>
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="tool-row"><span class="tool-emoji">✍️</span><div><span class="tool-name accent-cool">Text AI</span><br><span class="tool-desc">Writes, translates, summarizes</span></div><span class="tool-badge"><a href="labs.html#code" style="color: var(--accent-mint);">brief demo →</a></span></div>
+        <div class="tool-row"><span class="tool-emoji">✍️</span><div><span class="tool-name accent-cool">Text AI</span><br><span class="tool-desc">Writes, translates, summarizes</span></div><span class="tool-badge"><a href="labs.html#text-ai" style="color: var(--accent-mint);">Text AI Lab →</a></span></div>
         <div class="tool-row"><span class="tool-emoji">👁️</span><div><span class="tool-name accent-mint">Vision AI</span><br><span class="tool-desc">Understands pictures, screenshots, signs, and handwriting — Google Lens / ChatGPT Vision</span></div><span class="tool-badge"><a href="labs.html#vision" style="color: var(--accent-mint);">brief demo →</a></span></div>
         <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name accent-violet">Image AI</span><br><span class="tool-desc">Creates images from text prompts — Google Gemini / ChatGPT image generation</span></div><span class="tool-badge"><a href="labs.html#image-gen" style="color: var(--accent-mint);">brief demo →</a></span></div>
         <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name accent-coral">Audio AI</span><br><span class="tool-desc">Transcribes speech, translates voice, and generates music</span></div><span class="tool-badge"><a href="labs.html#audio" style="color: var(--accent-mint);">brief demo →</a></span></div>
@@ -1368,7 +1400,20 @@
         <span class="emoji-big">❓</span>
         <h2 class="slide-title">Questions?</h2>
         <p class="slide-subtitle">Ask me anything about AI — no question is too basic!</p>
-        <p style="font-size: clamp(20px, 3vw, 36px); margin-top: 24px;">Thank you! 🙏</p>
+        <p class="slide-label accent-mint">Scan to connect</p>
+        <div class="qr-grid">
+            <div class="qr-card">
+                <img src="assets/qr-linkedin.svg" alt="LinkedIn QR code">
+                <strong>LinkedIn QR</strong>
+                <span>linkedin.com/in/shaeel-afsar</span>
+            </div>
+            <div class="qr-card">
+                <img src="assets/qr-website.svg" alt="Personal website QR code">
+                <strong>Website QR</strong>
+                <span>shaeelafsar.github.io</span>
+            </div>
+        </div>
+        <p style="font-size: clamp(18px, 2.4vw, 30px); margin-top: 8px;">Thank you! 🙏</p>
     </div>
 </div>
 
@@ -1447,6 +1492,7 @@
         clearPhoneTimers();
         slides.forEach((s, i) => {
             s.classList.toggle('active', i === n - 1);
+            s.tabIndex = i === n - 1 ? 0 : -1;
             resetSlideInteractions(s);
         });
         startPhoneTyping(slides[n - 1]);
@@ -1456,6 +1502,12 @@
 
     function nextSlide() { showSlide(current + 1); }
     function prevSlide() { showSlide(current - 1); }
+
+    function slideFromHash() {
+        const match = window.location.hash.match(/^#slide-(\d+)$/);
+        if (!match) return 1;
+        return Number(match[1]);
+    }
 
     function revealNextInSlide(slide) {
         const next = slide.querySelector('[data-reveal]:not(.revealed)');
@@ -1505,7 +1557,8 @@
         }
     });
 
-    showSlide(1);
+    window.addEventListener('hashchange', () => showSlide(slideFromHash()));
+    showSlide(slideFromHash());
 </script>
 
 </body>
