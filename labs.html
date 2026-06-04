@@ -269,6 +269,38 @@
         }
         .tip strong { color: var(--accent-cool); }
 
+        .tool-note {
+            background: oklch(0.15 0.02 260);
+            border: 1px solid oklch(0.26 0.025 260);
+            border-radius: 14px;
+            padding: clamp(16px, 2.5vw, 22px);
+            margin-top: 18px;
+        }
+        .tool-note p {
+            color: var(--text-secondary);
+            font-size: clamp(13px, 1.4vw, 15px);
+        }
+        .tool-note strong { color: var(--accent-cool); }
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .tool-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: var(--bg-elevated);
+            border: 1px solid oklch(0.3 0.025 260);
+        }
+        .tool-links a:hover {
+            border-color: var(--accent-cool);
+            color: var(--accent-cool);
+        }
+
         /* ═══ Example Prompts ═══ */
         .prompt-list {
             list-style: none;
@@ -371,13 +403,21 @@
     <div class="activity">
         <p class="activity-num">Activity 2 — Summary Checker</p>
         <h3>📝 Summarize text you provide</h3>
-        <p>Text AI works best when you provide the source text instead of asking it to guess what a chapter/article says.</p>
+        <p>Use ChatGPT with source text you provide instead of asking it to guess what a chapter/article says.</p>
         <ol class="steps">
             <li>Paste a short paragraph from class notes, an article, or a book section you are allowed to use</li>
             <li>Prompt: "Summarize this in 3 bullets, then list 2 things I should verify."</li>
             <li>Ask: "Make it sound like a study guide for a middle schooler."</li>
         </ol>
         <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--bg-elevated); border: 1px solid oklch(0.3 0.02 260); color: var(--text-primary);">→ Open ChatGPT</a>
+    </div>
+
+    <div class="tool-note">
+        <p><strong>Other text AI tools to explore later:</strong> These are useful alternatives after students understand the ChatGPT workflow.</p>
+        <div class="tool-links">
+            <a href="https://claude.ai" target="_blank">Claude</a>
+            <a href="https://gemini.google.com" target="_blank">Google Gemini</a>
+        </div>
     </div>
 </section>
 
@@ -401,25 +441,27 @@
             <li>Follow up: "What should I verify before trusting this?"</li>
         </ol>
         <a href="https://chat.openai.com" target="_blank" class="try-btn try-btn-mint">→ Open ChatGPT</a>
-        <div class="tip">
-            <strong>💡 Other tools:</strong> Google Lens is also great for quick visual search, but this lab uses ChatGPT so you can ask follow-up questions.
-        </div>
     </div>
 
     <div class="activity">
-        <p class="activity-num">Activity 2 — ChatGPT equivalent</p>
-        <h3>📸 Photo Detective (ChatGPT Vision)</h3>
-        <p>ChatGPT can also see images — but you can have a full <em>conversation</em> about what it sees.</p>
+        <p class="activity-num">Activity 2 — ChatGPT Vision</p>
+        <h3>📸 Explain and double-check a photo</h3>
+        <p>Use ChatGPT to reason about an image, then ask what it might be uncertain about.</p>
         <ol class="steps">
             <li>Open ChatGPT on your phone (<a href="https://chat.openai.com" target="_blank" style="color: var(--accent-cool);">chat.openai.com</a>)</li>
             <li>Tap the camera/photo icon in the message bar</li>
             <li>Take a photo of something interesting</li>
-            <li>Ask: "What do you see? Describe it in detail."</li>
-            <li>Follow up: "How much does this cost?" or "What year was this made?"</li>
+            <li>Ask: "What do you see? Describe it in detail and tell me what you are unsure about."</li>
+            <li>Follow up: "What clues in the image support your answer?"</li>
         </ol>
         <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--bg-elevated); border: 1px solid oklch(0.3 0.02 260); color: var(--text-primary);">→ Try with ChatGPT</a>
-        <div class="tip">
-            <strong>💡 Key difference:</strong> Google Lens gives instant facts. ChatGPT lets you have a back-and-forth conversation about what it sees.
+    </div>
+
+    <div class="tool-note">
+        <p><strong>Other vision tools to explore later:</strong> Use these for quick visual search or as a second opinion after trying ChatGPT.</p>
+        <div class="tool-links">
+            <a href="https://lens.google.com" target="_blank">Google Lens</a>
+            <a href="https://gemini.google.com" target="_blank">Google Gemini</a>
         </div>
     </div>
 </section>
@@ -454,10 +496,6 @@
         </ul>
 
         <a href="https://chat.openai.com" target="_blank" class="try-btn try-btn-violet">→ Open ChatGPT</a>
-
-        <div class="tip">
-            <strong>💡 Other tools:</strong> Gemini and other image tools can also generate images, but this lab keeps practice inside ChatGPT.
-        </div>
     </div>
 
     <div class="activity">
@@ -471,8 +509,13 @@
             <li>Keep refining — AI remembers your whole conversation</li>
         </ol>
         <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--bg-elevated); border: 1px solid oklch(0.3 0.02 260); color: var(--text-primary);">→ Try with ChatGPT</a>
-        <div class="tip">
-            <strong>💡 Key difference:</strong> Both Gemini and ChatGPT support conversational image generation. The exact model names and limits change over time, so focus on the skill: write a clear prompt, inspect the result, then refine.
+    </div>
+
+    <div class="tool-note">
+        <p><strong>Other image tools to explore later:</strong> Model names and limits change over time, so focus on the skill: write a clear prompt, inspect the result, then refine.</p>
+        <div class="tool-links">
+            <a href="https://gemini.google.com" target="_blank">Google Gemini</a>
+            <a href="https://www.adobe.com/products/firefly.html" target="_blank">Adobe Firefly</a>
         </div>
     </div>
 </section>
@@ -496,15 +539,12 @@
             <li>Ask it to explain anything you miss using a simple analogy</li>
         </ol>
         <a href="https://chat.openai.com" target="_blank" class="try-btn try-btn-coral">→ Open ChatGPT</a>
-        <div class="tip">
-            <strong>💡 Other tools:</strong> ElevenLabs specializes in voice generation, but this lab uses ChatGPT voice for conversation practice.
-        </div>
     </div>
 
     <div class="activity">
-        <p class="activity-num">Activity 2 — Google Translate</p>
-        <h3>🌍 Real-Time Voice Translation</h3>
-        <p>Speak in one language and hear/read it back in another — instantly.</p>
+        <p class="activity-num">Activity 2 — ChatGPT Translation Practice</p>
+        <h3>🌍 Translation & pronunciation coach</h3>
+        <p>Use ChatGPT to translate a sentence, explain the meaning, and practice phrases out loud.</p>
         <ol class="steps">
             <li>Open <a href="https://chat.openai.com" target="_blank" style="color: var(--accent-cool);">ChatGPT</a></li>
             <li>Type or say a simple sentence in English</li>
@@ -514,19 +554,11 @@
         <a href="https://chat.openai.com" target="_blank" class="try-btn try-btn-coral">→ Open ChatGPT</a>
     </div>
 
-    <div class="activity">
-        <p class="activity-num">Activity 3 — ChatGPT equivalent</p>
-        <h3>🎙️ Voice Conversation (ChatGPT Voice)</h3>
-        <p>ChatGPT has a voice mode too — have a full back-and-forth conversation with AI using just your voice.</p>
-        <ol class="steps">
-            <li>Open ChatGPT on your phone</li>
-            <li>Tap the headphone icon (Voice mode)</li>
-            <li>Talk naturally — ask questions, get explanations, practice presentations</li>
-            <li>Interrupt it anytime — it'll adjust mid-sentence</li>
-        </ol>
-        <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--bg-elevated); border: 1px solid oklch(0.3 0.02 260); color: var(--text-primary);">→ Try with ChatGPT</a>
-        <div class="tip">
-            <strong>💡 Key difference:</strong> ElevenLabs is best for creating voice content (narration, cloning). ChatGPT Voice is best for interactive conversations.
+    <div class="tool-note">
+        <p><strong>Other audio tools to explore later:</strong> These are better when you specifically need translation apps or generated narration.</p>
+        <div class="tool-links">
+            <a href="https://translate.google.com" target="_blank">Google Translate</a>
+            <a href="https://elevenlabs.io" target="_blank">ElevenLabs</a>
         </div>
     </div>
 </section>
@@ -550,15 +582,12 @@
             <li>Then ask: "Summarize this into 3 study bullets"</li>
         </ol>
         <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--accent-warm); color: oklch(0.15 0.02 45);">→ Open ChatGPT</a>
-        <div class="tip">
-            <strong>💡 Other tools:</strong> Adobe Scan is a dedicated scanner app, but this lab uses ChatGPT so you can ask questions about the text after it reads it.
-        </div>
     </div>
 
     <div class="activity">
-        <p class="activity-num">Activity 2 — ChatGPT equivalent</p>
-        <h3>✍️ Conversational OCR (ChatGPT Vision)</h3>
-        <p>ChatGPT can also read images — and then you can ask follow-up questions about what it read.</p>
+        <p class="activity-num">Activity 2 — ChatGPT OCR</p>
+        <h3>✍️ Turn captured text into a study tool</h3>
+        <p>Use ChatGPT to read text from an image, then transform it into something easier to study.</p>
         <ol class="steps">
             <li>Open <a href="https://chat.openai.com" target="_blank" style="color: var(--accent-cool);">ChatGPT</a> and tap the camera icon</li>
             <li>Take a photo of handwriting, a printed page, or a whiteboard</li>
@@ -566,8 +595,13 @@
             <li>Then ask: "Summarize this" or "Translate this to Spanish" or "Is this correct?"</li>
         </ol>
         <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--bg-elevated); border: 1px solid oklch(0.3 0.02 260); color: var(--text-primary);">→ Try with ChatGPT</a>
-        <div class="tip">
-            <strong>💡 Key difference:</strong> Adobe Scan is best for clean document scanning and PDFs. ChatGPT lets you ask questions about what it reads and do more with it (summarize, translate, correct).
+    </div>
+
+    <div class="tool-note">
+        <p><strong>Other document-reading tools to explore later:</strong> These are useful for clean scans or quick visual search after the ChatGPT practice.</p>
+        <div class="tool-links">
+            <a href="https://www.adobe.com/acrobat/mobile/scanner-app.html" target="_blank">Adobe Scan</a>
+            <a href="https://lens.google.com" target="_blank">Google Lens</a>
         </div>
     </div>
 </section>
@@ -581,13 +615,13 @@
     </div>
 
     <div class="activity">
-        <p class="activity-num">Activity 1</p>
-        <h3>🎤 Your First AI Song</h3>
-        <p>Use ChatGPT to write lyrics and a prompt you could take to a dedicated music generator later.</p>
+        <p class="activity-num">Activity 1 — ChatGPT Lyrics</p>
+        <h3>🎤 Write lyrics for an original song</h3>
+        <p>Use ChatGPT to draft lyrics, choose a genre, and revise the mood before trying any music generator.</p>
         <ol class="steps">
             <li>Open <a href="https://chat.openai.com" target="_blank" style="color: var(--accent-cool);">ChatGPT</a></li>
             <li>Ask: "Write lyrics for an upbeat pop song about being done with homework on a Friday"</li>
-            <li>Ask: "Give me a Suno-style prompt I could use in a music generator"</li>
+            <li>Ask: "Make the chorus catchier and easier for middle schoolers to sing"</li>
             <li>Ask for a different genre: lo-fi, rap, country, jazz, rock</li>
         </ol>
 
@@ -600,9 +634,25 @@
         </ul>
 
         <a href="https://chat.openai.com" target="_blank" class="try-btn try-btn-gold">→ Open ChatGPT</a>
+    </div>
 
-        <div class="tip">
-            <strong>💡 Other tools:</strong> Suno can generate full songs from prompts. In this lab, ChatGPT helps you write the lyrics and music prompt first.
+    <div class="activity">
+        <p class="activity-num">Activity 2 — ChatGPT Music Prompt</p>
+        <h3>🎚️ Turn the song idea into a clear music brief</h3>
+        <p>Use ChatGPT to write the kind of structured prompt a dedicated music generator can understand.</p>
+        <ol class="steps">
+            <li>Open <a href="https://chat.openai.com" target="_blank" style="color: var(--accent-cool);">ChatGPT</a></li>
+            <li>Prompt: "Turn these lyrics into a music-generation brief with genre, tempo, instruments, mood, and vocal style."</li>
+            <li>Ask: "Make the brief shorter, clearer, and safe for a school project."</li>
+            <li>Ask: "Give me 3 alternate styles: energetic, calm, and funny."</li>
+        </ol>
+        <a href="https://chat.openai.com" target="_blank" class="try-btn" style="background: var(--bg-elevated); border: 1px solid oklch(0.3 0.02 260); color: var(--text-primary);">→ Try with ChatGPT</a>
+    </div>
+
+    <div class="tool-note">
+        <p><strong>Other music tools to explore later:</strong> ChatGPT helps with lyrics and prompts; dedicated music tools can turn those ideas into full songs.</p>
+        <div class="tool-links">
+            <a href="https://suno.com" target="_blank">Suno</a>
         </div>
     </div>
 </section>
@@ -637,9 +687,27 @@
         </ul>
 
         <a href="https://education.github.com/pack" target="_blank" class="try-btn">→ Check GitHub Education Access</a>
+    </div>
 
-        <div class="tip">
-            <strong>💡 Why Copilot here:</strong> Coding works best when the AI can see your project files inside the editor. That is why this lab uses GitHub Copilot instead of ChatGPT.
+    <div class="activity">
+        <p class="activity-num">Activity 2 — GitHub Copilot</p>
+        <h3>🛠️ Improve the site with Copilot Chat</h3>
+        <p>Use GitHub Copilot to make one clear change to the project, then ask it to explain what changed.</p>
+        <ol class="steps">
+            <li>Open the website project in VS Code with GitHub Copilot enabled</li>
+            <li>Open Copilot Chat and type: "Add a colorful hero section and explain the files you changed"</li>
+            <li>Ask: "Make the design more fun for middle school students"</li>
+            <li>Preview the page and ask Copilot to fix anything that looks broken</li>
+        </ol>
+        <a href="https://code.visualstudio.com" target="_blank" class="try-btn" style="background: var(--bg-elevated); border: 1px solid oklch(0.3 0.02 260); color: var(--text-primary);">→ Download VS Code</a>
+    </div>
+
+    <div class="tool-note">
+        <p><strong>Helpful setup links:</strong> Coding works best when the AI can see your project files inside the editor, so this lab uses GitHub Copilot.</p>
+        <div class="tool-links">
+            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://education.github.com/pack" target="_blank">GitHub Education</a>
+            <a href="https://code.visualstudio.com" target="_blank">VS Code</a>
         </div>
     </div>
 
