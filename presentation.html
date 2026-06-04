@@ -210,8 +210,36 @@
         .logo-ms span:nth-child(2) { background: #7fba00; }
         .logo-ms span:nth-child(3) { background: #00a4ef; }
         .logo-ms span:nth-child(4) { background: #ffb900; }
-        .logo-ua { background: #0033a0; font-size: 18px; }
-        .logo-aws { background: #151920; color: #ff9900; }
+        .logo-ua {
+            background: #0033a0;
+            font-size: 20px;
+            position: relative;
+        }
+        .logo-ua::before {
+            content: "✈";
+            transform: rotate(-18deg);
+        }
+        .logo-aws {
+            background: #151920;
+            color: #ffffff;
+            font-size: 12px;
+            position: relative;
+            padding-bottom: 7px;
+        }
+        .logo-aws::before {
+            content: "aws";
+        }
+        .logo-aws::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 7px;
+            left: 7px;
+            bottom: 6px;
+            border-bottom: 3px solid #ff9900;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(-8deg);
+        }
         .logo-uhg { background: #2f65e8; font-size: 11px; }
         .company-role {
             font-size: clamp(12px, 1.2vw, 14px);
@@ -365,14 +393,19 @@
         .meaning-lines line {
             stroke-linecap: round;
         }
-        .meaning-lines text {
+        .map-weight {
+            position: absolute;
             font-family: var(--font-mono);
-            font-size: 11px;
-            fill: var(--text-primary);
-            paint-order: stroke;
-            stroke: var(--bg-surface);
-            stroke-width: 4px;
-            stroke-linejoin: round;
+            font-size: 10px;
+            line-height: 1;
+            color: var(--text-primary);
+            background: oklch(0.12 0.02 260 / 0.86);
+            border: 1px solid oklch(0.28 0.03 260);
+            border-radius: 999px;
+            padding: 3px 6px;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            white-space: nowrap;
         }
         .map-dot {
             position: absolute;
@@ -819,11 +852,11 @@
             <div><div class="company-role">Cloud & AI Solutions Engineer</div><div class="company-meta">Microsoft · Feb 2026–Present</div></div>
         </div>
         <div class="company-tile">
-            <div class="company-logo logo-ua">UA</div>
+            <div class="company-logo logo-ua" aria-label="United Airlines"></div>
             <div><div class="company-role">Lead Software Engineer</div><div class="company-meta">United Airlines · Nov 2023–Feb 2026</div></div>
         </div>
         <div class="company-tile">
-            <div class="company-logo logo-aws">aws</div>
+            <div class="company-logo logo-aws" aria-label="AWS"></div>
             <div><div class="company-role">Software Development Engineer</div><div class="company-meta">Amazon Web Services (AWS) · Dec 2021–Nov 2023</div></div>
         </div>
         <div class="company-tile">
@@ -1037,16 +1070,16 @@
         <div class="meaning-map" aria-label="Meaning map showing related words clustered together">
             <svg class="meaning-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                 <line x1="30" y1="42" x2="17" y2="32" stroke="oklch(0.75 0.14 165)" stroke-width="1.8" />
-                <text x="20" y="34">+2.31</text>
                 <line x1="30" y1="42" x2="39" y2="25" stroke="oklch(0.75 0.14 165)" stroke-width="1.5" />
-                <text x="35" y="31">+1.92</text>
                 <line x1="74" y1="28" x2="61" y2="19" stroke="oklch(0.75 0.14 165)" stroke-width="1.6" />
-                <text x="64" y="22">+2.18</text>
                 <line x1="67" y1="78" x2="54" y2="69" stroke="oklch(0.75 0.14 165)" stroke-width="1.4" />
-                <text x="56" y="72">+2.05</text>
                 <line x1="30" y1="42" x2="74" y2="28" stroke="oklch(0.70 0.17 25)" stroke-width="0.6" stroke-dasharray="3 3" />
-                <text x="49" y="34">-1.14</text>
             </svg>
+            <span class="map-weight" style="left: 22%; top: 35%;">+2.31</span>
+            <span class="map-weight" style="left: 36%; top: 31%;">+1.92</span>
+            <span class="map-weight" style="left: 66%; top: 22%;">+2.18</span>
+            <span class="map-weight" style="left: 57%; top: 73%;">+2.05</span>
+            <span class="map-weight" style="left: 50%; top: 35%;">-1.14</span>
             <span class="map-dot primary" style="left: 30%; top: 42%;">pizza</span>
             <span class="map-dot" style="left: 17%; top: 32%;">pepperoni</span>
             <span class="map-dot" style="left: 39%; top: 25%;">cheese</span>
