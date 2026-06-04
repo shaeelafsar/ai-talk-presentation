@@ -355,6 +355,25 @@
                 var(--bg-surface);
             margin: 0 auto;
         }
+        .meaning-lines {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .meaning-lines line {
+            stroke-linecap: round;
+        }
+        .meaning-lines text {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            fill: var(--text-primary);
+            paint-order: stroke;
+            stroke: var(--bg-surface);
+            stroke-width: 4px;
+            stroke-linejoin: round;
+        }
         .map-dot {
             position: absolute;
             transform: translate(-50%, -50%);
@@ -524,14 +543,14 @@
             display: grid;
             grid-template-columns: 0.8fr 1.2fr;
             align-items: stretch;
-            gap: 16px;
+            gap: 12px;
             max-width: 820px;
             width: 100%;
-            min-height: 170px;
+            min-height: 112px;
             background: var(--bg-surface);
             border: 1px solid oklch(0.26 0.02 260);
             border-radius: 16px;
-            padding: clamp(14px, 1.8vw, 22px);
+            padding: clamp(10px, 1.2vw, 14px);
         }
         .training-step-card .step {
             align-items: center;
@@ -540,17 +559,17 @@
             background: var(--bg-elevated);
             border: 1px solid oklch(0.31 0.03 260);
             border-radius: 14px;
-            padding: 14px 16px;
+            padding: 10px 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 8px;
+            gap: 5px;
             text-align: center;
         }
         .training-sample p {
             color: var(--text-secondary);
-            font-size: clamp(12px, 1.25vw, 15px);
-            line-height: 1.35;
+            font-size: clamp(11px, 1.15vw, 14px);
+            line-height: 1.25;
         }
         .training-sample strong {
             color: var(--text-primary);
@@ -967,14 +986,36 @@
         <h2 class="slide-title" style="font-size: clamp(26px, 4vw, 48px);">How Was It Trained?</h2>
         <p class="slide-subtitle">By doing prediction practice billions of times.</p>
     </div>
-    <div class="flex-col gap-sm" style="max-width: 760px;">
-        <div class="step" data-reveal><span class="step-num">1</span><p class="step-text"><strong class="accent-cool">Feed it examples</strong><br>Dogs bark at strangers.<br>The dog barked at the mailman.<br>My neighbor’s dog likes to bark.</p></div>
-        <div class="step" data-reveal><span class="step-num">2</span><p class="step-text"><strong class="accent-violet">Hide a word</strong><br>Now try a similar sentence: “The puppy started to ___ at the door.”</p></div>
-        <div class="step" data-reveal><span class="step-num">3</span><p class="step-text"><strong class="accent-coral">Guess and check</strong><br>Guess: bark. Correct — strengthen that pattern.</p></div>
-        <div class="step" data-reveal><span class="step-num">4</span><p class="step-text"><strong class="accent-gold">Repeat billions of times</strong><br>Do this with tons of examples until the model gets good at predicting missing words.</p></div>
-    </div>
-    <div class="animate-in card" data-reveal style="max-width: 760px;">
-        <p style="font-size: clamp(15px, 1.7vw, 20px); line-height: 1.5; color: var(--text-secondary);">📚 It's like studying for a test by doing practice problems over and over — except it did <strong class="accent-gold">BILLIONS</strong> of practice problems.</p>
+    <div class="flex-col gap-sm" style="max-width: 820px; width: 100%;">
+        <div class="training-step-card" data-reveal>
+            <div class="step"><span class="step-num">1</span><p class="step-text"><strong class="accent-cool">Feed it examples</strong><br>Show the model sentence patterns.</p></div>
+            <div class="training-sample">
+                <p>Dogs bark at strangers.</p>
+                <p>The dog barked at the mailman.</p>
+                <p>My neighbor’s dog likes to bark.</p>
+            </div>
+        </div>
+        <div class="training-step-card" data-reveal>
+            <div class="step"><span class="step-num">2</span><p class="step-text"><strong class="accent-violet">Hide a word</strong><br>Give it a similar sentence with one blank.</p></div>
+            <div class="training-sample">
+                <p><strong>The puppy started to ___ at the door.</strong></p>
+                <p>What word fits the pattern?</p>
+            </div>
+        </div>
+        <div class="training-step-card" data-reveal>
+            <div class="step"><span class="step-num">3</span><p class="step-text"><strong class="accent-coral">Guess and check</strong><br>Compare the guess with the right answer.</p></div>
+            <div class="training-sample">
+                <p>Guess: bark</p>
+                <p><strong>Correct — strengthen that pattern.</strong></p>
+            </div>
+        </div>
+        <div class="training-step-card" data-reveal>
+            <div class="step"><span class="step-num">4</span><p class="step-text"><strong class="accent-gold">Repeat billions of times</strong><br>Practice until it predicts missing words well.</p></div>
+            <div class="training-sample">
+                <p>More examples → better guesses</p>
+                <p>Wrong guess → adjust weights</p>
+            </div>
+        </div>
     </div>
     <p class="reveal-hint">Click anywhere to reveal each training step.</p>
 </div>
@@ -990,6 +1031,18 @@
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 780px;">
         <div class="meaning-map" aria-label="Meaning map showing related words clustered together">
+            <svg class="meaning-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="30" y1="42" x2="17" y2="32" stroke="oklch(0.75 0.14 165)" stroke-width="1.8" />
+                <text x="20" y="34">+2.31</text>
+                <line x1="30" y1="42" x2="39" y2="25" stroke="oklch(0.75 0.14 165)" stroke-width="1.5" />
+                <text x="35" y="31">+1.92</text>
+                <line x1="74" y1="28" x2="61" y2="19" stroke="oklch(0.75 0.14 165)" stroke-width="1.6" />
+                <text x="64" y="22">+2.18</text>
+                <line x1="67" y1="78" x2="54" y2="69" stroke="oklch(0.75 0.14 165)" stroke-width="1.4" />
+                <text x="56" y="72">+2.05</text>
+                <line x1="30" y1="42" x2="74" y2="28" stroke="oklch(0.70 0.17 25)" stroke-width="0.6" stroke-dasharray="3 3" />
+                <text x="49" y="34">-1.14</text>
+            </svg>
             <span class="map-dot primary" style="left: 30%; top: 42%;">pizza</span>
             <span class="map-dot" style="left: 17%; top: 32%;">pepperoni</span>
             <span class="map-dot" style="left: 39%; top: 25%;">cheese</span>
@@ -1153,11 +1206,11 @@
         <p class="slide-subtitle">Same big idea — learn patterns from examples — different kind of output.</p>
     </div>
     <div class="stagger flex-col gap-sm" style="max-width: 640px;">
-        <div class="tool-row"><span class="tool-emoji">✍️</span><div><span class="tool-name accent-cool">Text AI</span><br><span class="tool-desc">Writes, translates, summarizes</span></div><span class="tool-badge">ChatGPT · Claude · Google Gemini</span></div>
-        <div class="tool-row"><span class="tool-emoji">👁️</span><div><span class="tool-name accent-mint">Vision AI</span><br><span class="tool-desc">Understands pictures, screenshots, signs, and handwriting</span></div><span class="tool-badge">Google Lens · ChatGPT Vision</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name accent-violet">Image AI</span><br><span class="tool-desc">Creates images from text prompts</span></div><span class="tool-badge">Gemini · ChatGPT image generation</span></div>
-        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name accent-coral">Audio AI</span><br><span class="tool-desc">Transcribes speech, translates voice, and generates music</span></div><span class="tool-badge">Whisper · Suno · ElevenLabs</span></div>
-        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name accent-gold">Code AI</span><br><span class="tool-desc">Helps build websites, apps, and scripts</span></div><span class="tool-badge">GitHub Copilot · Claude · Cursor</span></div>
+        <div class="tool-row"><span class="tool-emoji">✍️</span><div><span class="tool-name accent-cool">Text AI</span><br><span class="tool-desc">Writes, translates, summarizes</span></div><span class="tool-badge"><a href="labs.html#code" style="color: var(--accent-mint);">brief demo →</a></span></div>
+        <div class="tool-row"><span class="tool-emoji">👁️</span><div><span class="tool-name accent-mint">Vision AI</span><br><span class="tool-desc">Understands pictures, screenshots, signs, and handwriting — Google Lens / ChatGPT Vision</span></div><span class="tool-badge"><a href="labs.html#vision" style="color: var(--accent-mint);">brief demo →</a></span></div>
+        <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name accent-violet">Image AI</span><br><span class="tool-desc">Creates images from text prompts — Google Gemini / ChatGPT image generation</span></div><span class="tool-badge"><a href="labs.html#image-gen" style="color: var(--accent-mint);">brief demo →</a></span></div>
+        <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name accent-coral">Audio AI</span><br><span class="tool-desc">Transcribes speech, translates voice, and generates music</span></div><span class="tool-badge"><a href="labs.html#audio" style="color: var(--accent-mint);">brief demo →</a></span></div>
+        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name accent-gold">Code AI</span><br><span class="tool-desc">Helps build websites, apps, and scripts</span></div><span class="tool-badge"><a href="labs.html#code" style="color: var(--accent-mint);">brief demo →</a></span></div>
     </div>
 </div>
 
