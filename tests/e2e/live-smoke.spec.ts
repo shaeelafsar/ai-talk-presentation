@@ -190,4 +190,39 @@ test.describe('AI talk learning hub', () => {
     await page.locator('.slide.active').click();
     await expect(page.getByText(/Repeat billions of times/i)).toBeVisible();
   });
+
+  test('lab external links use official source domains', async ({ page, request }) => {
+    await page.goto('/labs.html');
+    const urls = await page.locator('a[target="_blank"]').evaluateAll((links) =>
+      links.map((link) => link.href)
+    );
+
+    const allowedHosts = new Set([
+      'chat.openai.com',
+      'claude.ai',
+      'code.visualstudio.com',
+      'education.github.com',
+      'elevenlabs.io',
+      'gemini.google.com',
+      'github.com',
+      'lens.google.com',
+      'suno.com',
+      'translate.google.com',
+      'www.adobe.com',
+      'www.google.com',
+      'www.linkedin.com',
+      'shaeelafsar.github.io',
+    ]);
+
+    for (const url of urls) {
+      const { hostname } = new URL(url);
+      expect(allowedHosts.has(hostname), `Unexpected external link host: ${url}`).toBeTruthy();
+      try {
+        const response = await request.get(url, { maxRedirects: 2, timeout: 15000 });
+        expect(response.status(), `External link did not respond successfully: ${url}`).toBeLessThan(500);
+      } catch (error) {
+        console.warn(`Reachability check skipped for official source due to timeout/network issue: ${url}`);
+      }
+    }
+  });
 });

@@ -172,6 +172,58 @@
             border-radius: 12px;
             padding: clamp(16px, 2vw, 28px);
         }
+        .company-strip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: 820px;
+        }
+        .company-tile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-surface);
+            border: 1px solid oklch(0.28 0.02 260);
+            border-radius: 14px;
+            padding: 10px 12px;
+            min-width: 175px;
+        }
+        .company-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: white;
+            flex: 0 0 34px;
+        }
+        .logo-ms {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px;
+            background: transparent;
+        }
+        .logo-ms span { width: 15px; height: 15px; display: block; }
+        .logo-ms span:nth-child(1) { background: #f25022; }
+        .logo-ms span:nth-child(2) { background: #7fba00; }
+        .logo-ms span:nth-child(3) { background: #00a4ef; }
+        .logo-ms span:nth-child(4) { background: #ffb900; }
+        .logo-ua { background: #0033a0; font-size: 18px; }
+        .logo-aws { background: #151920; color: #ff9900; }
+        .logo-uhg { background: #2f65e8; font-size: 11px; }
+        .company-role {
+            font-size: clamp(12px, 1.2vw, 14px);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        .company-meta {
+            font-size: clamp(10px, 1vw, 12px);
+            color: var(--text-secondary);
+            line-height: 1.2;
+        }
 
         /* ═══ Poll Options ═══ */
         .poll-option {
@@ -468,6 +520,41 @@
             line-height: 1.5;
             padding-top: 4px;
         }
+        .training-step-card {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            align-items: stretch;
+            gap: 16px;
+            max-width: 820px;
+            width: 100%;
+            min-height: 170px;
+            background: var(--bg-surface);
+            border: 1px solid oklch(0.26 0.02 260);
+            border-radius: 16px;
+            padding: clamp(14px, 1.8vw, 22px);
+        }
+        .training-step-card .step {
+            align-items: center;
+        }
+        .training-sample {
+            background: var(--bg-elevated);
+            border: 1px solid oklch(0.31 0.03 260);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
+        }
+        .training-sample p {
+            color: var(--text-secondary);
+            font-size: clamp(12px, 1.25vw, 15px);
+            line-height: 1.35;
+        }
+        .training-sample strong {
+            color: var(--text-primary);
+        }
 
         /* ═══ Do/Don't Rows ═══ */
         .advice-row {
@@ -609,6 +696,7 @@
         /* ═══ Responsive ═══ */
         @media (max-width: 768px) {
             .split { grid-template-columns: 1fr; }
+            .training-step-card { grid-template-columns: 1fr; }
             .tool-row { grid-template-columns: auto 1fr; }
             .tool-badge { display: none; }
             .section-number { font-size: 60px; }
@@ -703,20 +791,28 @@
     <div class="animate-in flex-col gap-sm">
         <p class="slide-label accent-cool">about me</p>
         <h2 class="slide-title" style="font-size: clamp(30px, 4.6vw, 56px);">Shaeel Afsar</h2>
-        <p class="slide-subtitle">Lead Software Engineer · Chicago, IL</p>
+        <p class="slide-subtitle">Cloud & AI Solutions Engineer at Microsoft · Chicago, IL</p>
     </div>
-    <div class="animate-in split" style="max-width: 860px; animation-delay: 0.2s; opacity: 0;">
-        <div class="card flex-col gap-sm">
-            <p style="font-size: clamp(18px, 2vw, 24px); font-weight: 700;" class="accent-mint">What I build</p>
-            <p style="font-size: clamp(14px, 1.5vw, 17px); color: var(--text-secondary);">Backend systems, cloud architecture, microservices, APIs, and enterprise software that has to be reliable at scale.</p>
+    <div class="animate-in company-strip" style="animation-delay: 0.2s; opacity: 0;">
+        <div class="company-tile">
+            <div class="company-logo logo-ms"><span></span><span></span><span></span><span></span></div>
+            <div><div class="company-role">Cloud & AI Solutions Engineer</div><div class="company-meta">Microsoft · Feb 2026–Present</div></div>
         </div>
-        <div class="card flex-col gap-sm">
-            <p style="font-size: clamp(18px, 2vw, 24px); font-weight: 700;" class="accent-gold">Where I've worked</p>
-            <p style="font-size: clamp(14px, 1.5vw, 17px); color: var(--text-secondary);">Fortune 500 teams including Amazon, United Airlines, and UnitedHealth Group.</p>
+        <div class="company-tile">
+            <div class="company-logo logo-ua">UA</div>
+            <div><div class="company-role">Lead Software Engineer</div><div class="company-meta">United Airlines · Nov 2023–Feb 2026</div></div>
+        </div>
+        <div class="company-tile">
+            <div class="company-logo logo-aws">aws</div>
+            <div><div class="company-role">Software Development Engineer</div><div class="company-meta">Amazon Web Services (AWS) · Dec 2021–Nov 2023</div></div>
+        </div>
+        <div class="company-tile">
+            <div class="company-logo logo-uhg">UHG</div>
+            <div><div class="company-role">Software Engineer</div><div class="company-meta">UnitedHealth Group · Jul 2019–Dec 2021</div></div>
         </div>
     </div>
     <div class="animate-in flex-col gap-sm" style="animation-delay: 0.45s; opacity: 0; max-width: 740px;">
-        <p style="font-size: clamp(15px, 1.7vw, 20px); color: var(--text-secondary); line-height: 1.5;">I care about AI because it lets people turn ideas into real things faster — websites, games, study tools, music, images, and apps. Tonight is about understanding the magic enough to use it wisely.</p>
+        <p style="font-size: clamp(15px, 1.7vw, 20px); color: var(--text-secondary); line-height: 1.5;">I build cloud, AI, security, and enterprise software systems. I care about AI because it helps people turn ideas into real things faster — websites, study tools, music, images, and apps.</p>
         <p style="font-family: var(--font-mono); font-size: clamp(11px, 1.1vw, 13px); color: var(--text-muted);">linkedin.com/in/shaeel-afsar · shaeelafsar.github.io</p>
     </div>
 </div>
@@ -1061,7 +1157,7 @@
         <div class="tool-row"><span class="tool-emoji">👁️</span><div><span class="tool-name accent-mint">Vision AI</span><br><span class="tool-desc">Understands pictures, screenshots, signs, and handwriting</span></div><span class="tool-badge">Google Lens · ChatGPT Vision</span></div>
         <div class="tool-row"><span class="tool-emoji">🎨</span><div><span class="tool-name accent-violet">Image AI</span><br><span class="tool-desc">Creates images from text prompts</span></div><span class="tool-badge">Gemini · ChatGPT image generation</span></div>
         <div class="tool-row"><span class="tool-emoji">🎵</span><div><span class="tool-name accent-coral">Audio AI</span><br><span class="tool-desc">Transcribes speech, translates voice, and generates music</span></div><span class="tool-badge">Whisper · Suno · ElevenLabs</span></div>
-        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name accent-gold">Code AI</span><br><span class="tool-desc">Helps build websites, apps, and scripts</span></div><span class="tool-badge">GitHub Copilot · Cursor · Replit</span></div>
+        <div class="tool-row"><span class="tool-emoji">💻</span><div><span class="tool-name accent-gold">Code AI</span><br><span class="tool-desc">Helps build websites, apps, and scripts</span></div><span class="tool-badge">GitHub Copilot · Claude · Cursor</span></div>
     </div>
 </div>
 
@@ -1087,7 +1183,7 @@
             <p class="demo-card-text">We'll use GitHub Copilot to build a simple website live — the audience picks the details!</p>
         </div>
     </div>
-    <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">tools: GitHub Copilot · Cursor · Replit AI · many tools have free tiers or student access; check current student access · <a href="labs.html#code" style="color: var(--accent-mint);">🧪 Try the Code Lab</a></p>
+    <p class="animate-in" style="font-family: var(--font-mono); font-size: clamp(12px, 1.2vw, 14px); color: var(--text-muted); animation-delay: 0.6s; opacity: 0;">tools: GitHub Copilot · Claude · Cursor · many tools have free tiers or student access; check current student access · <a href="labs.html#code" style="color: var(--accent-mint);">🧪 Try the Code Lab</a></p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
