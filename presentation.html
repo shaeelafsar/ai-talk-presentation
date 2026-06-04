@@ -253,10 +253,19 @@
             padding: 12px 14px;
             font-size: clamp(16px, 1.9vw, 22px);
         }
+        .phone-suggestions {
+            display: none;
+        }
+        .phone-suggestions.visible {
+            display: flex;
+        }
         .suggestion-row {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+        }
+        .suggestion-row.phone-suggestions:not(.visible) {
+            display: none;
         }
         .suggestion-chip {
             padding: 8px 14px;
@@ -741,8 +750,8 @@
         <div class="phone-screen">
             <p class="slide-label" style="margin-bottom: 12px; color: var(--accent-cool);">your phone does this</p>
             <div class="card-elevated flex-col gap-sm" style="padding: 14px;">
-                <p class="phone-draft">I'm on my <span class="cursor-blink"></span></p>
-                <div class="suggestion-row">
+                <p class="phone-draft"><span class="phone-typed" data-text="I'm on my"></span><span class="cursor-blink"></span></p>
+                <div class="suggestion-row phone-suggestions">
                     <span class="suggestion-chip accent-mint">way</span>
                     <span class="suggestion-chip">phone</span>
                     <span class="suggestion-chip">break</span>
@@ -1354,15 +1363,51 @@
     const total = slides.length;
     document.getElementById('total').textContent = total;
 
+    let phoneTypingTimer = null;
+
+    function resetSlideInteractions(slide) {
+        slide.querySelectorAll('[data-reveal], .reveal-feedback').forEach((item) => item.classList.remove('revealed'));
+        slide.querySelectorAll('.poll-option').forEach((item) => item.classList.remove('revealed', 'correct', 'incorrect'));
+        slide.querySelectorAll('.phone-typed').forEach((item) => {
+            item.textContent = '';
+        });
+        slide.querySelectorAll('.phone-suggestions').forEach((item) => item.classList.remove('visible'));
+    }
+
+    function startPhoneTyping(slide) {
+        const typed = slide.querySelector('.phone-typed');
+        const suggestions = slide.querySelector('.phone-suggestions');
+        if (!typed || !suggestions) return;
+
+        const text = typed.dataset.text || '';
+        typed.textContent = '';
+        suggestions.classList.remove('visible');
+
+        let index = 0;
+        phoneTypingTimer = window.setInterval(() => {
+            typed.textContent = text.slice(0, index + 1);
+            index += 1;
+            if (index >= text.length) {
+                window.clearInterval(phoneTypingTimer);
+                phoneTypingTimer = null;
+                window.setTimeout(() => suggestions.classList.add('visible'), 220);
+            }
+        }, 120);
+    }
+
     function showSlide(n) {
         if (n < 1) n = 1;
         if (n > total) n = total;
         current = n;
+        if (phoneTypingTimer) {
+            window.clearInterval(phoneTypingTimer);
+            phoneTypingTimer = null;
+        }
         slides.forEach((s, i) => {
             s.classList.toggle('active', i === n - 1);
-            s.querySelectorAll('[data-reveal], .reveal-feedback').forEach((item) => item.classList.remove('revealed'));
-            s.querySelectorAll('.poll-option').forEach((item) => item.classList.remove('revealed', 'correct', 'incorrect'));
+            resetSlideInteractions(s);
         });
+        startPhoneTyping(slides[n - 1]);
         document.getElementById('current').textContent = n;
         document.getElementById('progressBar').style.width = (n / total * 100) + '%';
     }
